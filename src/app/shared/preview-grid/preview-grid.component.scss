@@ -1,0 +1,105 @@
+.ui-table-input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(255, 0, 0, 0) !important;
+}
+
+input {
+  height: 40px;
+  outline: none;
+}
+
+/*
+  Pagination design
+*/
+ul.pagination {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+ul.pagination li {
+  display: inline;
+}
+
+.fa-step-backward,
+.fa-chevron-left,
+.fa-chevron-right,
+.fa-step-forward {
+  color: black;
+}
+
+#idFirstOne,
+#idPreviewOne,
+#idNextL,
+#idLastL {
+  color: rgb(180, 179, 179);
+}
+
+ul.pagination li a {
+  color: #008B8B;
+  float: left;
+  padding: 5px 14px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+ul.pagination li a.active {
+  color: #20B2AA;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #20B2AA;
+}
+
+ul.pagination li a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.ag-header-cell-label .ag-header-cell-text {
+  /*Force the width corresponding at how much width
+  we need once the text is laid out vertically*/
+  text-align: center;
+  float: center;
+  font-family: initial;
+  font-size: 25px;
+}
+.ag-pivot-off .ag-header-group-cell {
+  text-align: center;
+  font-family: initial;
+  font-size: 25px;
+}
+
+::ng-deep .ui-table-scrollable-wrapper {
+  height: 100% !important;
+}
+
+::ng-deep .ui-table-scrollable-view {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+::ng-deep .ui-table-scrollable-body {
+  flex: 1 1 0 !important;
+}
+
+::ng-deep .ui-table {
+  height: 100% !important;
+  display: flex;
+  flex-direction: column;
+}
+
+::ng-deep .header-align {
+  text-align: left;
+  margin-left: 10px !important;
+}
+
+::ng-deep td.ng-star-inserted {
+  min-width: 200px !important;
+}
+
+::ng-deep th.ui-resizable-column.ng-star-inserted {
+  min-width: 200px !important;
+}

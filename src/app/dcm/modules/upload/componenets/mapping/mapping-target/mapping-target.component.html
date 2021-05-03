@@ -1,0 +1,49 @@
+
+<div class="source-list" class="my-list">
+  <!--
+    <input #myInput mdInput placeholder="Item name..." [(ngModel)]="name" (input)="filterItem(myInput.value)">
+ -->
+    <ng-container *ngFor="let item of sortBy(items); let index = index;">
+      <div class="target-box" [class.mandatory-row]="isFieldMandatory(item)" [class.mapped]="item.mappedItems.length > 0 || (item.mappedItems.length === 0 && item.isDisabled)"
+        [class.disabled]="item.isDisabled" fxLayout="row" fxLayoutAlign="space-between center"
+        *ngIf="(filterView|async) === 'All' ||
+            ((filterView|async)=== 'Mandatory' && item.mandatory === true )
+            || ((filterView|async)=== 'MandatoryMissing' && item.mandatory === true && item.mappedItems.length === 0 && (item.isDisabled !== true || item.isDisabled === undefined))">
+        <div class="mapped-item-list" fxFlex="48" fxLayout="row" fxLayoutAlign="start center" dndDropzone
+          [class.dropHintClass]="dropAllowed(item)" [dndDragoverClass]="'dropOverClass'"
+          (dndDrop)="onItemDrop($event.dragData,item,index)" [dndDisableIf]="!dropAllowed(item)"
+          >
+
+          <mat-chip-list>
+            <mat-chip *ngFor="let sField of item.mappedItems" color="accent" selected [removable]="true">
+              <mat-icon (click)="onRemoveClick(sField, item)" class="mat-icon-cl">close</mat-icon>
+              <span class="list-description">{{sField.viewValue}}</span>
+            </mat-chip>
+          </mat-chip-list>
+
+        </div>
+
+        <button mat-icon-button color="primary"
+          *ngIf="(filterView|async) === 'All' ||
+            ((filterView|async)=== 'Mandatory' && item.mandatory === true )
+            || ((filterView|async)=== 'MandatoryMissing' && item.mandatory === true && item.mappedItems.length === 0 && (item.isDisabled !== true || item.isDisabled === undefined))"
+          (click)="showElement(item)">
+         <!--  <fa-icon icon="calculator"></fa-icon> -->
+        </button>
+<!--<div id="id{{index}}" fxFlex="50" class="target-item"-->
+        <div fxFlex="50" class="target-item"
+          *ngIf="(filterView|async) === 'All' ||
+            ((filterView|async)=== 'Mandatory' && item.mandatory === true )
+            || ((filterView|async)=== 'MandatoryMissing' && item.mandatory === true && item.mappedItems.length === 0 &&
+             (item.isDisabled !== true || item.isDisabled === undefined))">
+
+          <mat-icon *ngIf="item.mappedItems.length > 0" style="color: rgb(29, 216, 29); margin-right: 5px;">check_circle_outline</mat-icon>
+          <span [class.mandatory]="isFieldMandatory(item)" style="color: rgb(66, 66, 66);">
+            {{item.viewValue}}
+            <!-- [class.text-info]="isFieldMandatory(item)" <span *ngIf="isFieldMandatory(item)">*</span> -->
+          </span>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>

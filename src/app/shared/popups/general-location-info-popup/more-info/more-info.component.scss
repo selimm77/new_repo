@@ -1,0 +1,105 @@
+.btn-geocode {
+  min-width: 100%;
+  background-color: #005373;
+  color: white;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  outline: 0;
+  border-width: 0px 0 1px;
+  border-color: rgb(43, 43, 255);
+  border-radius: 0;
+  font-size: 12px !important;
+  color: rgb(43, 43, 255) !important;
+
+}
+
+input:focus {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-color: rgb(43, 43, 255);
+  outline : none;
+  box-shadow: 0 0 0 0 ;
+  color: rgb(43, 43, 255) !important;
+
+}
+.danger {
+  color: #cd3531;
+  font-size:12px;
+  font-weight:500
+}
+
+::ng-deep .info-tabset > div.ant-tabs-bar.ant-tabs-top-bar.ant-tabs-default-bar.ng-star-inserted > div > div > div {
+  text-align: center !important;
+  background-color: white;
+}
+
+input::placeholder {
+  color: blue;
+}
+
+::ng-deep  nz-date-picker.my-info-date > nz-picker > span > input {
+  border: 1px solid blue;
+  height: 40px;
+}
+
+::ng-deep .ant-calendar-picker {
+  width: 100%;
+}
+
+::ng-deep nz-date-picker.my-info-date > nz-picker > span > span {
+  color: blue;
+}
+
+.body-active-item {
+  background-color: #fdfbdf;
+  font-weight: bold;
+}
+
+::ng-deep .info-checkbox .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: blue;
+}
+
+.text-overflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+::ng-deep .info-tabset > div.ant-tabs-content.ant-tabs-top-content.ant-tabs-content-animated.ng-star-inserted > div.ant-tabs-tabpane.ng-star-inserted.ant-tabs-tabpane-active {
+  height: 65vh;
+  overflow-y: scroll;
+}
+
+::ng-deep .info-tabset > div.ant-tabs-bar.ant-tabs-top-bar.ant-tabs-default-bar.ng-star-inserted > div > div > div > div {
+  height: 40px;
+}
+
+::ng-deep .info-tabset > div.ant-tabs-bar.ant-tabs-top-bar.ant-tabs-default-bar.ng-star-inserted > div > div > div > div > div:nth-child(1) > div.ant-tabs-tab.ng-star-inserted.ant-tabs-tab-active {
+  font-size: 12px;
+}
+
+::ng-deep nz-tabset.info-tabset  .ant-tabs-nav .ant-tabs-tab-active {
+  font-size: 18px;
+  border-top: none;
+  border-bottom: 2px solid blue;
+  padding-bottom: 2px;
+  color: blue;
+}
+
+::ng-deep nz-tabset.info-tabset  .ant-tabs-ink-bar {
+  display: none !important;
+}

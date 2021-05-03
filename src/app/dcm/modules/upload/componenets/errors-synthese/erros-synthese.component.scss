@@ -1,0 +1,71 @@
+
+.span-errors {
+  color: #6e6e6e;
+  font-size: 21px;
+  font-family: 'Tw Cen MT', sans-serif;
+  letter-spacing: 0px;
+  transform: scale(1, 0.9);
+  text-transform: full-width;
+  display: inline-block;
+}
+
+#head-fa  {
+  color: #6e6e6e;
+  font-size: 20px;
+}
+
+::ng-deep i.ui-table-loading-icon.pi-spin.pi.pi-spinner {
+  font-size: 50px;
+  color: #172be0;
+}
+
+.danger {
+  background-color: white !important;
+}
+
+.notification {
+  color: #252525;
+  background-color: white;
+  font-family: Tahoma, Geneva, sans-serif;
+}
+
+.notification-activate {
+  width: 100%;
+  font-family: Tahoma, Geneva, sans-serif;
+  padding: 15px;
+  margin-left: -38px;
+  ul {
+    background-color: #ffecec;
+  }
+}
+
+.fieldCode-cl-activate {
+    color: #252525;
+}
+
+.badge {
+  font-size: 12px;
+  color: #3f3f3f;
+}
+
+.id-errors {
+  background-color: white !important;
+}
+
+ul li {
+  color: #252525;
+  display: block;
+  padding: 15px;
+  border-bottom: 1px solid #d6d3e6;
+  transition: 0.5s;
+}
+
+ul li a .fa {
+  width: 25px;
+}
+
+.notification-container{
+  width: 270px;
+  height: 350px;
+ }
+ 

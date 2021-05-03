@@ -1,0 +1,9 @@
+<div style="margin-bottom: 15px">
+  <ng-container [ngTemplateOutlet]="model.itemsLabel.checkbox ? checkboxItem : label"></ng-container>
+  <ng-template #checkboxItem>
+    <label class="tand-c-checkbox" nz-checkbox [(ngModel)]="model.itemsLabel.checked">{{model.itemsLabel.label}}</label>
+  </ng-template>
+  <ng-template #label>
+    <span>{{model.itemsLabel.label}}</span>
+  </ng-template>
+</div>

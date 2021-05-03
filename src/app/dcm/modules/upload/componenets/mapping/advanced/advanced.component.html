@@ -1,0 +1,20 @@
+<div class="full-h" fxLayout="column" fxLayoutAlign="space-between">
+  <div fxFlex="100"  fxLayout="row" fxLayoutAlign="space-between start" style="height: 100%;">
+    <mat-card fxFlex="25" class="cardField">
+      <div class="mapping-box" fxLayout="column" fxLayoutAlign="space-between">
+               <div fxFlex="100" class="scroll-box">
+          <anms-advanced-list [fields]="listFields" (getoperation)="updateOperation($event)"></anms-advanced-list>
+        </div>
+      </div>
+
+    </mat-card>
+    <mat-card fxFlex="75"  class="cardField">
+      <div class="mapping-box" fxLayout="column" fxLayoutAlign="space-between">
+        <div fxFlex="100" class="scroll-box">
+          <anms-advanced-operations [selectedField]="selectedField" (updateOperation) = "update($event)"></anms-advanced-operations>
+        </div>
+      </div>
+
+    </mat-card>
+  </div>
+</div>

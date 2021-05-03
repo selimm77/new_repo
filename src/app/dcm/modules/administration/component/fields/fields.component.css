@@ -1,0 +1,44 @@
+:host >>> .ant-form-item {
+  margin-bottom: 16px;
+}
+
+:host >>> .ant-table {
+  font-size: 12px;
+}
+
+:host >>> .ant-form-item-label label {
+  font-size: 12px !important;
+}
+
+:host >>> .ant-form-inline .ant-form-item {
+  margin-right: 3px;
+}
+
+:host >>> .ant-select-selection__rendered {
+
+  width: 83%;
+  border-right: 1px solid #2da5b9;
+}
+
+.errorSpan {
+  color: darkred;
+  font-weight: 500;
+}
+
+.warnSpan {
+  color: orangered;
+  font-weight: 500;
+
+}
+
+:host >>> .mat-list-base .mat-list-item {
+  font-size: 13px;
+}
+:host >>> .mat-dialog-content{
+  height: 55vh;
+  overflow: auto;
+}
+:host >>> .default-theme .mat-dialog-container{
+  height: 75vh;
+  overflow-y: auto;
+}

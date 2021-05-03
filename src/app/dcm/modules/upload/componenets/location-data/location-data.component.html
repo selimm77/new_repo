@@ -1,0 +1,259 @@
+<nz-tabset
+  style="height:100%;"
+  [nzTabPosition]="'left'"
+>
+  <nz-tab [nzTitle]="'General'"
+  >
+    <ng-container
+      *ngTemplateOutlet="general ">
+    </ng-container>
+  </nz-tab>
+  <nz-tab [nzTitle]="'Geographical'">
+    <ng-container
+      *ngTemplateOutlet="geographical ">
+    </ng-container>
+
+  </nz-tab>
+  <nz-tab [nzTitle]="'Insured Value'" >
+    <ng-container
+      *ngTemplateOutlet="insuredValues ">
+    </ng-container>
+  </nz-tab>
+
+</nz-tabset>
+<ng-template #general >
+  <div class="row" style="overflow-y: auto;height: 40vh">
+  <span class="header col-12">
+    Location Name
+  </span>
+  <span class="col-12  mb-2">
+      {{location.location_name?location.location_name:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Division
+  </span>
+  <span class="col-12  mb-2">
+      {{location.division?location.division:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Occupancy Source
+  </span>
+  <span class="col-12  mb-2">
+      {{location.occupancy_source?location.occupancy_source:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Occupancy Class
+  </span>
+  <span class="col-12  mb-2">
+      {{location.occupancy_class?location.occupancy_class:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Occupancy Sub Class
+  </span>
+  <span class="col-12  mb-2">
+      {{location.occupancy_sub_class?location.occupancy_sub_class:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Occupancy Code
+  </span>
+  <span class="col-12  mb-2">
+      {{location.occupancy_code?location.occupancy_code:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Occupancy Scheme
+  </span>
+  <span class="col-12  mb-2">
+      {{location.occupancy_scheme?location.occupancy_scheme:'_____________'}}
+  </span>
+    <span class="header col-12">
+    Construction Source
+  </span>
+  <span class="col-12  mb-2">
+      {{location.construction_source?location.construction_source:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Construction Class
+  </span>
+  <span class="col-12  mb-2">
+      {{location.construction_class?location.construction_class:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Construction Code
+  </span>
+  <span class="col-12  mb-2">
+      {{location.construction_code?location.construction_code:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Construction Scheme
+  </span>
+  <span class="col-12  mb-2">
+      {{location.construction_scheme?location.construction_scheme:'_____________'}}
+  </span>
+  </div>
+</ng-template>
+<ng-template #geographical >
+  <div class="row" style="overflow-y: auto;height: 40vh">
+  <span class="header col-12">
+    Country
+  </span>
+  <span class="col-12  mb-2">
+      {{location.country?location.country:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Original Adress
+  </span>
+  <span class="col-12  mb-2">
+      {{location.original_full_address?location.original_full_address:'_____________'}}
+  </span>
+  <span class="header col-12">
+    State
+  </span>
+  <span class="col-12  mb-2">
+      {{location.state?location.state:'_____________'}}
+  </span>
+  <span class="header col-12">
+    County
+  </span>
+  <span class="col-12  mb-2">
+      {{location.county?location.county:'_____________'}}
+  </span>
+  <span class="header col-12">
+    City
+  </span>
+  <span class="col-12  mb-2">
+      {{location.city?location.city:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Street
+  </span>
+  <span class="col-12  mb-2">
+      {{location.street?location.street:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Longitude
+  </span>
+  <span class="col-12  mb-2">
+      {{location.longitude?location.longitude:'_____________'}}
+  </span>
+    <span class="header col-12">
+    Latitude
+  </span>
+  <span class="col-12  mb-2">
+      {{location.latitude?location.latitude:'_____________'}}
+  </span>
+  <span class="header col-12">
+   Zip Code
+  </span>
+  <span class="col-12  mb-2">
+      {{location.zip_code?location.zip_code:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Accuracy
+  </span>
+  <span class="col-12  mb-2">
+      {{location.accuracy?location.accuracy:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Geocode
+  </span>
+  <span class="col-12  mb-2">
+      {{location.geocode?location.geocode:'_____________'}}
+  </span>
+  <span class="header col-12">
+    Geocoder
+  </span>
+  <span class="col-12  mb-2">
+      {{location.geocoder?location.geocoder:'_____________'}}
+  </span>
+  <span class="header col-12">
+    GC Validated
+  </span>
+  <span class="col-12  mb-2">
+      {{location.geocoding_validated?location.geocoding_validated:'_____________'}}
+  </span>
+  </div>
+</ng-template>
+<ng-template #insuredValues  >
+  <div class="row" style="overflow-y: auto;height: 40vh">
+  <span class="header col-12">
+Site Currency
+  </span>
+    <span class="col-12  mb-2">
+      {{location.site_currency?location.site_currency:'_____________'}}
+  </span>
+    <span class="header col-12">
+    TIV Amount
+  </span>
+    <span class="col-12  mb-2">
+      {{location.tiv_amount?location.tiv_amount:'_____________'}}
+  </span>
+    <span class="header col-12">
+    Building Value
+  </span>
+    <span class="col-12  mb-2">
+      {{location.building_value?location.building_value:'_____________'}}
+  </span>
+
+    <span class="header col-12">
+    Stock Value
+  </span>
+    <span class="col-12  mb-2">
+      {{location.stock_value?location.stock_value:'_____________'}}
+  </span>
+    <span class="header col-12">
+   Content Value
+  </span>
+    <span class="col-12  mb-2">
+      {{location.content_value?location.content_value:'_____________'}}
+  </span>
+    <span class="header col-12">
+    Machinery Value
+  </span>
+    <span class="col-12  mb-2">
+      {{location.machinery_value?location.machinery_value:'_____________'}}
+  </span>
+    <span class="header col-12">
+    PD Value
+  </span>
+    <span class="col-12  mb-2">
+      {{location.pd_value?location.pd_value:'_____________'}}
+  </span>
+    <span class="header col-12">
+    BI Type
+  </span>
+    <span class="col-12  mb-2">
+      {{location.bi_type?location.bi_type:'_____________'}}
+  </span>
+    <span class="header col-12">
+    BI Value
+  </span>
+    <span class="col-12  mb-2">
+      {{location.bi_value?location.bi_value:'_____________'}}
+  </span>
+    <span class="header col-12">
+Indemnity Period Eip
+    </span>
+    <span class="col-12  mb-2">
+      {{location.indemnity_period_eip?location.indemnity_period_eip:'_____________'}}
+  </span>
+    <span class="header col-12">
+Declaration Period
+    </span>
+    <span class="col-12  mb-2">
+      {{location.bi_declaration_period?location.bi_declaration_period:'_____________'}}
+  </span>
+    <span class="header col-12">
+For Insterest /100%
+    </span>
+    <span class="col-12  mb-2">
+      {{location.for_interest?location.for_interest:'_____________'}}
+  </span>
+    <span class="header col-12">
+Interest
+    </span>
+    <span class="col-12  mb-2">
+      {{location.interest?location.interest:'_____________'}}
+  </span>
+  </div>
+
+</ng-template>

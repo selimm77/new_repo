@@ -1,0 +1,37 @@
+<h1 mat-dialog-title class="opacity-half">
+  <small>Available mapping templates library</small>
+</h1>
+<div mat-dialog-content style="overflow-y: hidden !important;">
+  <p-table [columns]="cols" [value]="dataSource" selectionMode="single" [paginator]="true" [rows]="5"
+           [scrollable]="false" [(selection)]="selecteddata" dataKey="id">
+    <ng-template pTemplate="header" let-columns>
+      <tr  class="popUpRow">
+        <th *ngFor="let col of columns" style="font-size: 13px !important;border-bottom-width: 1px;
+        border-top-width: 0;border-right-width: 0;border-left-width: 0;">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr [pSelectableRow]="rowData" class="popUpRow">
+        <td *ngFor="let col of columns"
+            style="font-size: 12px !important;border-bottom-width: 1px;border-top-width: 0;border-right-width: 0;border-left-width: 0;text-align: center" >
+         <span *ngIf="col.field==='lastUsedDate'">
+           {{rowData[col.field] | date : 'yyyy-MM-dd'}}
+         </span>
+        <span *ngIf="col.field!=='lastUsedDate'">
+              {{rowData[col.field]  }}
+        </span>
+
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<div mat-dialog-actions>
+  <div fxLayout="row" fxLayoutAlign="space-between" class="full-w">
+    <button mat-button [mat-dialog-close]="false">Close</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="name" cdkFocusInitial (click)="selectdata()">Select</button>
+  </div>
+</div>

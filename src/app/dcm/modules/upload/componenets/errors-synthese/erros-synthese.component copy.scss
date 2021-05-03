@@ -1,0 +1,102 @@
+.danger {
+  color: #FF0000;
+}
+
+.number-errors {
+  color: rgb(39, 175, 199);
+  letter-spacing: -0.5px;
+  font-size: 18px;
+  display: inline-block;
+  transform: scale(1, 0.8);
+  font-family: Verdana,
+  sans-serif;
+}
+
+.span-errors {
+  color: #6e6e6e;
+  font-size: 21px;
+  font-family: 'Tw Cen MT', sans-serif;
+  letter-spacing: 0px;
+  transform: scale(1, 0.9);
+  text-transform: full-width;
+  display: inline-block;
+}
+
+.error-eye {
+  color: #ff2d1e;
+  background-color: white;
+  border: 0.8px solid #ff2d1e;
+  font-family: Tahoma, Geneva, sans-serif;
+  padding: 3px 15px;
+  margin-left: 20px;
+  position: relative;
+  display: inline-block;
+  border-radius: 20px;
+}
+
+::ng-deep i.ui-table-loading-icon.pi-spin.pi.pi-spinner {
+  font-size: 50px;
+  color: #172be0;
+}
+
+.danger {
+  background-color: white !important;
+  margin-left: 140px;
+}
+
+.notification {
+  color: #ff2d1e;
+  background-color: white;
+  border: 0.8px solid #ff2d1e;
+  font-family: Tahoma, Geneva, sans-serif;
+  padding: 3px 15px;
+  margin-left: 20px;
+  margin-bottom: 3px;
+  position: relative;
+  // top: -15px;
+  display: inline-block;
+  border-radius: 20px;
+  // width: 70px;
+
+}
+
+.notification-activate {
+  background-color: #ff2d1e;
+  border: 0.8px solid #ff2d1e;
+  font-family: Tahoma, Geneva, sans-serif;
+  // text-decoration: none;
+  padding: 6px 15px;
+  margin-left: 13px;
+  margin-bottom: 3px;
+  position: relative;
+  // top: -15px;
+  // display: inline-block;
+  border-radius: 20px;
+  color: white;
+  // width: 70px;
+
+}
+
+.fieldCode-cl-activate {
+    color: white;
+}
+
+.notification:hover {
+  background: #fafafa;
+  border: 0.8px solid #ff3728;
+  color: red;
+}
+
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background-color: #ff2d1e;
+  color: white;
+}
+
+.id-errors {
+  background-color: white !important;
+}

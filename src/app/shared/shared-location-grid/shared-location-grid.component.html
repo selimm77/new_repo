@@ -1,0 +1,336 @@
+<div *ngIf="notify" id="id_notify_success_div" class="alert-success" style="float: right; z-index: 1;
+"><strong>Success!</strong>
+  <!--<span class="closebtn">&times;</span>-->
+</div>
+ <!-- <div id="mySidenav" class="sidenav body template-bg template-border radius-all"
+  style="float: right; z-index:1; position:relative" class="sidebar-class">
+  <a id="sideBar" (click)="onShowSideBar()"><i class=" fa fa-bars fa-fw" aria-hidden="true"></i></a>
+  <a (click)="getStateCols()" id="helps"  nz-popover nzContent="Field Management" >
+    <i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"  ></i>
+  </a>-->
+  <!-- <a href="#/dcm/upload" id="setting"><i class="fa fa-user fa-fw" aria-hidden="true"></i></a>
+  <a (click)="goToAdmin()" id="helps"  nz-popover nzContent="Field Management" >
+    <i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"  ></i>
+  </a>
+</div>  *ngIf="startSave"-->
+
+<div *ngIf="startSave" class="spinner-save" style="z-index:1;">
+  <div>
+    <nz-spin style="width: 60px"></nz-spin>
+  </div>
+</div>
+
+<div style="display: inline-block; width: 96%; height: 100%; margin-left: 20px; position:relative;" class="d-aggrid">
+  <!-- <div style="display: inline-block; width: 96%; height: 100%; margin-left: 20px; z-index:1; position:relative;" class="d-aggrid"> -->
+ <ag-grid-angular
+      #agGrid
+      style="width: 100%; height: calc(100% - 40px);"
+      id="myGrid"
+      class="ag-theme-balham"
+      [sideBar]="sideBar"
+      [modules]="modules"
+      floatingFilter
+      [gridOptions]="gridOptions"
+      [defaultColDef]="defaultColDef"
+      [tooltipShowDelay]="tooltipShowDelay"
+      [animateRows]="true"
+      [frameworkComponents]="frameworkComponents"
+      [enableRangeSelection]="true"
+      [suppressRowClickSelection]="true"
+
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      
+        [pivotPanelShow]="pivotPanelShow"
+        [icons]="icons"
+      [pagination]="true"
+      [suppressPaginationPanel]="true"
+      [enterMovesDown]="true"
+      [enterMovesDownAfterEdit]="true"
+      [enableFillHandle]="true"
+      [enableCellChangeFlash]="false"
+      [aggregateOnlyChangedColumns]="true"
+      [rememberGroupStateWhenNewData]="true"
+      [components]="components"
+      [rowBuffer]="rowBuffer"
+      [rowSelection]="rowSelection"
+      [paginationPageSize]="paginationPageSize"
+      [getContextMenuItems]="getContextMenuItems"
+      (cellValueChanged)="onCellValueChanged($event)"
+    (cellClicked)="onCellClicked($event)"
+            (cellKeyDown)="onCellKeyDown($event)"
+            (cellKeyPress)="onCellKeyPress($event)"
+      
+      (gridReady)="onGridReady($event)"
+    (cellFocused)="onCellFocused($event)"
+    (cellDoubleClicked)="onCellDoubleClicked($event)"
+      >
+
+  </ag-grid-angular>
+  <!-- (paginationChanged)="onPaginationChanged($event)" -->
+  <!-- costomize pagination -->
+  <div class="test-header">
+    <!-- <div style="display: inline-block; margin-left: 10%;">
+    <span class="ms-1"><i class="fas fa-pen" (click)="invokeEditMethod($event)" style="margin-top: 15px; cursor: pointer;"></i></span>
+      <span class="ms-1"><i class="fa fa-trash" (click)="invokeDeleteMethod($event)" style="margin-top: 15px; cursor: pointer;"></i></span>
+      <span class="ms-1"><i class="fa fa-link" (click)="invokeLinkMethod($event)" style="margin-top: 15px; cursor: pointer;"></i></span>
+      
+      <input type="text" placeholder="'TIV       %'" style="display: inline-block; margin-left: 50px; color: blue; border: none; border-bottom: 1px solid blue; width: 60px; align-content: center;">
+      
+    <section class="example-section" style="display: inline-block;">
+      <ul class="tiv-class">
+        <li *ngFor="let elmt of calculTiv" style="display: inline-block;">
+          <mat-checkbox class="example-margin"
+          *ngIf="!colorPdBi"
+        [checked]="elmt.checked"
+        [color]="blue"
+        (change)="setCheck($event.checked, elmt.id)" style="margin-left: 30px; color: grey;">
+        {{elmt.name}}
+      </mat-checkbox>
+      <mat-checkbox class="example-margin"
+      *ngIf="colorPdBi"
+        [checked]="elmt.checked"
+        [color]="blue"
+        (change)="setCheck($event.checked, elmt.id)" style="margin-left: 30px; color: red;">
+        {{elmt.name}}
+      </mat-checkbox>
+        </li>
+      </ul>
+    </section>
+    <span class="ms-1"><i class="fa fa-floppy-o" (click)="invokeTivMethod($event)" style="margin-top: 15px; cursor: pointer;"></i></span>
+  </div> -->
+
+  <div style="display: inline-block; float: right; margin-right: 10px;">
+
+    <ul class="pagination" style="margin-top: 5px; display: inline-block; float: right;  margin-right: 10px;">
+      <li *ngIf="currentPage != 1"><a id="idFirst" (click)="onBtFirst()"><i class="fa  fa-step-backward fa-fw" aria-hidden="true"></i></a></li>
+      <li *ngIf="currentPage == 1"><a id="idFirsta"><i id="idFirstOne" class="fa  fa-step-backward fa-fw"
+            aria-hidden="true"></i></a></li>
+      <li *ngIf="currentPage != 1"><a id="idPreview" (click)="onBtPrevious()"><i class="fa fa-chevron-left fa-fw"
+            aria-hidden="true"></i></a></li>
+            <li *ngIf="currentPage == 1"><a id="idPreview"><i id="idPreviewOne" class=" fa fa-chevron-left fa-fw"
+                  aria-hidden="true"></i></a></li>
+                  
+      <li *ngIf="currentPage==pageFirst">
+        <a id="idOne" class="active">{{currentPage}}</a>
+      </li>
+      <li *ngIf="currentPage==pageFirst && pageLast - currentPage > 0" (click)="onBtSpecifiquePage(currentPage + 1)">
+        <a id="idOne">{{currentPage + 1}}</a>
+      </li>
+      <li *ngIf="currentPage==pageFirst && pageLast - currentPage - 1 > 0" (click)="onBtSpecifiquePage(currentPage + 2)">
+        <a id="idOne">{{currentPage + 2}}</a>
+      </li>
+      <li *ngIf="currentPage==pageFirst && pageLast - currentPage - 2 > 0" (click)="onBtSpecifiquePage(currentPage + 3)">
+        <a id="idOne">{{currentPage + 3}}</a>
+      </li>
+      <li *ngIf="currentPage==pageFirst && pageLast - currentPage - 3 > 0" (click)="onBtSpecifiquePage(currentPage + 4)">
+        <a id="idOne">{{currentPage + 4}}</a>
+      </li>
+    
+    
+      <li *ngIf="currentPage == 2">
+        <a id="idOne" (click)="onBtFirst()">{{currentPage - 1}}</a>
+      </li>
+      <li *ngIf="currentPage == 2">
+        <a id="idOne" class="active">{{currentPage}}</a>
+      </li>
+      <li *ngIf="currentPage == 2 && pageLast - currentPage > 0" (click)="onBtSpecifiquePage(currentPage + 1)">
+        <a id="idOne">{{currentPage + 1}}</a>
+      </li>
+      <li *ngIf="currentPage == 2 && pageLast - currentPage - 1 > 0" (click)="onBtSpecifiquePage(currentPage + 2)">
+        <a id="idOne">{{currentPage + 2}}</a>
+      </li>
+      <li *ngIf="currentPage == 2 && pageLast - currentPage - 2 > 0" (click)="onBtSpecifiquePage(currentPage + 3)">
+        <a id="idOne">{{currentPage + 3}}</a>
+      </li>
+    
+    
+      <li *ngIf="currentPage == 3" (click)="onBtSpecifiquePage(currentPage - 1)">
+        <a id="idOne">{{currentPage - 2}}</a>
+      </li>
+      <li *ngIf="currentPage == 3" (click)="onBtSpecifiquePage(currentPage - 1)">
+        <a id="idOne">{{currentPage - 1}}</a>
+      </li>
+      <li *ngIf="currentPage == 3">
+        <a id="idOne" class="active">{{currentPage}}</a>
+      </li>
+      <li *ngIf="currentPage == 3 && pageLast - currentPage - 1 > 0" (click)="onBtSpecifiquePage(currentPage + 2)">
+        <a id="idOne">{{currentPage + 2}}</a>
+      </li>
+      <li *ngIf="currentPage == 3 && pageLast - currentPage - 2 > 0" (click)="onBtSpecifiquePage(currentPage + 3)">
+        <a id="idOne">{{currentPage + 3}}</a></li>
+    
+    
+      <li
+        *ngIf="currentPage!=pageFirst && currentPage - 3 > 0  && pageLast - currentPage != 2 && pageLast - currentPage != 1  && pageLast - currentPage != 2 && pageLast - currentPage != 1 && currentPage != pageLast"
+        (click)="onBtSpecifiquePage(currentPage -2)">
+        <a id="idOne" >{{currentPage - 2}}</a>
+      </li>
+      <li *ngIf="currentPage!=pageFirst && currentPage - 3 > 0  && pageLast - currentPage != 2 && pageLast - currentPage != 1  && pageLast - currentPage != 2 && pageLast - currentPage != 1 && currentPage != pageLast"
+        (click)="onBtSpecifiquePage(currentPage - 1)">
+        <a id="idOne">{{currentPage - 1}}</a>
+      </li>
+      <li *ngIf="currentPage!=pageFirst && currentPage - 3 > 0  && pageLast - currentPage != 2 && pageLast - currentPage != 1  && pageLast - currentPage != 2 && pageLast - currentPage != 1 && currentPage != pageLast">
+        <a id="idOne" class="active">{{currentPage}}</a>
+      </li>
+    
+      <li *ngIf="pageLast - currentPage - 2 > 0 && currentPage != 1 && currentPage != 2 && currentPage != 3 && pageLast - currentPage != 2 && pageLast - currentPage != 1 && currentPage != pageLast"
+        (click)="onBtSpecifiquePage(currentPage + 1)">
+        <a id="idOne">{{currentPage + 1}}</a>
+      </li>
+      <li *ngIf="pageLast - currentPage - 2 > 0  && currentPage != 1 && currentPage != 2 && currentPage != 3 && pageLast - currentPage != 2 && pageLast - currentPage != 1 && currentPage != pageLast"
+        (click)="onBtSpecifiquePage(currentPage + 2)">
+        <a id="idOne">{{currentPage + 2}}</a>
+      </li>
+    
+        <li *ngIf="pageLast - currentPage == 2 && pageLast > 4" (click)="onBtSpecifiquePage(currentPage - 2)"><a id="idOne">{{currentPage - 2}}</a></li>
+        <li *ngIf="pageLast - currentPage == 2 && pageLast > 4" (click)="onBtSpecifiquePage(currentPage - 1)"><a id="idOne">{{currentPage - 1}}</a></li>
+        <li *ngIf="pageLast - currentPage == 2 && pageLast > 4"><a id="idOne" class="active">{{currentPage}}</a></li>
+        <li *ngIf="pageLast - currentPage == 2 && pageLast > 4" (click)="onBtSpecifiquePage(currentPage + 1)"><a id="idOne">{{currentPage + 1}}</a></li>
+        <li *ngIf="pageLast - currentPage == 2 && pageLast > 4" (click)="onBtSpecifiquePage(currentPage + 2)"><a id="idOne">{{currentPage + 2}}</a></li>
+    
+        <li *ngIf="pageLast - currentPage == 1 && pageLast > 4"><a id="idOne" (click)="onBtSpecifiquePage(currentPage - 3)">{{currentPage - 3}}</a></li>
+        <li *ngIf="pageLast - currentPage == 1 && pageLast > 4"><a id="idOne" (click)="onBtSpecifiquePage(currentPage - 2)">{{currentPage - 2}}</a></li>
+        <li *ngIf="pageLast - currentPage == 1 && pageLast > 4"><a id="idOne" (click)="onBtSpecifiquePage(currentPage - 1)">{{currentPage - 1}}</a></li>
+        <li *ngIf="pageLast - currentPage == 1 && pageLast > 4"><a id="idOne" class="active">{{currentPage}}</a></li>
+        <li *ngIf="pageLast - currentPage == 1 && pageLast > 4"><a id="idOne" (click)="onBtSpecifiquePage(currentPage + 1)">{{currentPage + 1}}</a></li>
+    
+          <li *ngIf="currentPage == pageLast && pageLast > 4" (click)="onBtSpecifiquePage(currentPage - 4)"><a id="idOne">{{currentPage - 4}}</a></li>
+          <li *ngIf="currentPage == pageLast && pageLast > 4" (click)="onBtSpecifiquePage(currentPage - 3)"><a id="idOne">{{currentPage - 3}}</a></li>
+          <li *ngIf="currentPage == pageLast && pageLast > 4" (click)="onBtSpecifiquePage(currentPage - 2)"><a id="idOne">{{currentPage - 2}}</a></li>
+          <li *ngIf="currentPage == pageLast && pageLast > 4" (click)="onBtSpecifiquePage(currentPage - 1)"><a id="idOne">{{currentPage - 1}}</a></li>
+          <li *ngIf="currentPage == pageLast && pageLast > 4"><a id="idOne" class="active">{{currentPage}}</a></li>
+    
+      <li *ngIf="currentPage != pageLast"><a id="idNext" (click)="onBtNext()"><i class="fa fa-chevron-right fa-fw" aria-hidden="true"></i></a></li>
+      <li *ngIf="currentPage == pageLast"><a id="idNexta"><i id="idNextL" class="fa fa-chevron-right fa-fw"
+        aria-hidden="true"></i></a></li>
+      <li *ngIf="currentPage != pageLast"><a id="idLast" (click)="onBtLast()"><i class="fa fa-step-forward fa-fw" aria-hidden="true"></i></a></li>
+      <li *ngIf="currentPage == pageLast"><a id="idLast"><i id="idLastL" class="fa fa-step-forward fa-fw"
+          aria-hidden="true"></i></a></li>
+    </ul>
+  </div>
+  </div>
+</div>
+<div style="display: inline-block; float: right; z-index:1; position:fixed; margin-top: 20px;">
+  <a (click)="onManageColumn()"><mat-icon style=" margin-right: 4px; font-size: 30px;">menu</mat-icon></a>
+</div>
+
+    <nz-modal
+      [(nzVisible)]="isManageColumn"
+      [nzTitle]="modalTitleManageColumn"
+      [nzContent]="modalContentManageColumn"
+      [nzFooter]="modalFooterManageColumn"
+      (nzOnCancel)="handleOutsideClick()"
+      [nzBodyStyle]="{'overflow': 'scroll'}"
+    >
+      <ng-template #modalTitleManageColumn>Manage Columns</ng-template>
+
+      <ng-template #modalContentManageColumn style="overflow: scroll;">
+
+        <div  class="example-list mt-20" >  
+          <section class="example-section">
+            <div class="search-box">
+              <input #myInput class="form-control" [(ngModel)]="name"  style="height: 30px;font-size: 12px;text-align: center;padding: 0.5rem;background: #cccccc52">
+              <div class="search-box-placeholder-wrapper">
+                <mat-icon class="search-box-placeholder">search</mat-icon>
+              </div>
+            </div>
+          </section>
+          <section class="example-section p-3">
+            <mat-checkbox class="example-margin" (change)="setAllTree($event.checked)">Select All</mat-checkbox>
+          </section>
+       
+          <mat-accordion class="example-headers-align" multi>
+         
+  <mat-expansion-panel  *ngFor="let line of categoriesFilter(task) ; let i = index">
+   
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-checkbox class="example-margin"
+              [checked]="allComplete"
+              (click)="$event.stopPropagation()" 
+                (keydown)="$event.stopPropagation()"
+              (change)="setAll($event.checked, i)"
+              >
+            </mat-checkbox>
+      </mat-panel-title>
+      <mat-panel-description>
+        <span >
+          {{line.name}}
+        </span>
+       
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    
+      <ul  cdkDropList class="example-list pl-4 pr-2" (cdkDropListDropped)="drop($event,i)">
+          
+        <li class="example-box pr-2 pl-2 "    [cdkDragDisabled]="!subtask.checked" [class.highlight]="subtask.checked" *ngFor="let subtask of  dataFiltered(line)" cdkDrag>
+          <mat-checkbox [(ngModel)]="subtask.checked" class="mt-2"
+                        (ngModelChange)="updateAllComplete()"
+                        >
+                        <span (click)="onClickSheet($event, line.name, subtask.name)" class="w-100 drag-content">
+                          {{subtask.name}}
+                        </span>
+            
+          </mat-checkbox>
+        </li>
+      </ul>
+    
+  </mat-expansion-panel>
+
+          </mat-accordion>
+          
+        
+        
+
+              
+      </div>
+      </ng-template>
+
+      <ng-template #modalFooterManageColumn>
+        <button nz-button class="cancel-btn" nzType="default" (click)="handleCancelManageColumn()">Cancel</button>
+        <button nz-button class="reset-btn" (click)="handleResetManageColumn()">Reset</button>
+        <button nz-button class="save-btn" (click)="handleOkManageColumn()" [nzLoading]="isConfirmLoading">Save</button>
+      </ng-template>
+    </nz-modal>
+
+    <div *ngIf="laoding$|async" style="margin-top: -200px;">
+      <div class="app-loading">
+        <div class="logo">
+          <svg class="spinner" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+          </svg>
+        </div>
+      </div>
+    </div>
+    
+    <nz-modal
+    [(nzVisible)]="isVisiblePdBi"
+    [nzTitle]="modalTitlePb"
+    [nzContent]="modalContentPb"
+    [nzFooter]="modalFooterPb"
+    (nzOnCancel)="handleCancelPdBi()"
+    >
+    <ng-template #modalTitlePb>Confirm</ng-template>
+    
+    <ng-template #modalContentPb>
+      <p>Do you want to save the changes?</p>
+      <!-- <div>
+        <textarea nz-input placeholder="Add comments here... " [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+      </div> -->
+    </ng-template>
+    
+    <ng-template #modalFooterPb>
+      <button nz-button nzType="default" (click)="handleCancelPdBi()">Cancel</button>
+      <button nz-button class="confirm-btn" nzType="primary" (click)="handleOkPdBi()" [nzLoading]="isConfirmLoading">Confirm</button>
+    </ng-template>
+    </nz-modal>
+
+<nz-modal [(nzVisible)]="isVisibleRestor" nzTitle="Modal Title" (nzOnCancel)="handleCancelRestor()"
+          (nzOnOk)="handleOkRestor()" [nzOkLoading]="isOkLoadingRestor" *ngIf="isVisibleRestor">
+  <p>Restore initial data</p>
+</nz-modal>
+
+

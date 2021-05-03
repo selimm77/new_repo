@@ -1,0 +1,84 @@
+<div style="padding: 12px 140px;">
+  <div class="global-tab-header" style="background-color: white;padding: 25px;">
+    <nz-row>
+      <nz-col *ngFor="let item of tabModel.header" nzSpan="4" style="margin-right: 10px;">
+        <nz-row>
+          <nz-col nzSpan="3" style="height: 55px">
+            <img [src]="item.icon" style="width: 100%;height: 100%">
+          </nz-col>
+          <nz-col nzSpan="20" nzOffset="1" style="height: 55px">
+            <ng-container [ngTemplateOutlet]="item.type === 'inputNumber' ? number : other"></ng-container>
+            <ng-template #other>
+              <input nz-input [placeholder]="getPlaceHolder(item)" [(ngModel)]="locationData[item.field_code]" (ngModelChange)="checkMondatory($event, item.field_code)"
+                     [ngStyle]="{'border': mondatories['General'][item.field_code] ? '1px solid red' : ''}" nzSize="large" style="background-color: #f4f6fc;height: 100%" />
+            </ng-template>
+            <ng-template #number>
+              <input type="text" only-number [placeholder]="getPlaceHolder(item)" [(ngModel)]="locationData[item.field_code]" (ngModelChange)="checkMondatory($event, item.field_code)"
+                     [ngStyle]="{'border': mondatories['General'][item.field_code] ? '1px solid red' : ''}" style="background-color: #f4f6fc;height: 100%;padding-left: 11px;width: 100%" />
+            </ng-template>
+          </nz-col>
+        </nz-row>
+      </nz-col>
+    </nz-row>
+  </div>
+  <div class="global-tab-body" style="margin-top: 15px">
+    <nz-row>
+      <nz-col nzSpan="8" style="background-color: white;padding: 15px;height: 55vh">
+        <div *ngFor="let item of tabModel.body" style="display: flex;height: 50px;margin-bottom: 20px; cursor: pointer"
+              [ngClass]="item.active ? 'body-active-item' : ''" (click)="activeBodyItem(item.label)">
+          <div style="width: 10px;background-color: blue"></div>
+          <div style="margin-left: 10px;font-size: 15px;width: 100%">
+            <span style="vertical-align: middle;">{{item.label}}</span>
+            <i nz-icon nzType="right" style="float: right;position: relative;top: 10px"></i>
+          </div>
+        </div>
+      </nz-col>
+      <nz-col nzSpan="15" nzOffset="1" style="background-color: white;padding: 15px;height: 55vh">
+        <nz-row>
+          <ng-container [ngTemplateOutlet]="tabModel.body[0].active ? firstTab : secondTab"></ng-container>
+          <ng-template #firstTab>
+            <nz-col nzSpan="11" nzOffset="1" *ngFor="let val0 of tabModel.body[0].value">
+              <div style="margin-bottom: 10px">
+                <span style="font-size: 18px;font-weight: bold;">{{val0.label}}</span>
+              </div>
+              <ng-container *ngFor="let valItem0 of val0.items">
+                <div style="width: 100%; height: 40px; margin-bottom: 10px"  *ngIf="valItem0 | itemVisibility : locationData['occupancy_scheme']">
+                  <ng-container [ngSwitch]="valItem0.type">
+                    <nz-select  [nzPlaceHolder]="getPlaceHolder(valItem0)" nzShowSearch nzAllowClear nzCustomContent *ngSwitchCase="'list'" [disabled]="valItem0.disabled" class="my-select"
+                                [(ngModel)]="locationData[valItem0.field_code]" (ngModelChange)="applyAutoFill($event, valItem0.field_code);checkMondatory($event, valItem0.field_code)"
+                                [ngStyle]="{'border': mondatories['General'][valItem0.field_code] ? '1px solid red' : ''}" style="width: 100%;">
+                      <nz-option nzLabel={{o}} nzValue={{o}}
+                                 *ngFor="let o of getReferenceData(valItem0.field_code)">
+                        {{o}}
+                      </nz-option>
+                    </nz-select>
+                    <input *ngSwitchDefault nz-input [placeholder]="getPlaceHolder(valItem0)" [disabled]="valItem0.disabled"
+                           [(ngModel)]="locationData[valItem0.field_code]"  (ngModelChange)="checkMondatory($event, valItem0.field_code)" nzSize="large"
+                           [ngStyle]="{'border': mondatories['General'][valItem0.field_code] ? '1px solid red' : ''}" style="background-color: #f4f6fc;height: 100%" />
+                  </ng-container>
+                </div>
+              </ng-container>
+            </nz-col>
+          </ng-template>
+          <ng-template #secondTab>
+            <nz-col nzSpan="11" nzOffset="1" *ngFor="let val1 of tabModel.body[1].value">
+              <div style="margin-bottom: 10px">
+                <span style="font-size: 18px;font-weight: bold;">{{val1.label}}</span>
+              </div>
+              <div style="width: 100%; height: 40px; margin-bottom: 10px" *ngFor="let valItem1 of val1.items">
+                <ng-container [ngSwitch]="valItem1.type">
+                  <input type="text" only-number [placeholder]="getPlaceHolder(valItem1)" (ngModelChange)="checkMondatory($event, valItem1.field_code)" *ngSwitchCase="'inputNumber'"
+                         [ngStyle]="{'border': mondatories['General'][valItem1.field_code] ? '1px solid red' : ''}"
+                         [(ngModel)]="locationData[valItem1.field_code]" style="background-color: #f4f6fc;height: 100%;width: 100%;padding-left: 11px" />
+                  <input nz-input [placeholder]="getPlaceHolder(valItem1)" (ngModelChange)="checkMondatory($event, valItem1.field_code)" *ngSwitchDefault
+                         [ngStyle]="{'border': mondatories['General'][valItem1.field_code] ? '1px solid red' : ''}"
+                         [(ngModel)]="locationData[valItem1.field_code]" nzSize="large" style="background-color: #f4f6fc;height: 100%" />
+                </ng-container>
+              </div>
+            </nz-col>
+          </ng-template>
+        </nz-row>
+      </nz-col>
+    </nz-row>
+  </div>
+</div>

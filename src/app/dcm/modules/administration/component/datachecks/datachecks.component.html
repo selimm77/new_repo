@@ -1,0 +1,44 @@
+<div class="mt-3 container" >
+<div class="row" style="height: 400px">
+  <div class="col-6">
+    <form nz-form [formGroup]="formDs" [nzLayout]="'vertical'">
+      <nz-form-item>
+        <nz-form-label   nzRequired nzFor="description">Description Datacheck</nz-form-label>
+        <nz-form-control>
+          <textarea rows="4" nz-input formControlName="description"></textarea>
+
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+
+        <nz-form-control [nzSm]="18" [nzXs]="24">
+          <button nz-button nzType="default" (click)="adddescriptions()" [disabled]="!formDs.valid">add Datacheck Description</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+<div class="col-6">
+  <mat-list style="width:100%">
+    <h3 mat-subheader>Datachecks Description to Validate</h3>
+    <mat-list-item *ngFor="let datacheck of datacheckToAdd" class="row">
+      <p mat-line class="col-9">{{datacheck.description}}</p>
+      <button mat-button color="primary" style="float:right" (click)="delete(datacheck)">delete</button>
+    </mat-list-item>
+  </mat-list></div>
+
+</div>
+
+  <div class="row" *ngIf="datacheckToAdd.length>0">
+    <div class="col-8 offset-4">
+      <button nz-button nzType="link" style="float: right ; color: #16868C ;border: none ;box-shadow: 0 0 0 rgba(0, 0, 0, 0.015);background: transparent" nzSize="small"
+      (click)="validateAll()">
+        Validate Datachecks Description
+      </button>
+      <button nz-button nzType="link" style="float: right ; color : #D94938 ; border: none ;box-shadow: 0 0 0 rgba(0, 0, 0, 0.015);background: transparent " class="ml-2"
+              (click)="clearAll()" nzSize="small">
+        Clear Datachecks Description
+      </button>
+    </div>
+  </div>
+
+</div>

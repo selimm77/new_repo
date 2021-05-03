@@ -1,0 +1,88 @@
+<div style="padding: 15px 0">
+  <div class="pricing-supheader" style="background-color: white;padding: 10px 25px;margin: 20px 10%;">
+    <nz-row>
+      <nz-col nzSpan="24" style="font-size: 20px;font-weight: bold;margin-bottom: 10px;">
+        <span style="font-size: 20px;font-weight: bold;">{{tabModel.supHeader.title}}</span>
+      </nz-col>
+      <nz-col *ngFor="let headerItem of tabModel.supHeader.content, let i= index"
+              [nzSpan]="i==1 ? 11 : 12" [nzOffset]="i==1 ? 1 : 0"
+              style="height: 35px"
+              [ngStyle]="{'padding-right' : i==1 ? '20px' : ''}">
+        <nz-select  [nzPlaceHolder]="getPlaceHolder(headerItem)" nzShowSearch nzAllowClear nzCustomContent class="my-select"
+                    [(ngModel)]="locationData[headerItem.field_code]" (ngModelChange)="checkMondatory($event, headerItem.field_code)"
+                    [ngStyle]="{'border': mondatories[headerItem.field_code] ? '1px solid red' : ''}"
+                    [disabled]="headerItem.disabled"  style="background-color: #f4f6fc;width: 100%;">
+          <nz-option nzLabel={{o}} nzValue={{o}}
+                     *ngFor="let o of getReferenceData(headerItem.field_code)">
+            {{o}}
+          </nz-option>
+        </nz-select>
+      </nz-col>
+    </nz-row>
+  </div>
+  <div class="pricing-header" style="background-color: white;padding: 10px 25px;margin: 20px 10%;">
+    <nz-row>
+      <nz-col nzSpan="24">
+        <span style="font-size: 20px;font-weight: bold;">{{tabModel.header.title}}</span>
+      </nz-col>
+      <nz-col *ngFor="let item of tabModel.header.content" nzSpan="5" nzOffset="1">
+        <ng-container [ngTemplateOutlet]="item.type ? listItem : others"></ng-container>
+        <ng-template #listItem>
+          <nz-select  [nzPlaceHolder]="getPlaceHolder(item)" nzShowSearch nzAllowClear nzCustomContent class="my-select"
+                      [(ngModel)]="locationData[item.field_code]" (ngModelChange)="checkMondatory($event, item.field_code)"
+                      [ngStyle]="{'border': mondatories[item.field_code] ? '1px solid red' : ''}"
+                      [disabled]="item.disabled"  style="background-color: #f4f6fc;width: 100%;">
+            <nz-option nzLabel={{o}} nzValue={{o}}
+                       *ngFor="let o of getReferenceData(item.field_code)">
+              {{o}}
+            </nz-option>
+          </nz-select>
+        </ng-template>
+        <ng-template #others>
+          <div style="width: 100%"><span style="text-overflow: ellipsis;white-space: nowrap;">{{item.label}}</span></div>
+          <div [ngStyle]="{'border': mondatories[item.field_code] ? '1px solid red' : ''}" style="padding-bottom: 10px">
+            <nz-slider class="pricing-slider" [nzMarks]="marks" nzDots [(ngModel)]="item.value"
+                       (ngModelChange)="checkMondatory($event, item.field_code);onChangeValue(item)"></nz-slider>
+          </div>
+          <div style="text-align: center;color: blue;font-weight: bold"><span>{{marks[item.value]}}</span></div>
+        </ng-template>
+      </nz-col>
+    </nz-row>
+  </div>
+  <div class="pricing-content" style="margin: 0 10%;margin-bottom: 20px;">
+        <nz-row>
+          <nz-col *ngFor="let val of tabModel.body;let j = index"
+                  [nzSpan]="j == 0 ? 12 : 11" [nzOffset]="j"
+                  style="background-color: white;padding: 10px 30px;height: 28vh">
+            <div style="margin-bottom: 10px">
+              <span style="font-size: 20px;font-weight: bold;">{{val.label}}</span>
+            </div>
+            <div>
+              <nz-row>
+                <ng-container [ngTemplateOutlet]="j == 0 ? first : second"></ng-container>
+                <ng-template #first>
+                  <nz-col *ngFor="let valItem of val.value,let k = index" nzSpan="24" [ngStyle]="{'margin-bottom' : k === 0 ? '30px' : '15px' }">
+                    <div><span>{{valItem.label}}</span></div>
+                    <div *ngFor="let item of valItem.items" style="height: 30px">
+                      <input [type]="item.type === 'inputNumber' ? 'number' : 'text'" [placeholder]="getPlaceHolder(item)"  style="background-color: #f4f6fc;height: 100%;width: 100%;padding-left: 11px" />
+                    </div>
+                  </nz-col>
+                </ng-template>
+                <ng-template #second>
+                  <nz-col *ngFor="let valItem of val.items" nzSpan="24" style="margin-bottom: 20px">
+                    <input type="text" only-number [placeholder]="getPlaceHolder(valItem)" style="background-color: #f4f6fc;height: 33px;width: 100%;padding-left: 11px" />
+                  </nz-col>
+                </ng-template>
+              </nz-row>
+            </div>
+          </nz-col>
+        </nz-row>
+  </div>
+  <div class="pricing-footer" style="background-color: white;padding: 10px 25px;margin: 20px 10%">
+    <nz-row>
+      <nz-col *ngFor="let headerItem of tabModel.footer.content, let i= index" [nzSpan]="12">
+        <input type="text" only-number [placeholder]="getPlaceHolder(headerItem)" style="background-color: #f4f6fc;height: 33px;width: 100%;padding-left: 11px"/>
+      </nz-col>
+    </nz-row>
+  </div>
+</div>

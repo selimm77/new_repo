@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+ <div class="input-field col s12">
+   <select class="icons" id="opt">
+     <option value="eq" selected><b><span style="text-decoration: solid;">=</span></b></option>
+     <option value="inf"><b><span style="text-decoration: solid;">&lt;</span></b></option>
+     <option value="sup"><b><span style="text-decoration: solid;">></span></b></option>
+   </select>
+   <input #input formControlName="txt" (click)="onFocusInput($event)" [value]="txt" />
+  <button class="btn" (click)="onClickFilter($event)" name="checkbox" *ngIf="!isFilter">
+    <i>
+      <img src="assets/icons/filters/filter-b.png" alt="image" />
+    </i>
+  </button>
+  <button class="btn" (click)="onClickFilter($event)" *ngIf="isFilter">
+    <i><img src="assets/icons/filters/filter-f.png" alt="image" /></i>
+  </button>
+ </div>
+</form>

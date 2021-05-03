@@ -1,0 +1,161 @@
+<div class="full-h" fxLayout="column" fxLayoutAlign="start">
+  
+  <!-- <div class="row" [style.display]="(file$ | async) ? 'none' : 'grid'" style="width: 99.9%;">
+    <div class="col-md-12 ml-3 mt-4">
+      <div class="center-screen">
+        <button *ngIf="listOfFiles.length === 0" nz-button class="import-button" [nzSize]="'small'" (click)="fileInput.click()" style="width: 150px; height: 37px;">Add File</button>
+        <button *ngIf="listOfFiles.length > 0" nz-button class="import-button" [nzSize]="'small'" (click)="fileInput.click()" style="width: 150px; height: 37px;">Add File</button>
+        
+        <input style="display: none" #attachments type="file" (change)="onFileChanged($event)" #fileInput multiple="true">
+        <br>
+        <div  *ngIf="listOfFiles.length > 0" style="max-height: 300px; overflow: scroll; overflow-x: hidden;">
+            <br />
+  
+  <div *ngFor="let selected of listOfFiles;let index = index">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text" id="btnGroupAddon">
+                <i *ngIf="selected.extension === ('xlsx' || 'xls')" class="fas fa-file-excel" style="color: green; font-size: 20px;"></i>
+                <i *ngIf="selected.extension === 'csv'" class="fas fa-file-csv" style="color: green; font-size: 20px;"></i>
+                <i *ngIf="selected.extension == 'none'" class="fas fa-exclamation" style="color: rgb(212, 31, 7); font-size: 20px;"></i>
+              </div>
+            </div>
+            <input type="text" class="form-control input-group-prepend" aria-describedby="btnGroupAddon" [value]="selected.name" readonly style="width: auto;" id="btnGroupAddon">
+            <div class="input-group-prepend">
+              <div class="input-group-text" id="btnGroupAddon"><mat-icon (click)="removeSelectedFile(index)" style="color: rgb(97, 61, 255);  font-size: 20px; cursor: pointer;">delete</mat-icon></div>
+            </div>
+          </div>
+            <br />
+          </div>
+
+          
+        </div>
+        <br />
+        <div *ngIf="listOfFiles.length === 0" >        
+        <file-drop headertext="" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)"
+          (onFileLeave)="fileLeave($event)">
+          <div style="text-align:center;">
+            <br />
+            <br />
+            <fa-icon style="opacity:0.2; font-size:100px;" icon="file-upload"></fa-icon>
+          </div>
+        </file-drop>
+        <br />
+        <br />
+        <div style="opacity:0.8; margin-bottom: 10px;">Please <b>drag&drop</b> a file</div>
+        </div>
+        
+        <button *ngIf="listOfFiles.length > 0" nz-button class="import-button" (click)="onFileSelected($event)">Upload your files</button>
+        
+      </div>
+    </div>
+
+  </div> -->
+
+  <div class="bordered-card-accent" fxFlex='100' *ngIf="(!(uploaded$ | async) && (file$|async)); let file">
+    <div class="file-upload-info">
+      <div fxFlex="100" *ngIf="(uploading$ | async); else notUploading" class="file-upload-progress-container">
+        <div class="perc" style="margin-top: 12%" *ngIf="(uploadProgress$ | async) > 100 || (uploadProgress$ | async) === 0 || ((uploadProgress$ | async) === 100 && simpleFile)">
+          <circle-progress
+            [percent]="100"
+            [radius]="100"
+            [outerStrokeWidth]="8"
+            [innerStrokeWidth]="4"
+            [outerStrokeColor]="'#172be0'"
+            [innerStrokeColor]="'#525ecc'"
+            [animation]="true"
+            [animationDuration]="1"
+            
+          ></circle-progress>
+        </div>
+        <div class="perc" style="margin-top: 12%" *ngIf="((uploadProgress$ | async) < 100) || ((uploadProgress$ | async) === 100 && !simpleFile)">
+          <circle-progress
+            [percent]="(uploadProgress$ | async)"
+            [radius]="100"
+            [outerStrokeWidth]="8"
+            [innerStrokeWidth]="4"
+            [outerStrokeColor]="'#172be0'"
+            [innerStrokeColor]="'#525ecc'"
+            [animation]="true"
+            [animationDuration]="1"
+            
+          ></circle-progress>
+          <!--[lazy]="false" [percent]="(uploadProgress$ | async)"<br />
+          <button mat-button (click)="resetUpload()" style="color: #525ecc;">
+            Cancel
+          </button> -->
+        </div>
+        <!-- <div *ngIf="isInf((uploadProgress$ | async))" class="perc" style="margin-top: 12%">
+          <circle-progress
+            [percent]="0"
+            [radius]="100"
+            [outerStrokeWidth]="8"
+            [innerStrokeWidth]="4"
+            [outerStrokeColor]="'#172be0'"
+            [innerStrokeColor]="'#525ecc'"
+            [animation]="true"
+            [animationDuration]="300"
+          ></circle-progress>
+        </div> -->
+      </div>
+      <ng-template #notUploading>
+        <div fxFlex="100" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="7px">
+          <button mat-mini-fab color="primary" (click)="startUpload()">
+            <fa-icon icon="file-upload"></fa-icon>
+          </button>
+          <p class='opacity-half'>Import</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div style="width: 99.9%; height: 100%;">
+    <div fxFlex="100" *ngIf="uploaded$ | async" class="file-preview">
+      <anms-import-preview
+        [disable]='lockSelection$ | async'
+
+        [loading]="loading$ | async"
+        [headers]="headers$ | async"
+        [data]="data$ | async"
+        [totalRecords]="totalRecords$ | async"
+        [nrows]="nrows"
+        
+        [files]="filesUploaded$ | async"
+        [selectedFile]="selectedFile"
+        (sheetChanged)="onSheetChanged($event)"
+        (selectSheet)="onSelectionSheetChanged($event)"
+        (fileChanged) = "onSelectedFilename($event)"
+        
+        (sizePageChanged)="onPageSizeChanged($event)"
+        (goToLastPage)="onBtLast($event)"
+
+        [selectedSheet]="0"
+        [fileData]="(fileMetaData$ | async)"
+        (lazyload)="onLazyLoad($event)"
+      ></anms-import-preview>
+    </div>
+  </div>
+</div>
+
+<!-- personalized popup -->
+
+  <!-- <nz-modal
+      [(nzVisible)]="isVisible"
+      [nzTitle]="modalTitle"
+      [nzContent]="modalContent"
+      [nzFooter]="modalFooter"
+      (nzOnCancel)="handleCancel()"
+    >
+      <ng-template #modalTitle>Error File Type</ng-template>
+
+      <ng-template #modalContent>
+        <p style="color: red;">One or More file are not autorized to upload</p>
+        <div>
+          <textarea nz-input placeholder="Controlled autosize" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+        </div>
+      </ng-template>
+
+      <ng-template #modalFooter>
+        <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
+        <! <button nz-button nzType="primary" (click)="handleOk()" [nzLoading]="isConfirmLoading">Confirm</button> !!>
+      </ng-template>
+    </nz-modal> -->

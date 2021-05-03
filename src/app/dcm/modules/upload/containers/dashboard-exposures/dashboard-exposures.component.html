@@ -1,0 +1,25 @@
+<div class="  mx-3" style="  height:100%;width: calc(100% - 145px );
+    overflow-y: auto;
+    margin-left: 145px !important; overflow-x: hidden">
+  <div class="row col-12 mb-3 mt-3">
+    <div >
+      <button nz-button nzType="default"   nzSize="small" class="ml-2"
+              style="border: 1px solid #1fa6b8 !important;
+               color:#1fa6b8 !important;"  (click)="addNewGraphe()">
+        <i nz-icon type="plus" style="vertical-align: middle"></i> Add New Chart
+      </button>
+    </div>
+  </div>
+  <div class="row col-12">
+    <div class="col-12" style="display: contents" id="charts">
+      <div class="col-6 mb-3" *ngFor="let chart of charts">
+        <mat-card style="height: 370px">
+          <div class="w-100 h-100" [id]="'charts_'+chart.index"></div>
+        </mat-card>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

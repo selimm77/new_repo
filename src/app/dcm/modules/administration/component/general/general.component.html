@@ -1,0 +1,25 @@
+
+<mat-card class=" container  col-6" style="margin-top: 6vh">
+  <div >
+    <nz-alert nzType="warning" nzMessage="please select a Line of Business to Continue !" nzShowIcon *ngIf="!lobSelected"></nz-alert>
+    <nz-alert nzType="info" [nzMessage]="'you can manage fields for the line of business '+lobSelected.name" nzShowIcon *ngIf="lobSelected"></nz-alert>
+    <div class="form-general">
+
+      <div class="col-12">
+        <nz-form-item  >
+          <nz-form-control [nzSm]="24" [nzXs]="24">
+            <nz-select style="width: 100%"
+                       nzSize="small"
+                       [(ngModel)]="lobSelected"
+                       (ngModelChange)="selectLob()"
+                       [compareWith]="compareFn"
+                       nzPlaceHolder="LOB">
+              <nz-option *ngFor="let lob of lobs" [nzLabel]="lob.name" [nzValue]="lob" ></nz-option>
+            </nz-select>
+
+          </nz-form-control>
+        </nz-form-item>
+
+      </div>
+    </div>
+  </div></mat-card>

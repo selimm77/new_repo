@@ -1,0 +1,208 @@
+// new style
+.side-menu-right,
+.side-menu-left {
+  min-width: 220px;
+}
+
+.ng-tns-c1-1 {
+  margin-bottom: 0px !important;
+}
+
+.step-font {
+  color: #172be0 !important;
+  font-weight: bold;
+  font-size: large;
+  font-family: Garamond;
+}
+
+::ng-deep .mat-step-label.mat-step-label-active.mat-step-label-selected {
+  font-size: medium;
+  color: #172be0 !important;
+.stepper {
+  margin-left: 0px;
+}
+}
+
+::ng-deep .mat-stepper-horizontal-line {
+  background: #525ecc !important;
+}
+
+::ng-deep .import-buttons {
+  width: 180px;
+  border-radius: 25px;
+  border-color: #172be0;
+  color: #525ecc;
+  margin-left: 25px;
+}
+
+.import-button-cancel {
+  border: none;
+  text-transform: uppercase;
+  color: #525ecc;
+  margin-left: 25px;
+  font-weight: bold;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.import-button-save {
+  border: none;
+  color: #525ecc;
+  margin-left: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+.import-button-save:disabled {
+  border: none;
+  color: #525ecc;
+  margin-left: 5px;
+  background-color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: "Lucida Console", "Courier New", monospace;
+
+}
+.next, .previous {
+  background: #172be0 !important;
+  border-radius: 25px;
+  border: none;
+  outline:none;
+  color: white;
+  text-transform: uppercase;
+}
+.next:hover, .previous:hover {
+  transition: 0.7s;
+  background: #253bff !important;
+  border-radius: 25px;
+  border: none;
+  outline:none;
+  color: white;
+}
+
+.next:disabled,
+.next[disabled] {
+  transition: 0.7s;
+  opacity: 65%;
+  border: none;
+  background: #616dd6;
+  color: white;
+}
+.previous:disabled,
+.previous[disabled]{
+  transition: 0.7s;
+  opacity: 65%;
+  border: none;
+  background: #616dd6;
+  color: white;
+}
+#btn-exit {
+  margin-left: 135px;
+}
+
+#btn-exit-import {
+  border-color: #172be0 !important;
+  margin-left: 0px;
+  border-radius: 25px;
+  background: #ffffff !important;
+  color: #525ecc;
+}
+
+#btn-exit-import:hover {
+  border-color: #172be0 !important;
+  border-radius: 25px;
+  background: #ffffff !important;
+  color: #172be0;
+}
+
+.c-stepper {
+  background-color: #ffffff;
+}
+
+.btn-footer {
+  margin-left: auto;
+  margin-right: auto;
+  // width: 6em
+}
+
+.confirm-btn {
+  background: #172be0 !important;
+  text-transform: uppercase;
+  border-radius: 25px;
+  border: none;
+  outline:none;
+  color: white;
+  font-family: "Lucida Console", "Courier New", monospace;
+  width: 150px;
+}
+
+.confirm-btn:hover {
+  transition: 0.7s;
+  background: #253bff !important;
+  border-radius: 25px;
+  border: none;
+  outline:none;
+  color: white;
+}
+
+.cancel-btn {
+  border-radius: 25px;
+  text-transform: uppercase;
+  color: #525ecc;
+  width: 150px;
+  font-weight: bold;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+.cancel-btn-2 {
+  border: none;
+  text-transform: uppercase;
+  color: #525ecc;
+  width: 150px;
+  font-weight: bold;
+  font-family: "Lucida Console", "Courier New", monospace;
+  margin: 0;
+  position: absolute;
+  top: 88%;
+  left: 48%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.replace-btn {
+  background: #172be0 !important;
+  text-transform: uppercase;
+  border-radius: 25px;
+  border: none;
+  outline:none;
+  color: white;
+  font-family: "Lucida Console", "Courier New", monospace;
+  width: 125px;
+  height: 28px;
+}
+
+.add-btn {
+  background: green !important;
+  text-transform: uppercase;
+  border-radius: 25px;
+  border: none;
+  outline:none;
+  color: white;
+  font-family: "Lucida Console", "Courier New", monospace;
+  width: 125px;
+  height: 28px;
+}
+
+.text-add-replace {
+  color: black;
+}
+
+.button-add-replace {
+  padding-bottom: 15%;
+}

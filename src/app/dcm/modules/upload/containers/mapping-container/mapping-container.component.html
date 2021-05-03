@@ -1,0 +1,30 @@
+<div>
+  <nz-tabset class="a-tabs-default" [ngClass]="{'a-tabs-default-verified': !isMissMandatory}" (nzSelectedIndexChange)="tabChanged($event)">
+    <nz-tab *ngFor="let st of sheets; let index = index" [nzTitle]="titleTemplate">
+      <ng-template #titleTemplate>
+        <div style="width: 350px; display: flex">
+          <div style="width:fit-content; align-items: center; display: flex;">
+            <mat-icon *ngIf="setColorIntoIconIfMissMandatory(index)"
+                      style="color: rgb(247, 160, 0); margin-right: 5px; margin-left: 0; width: 22px; font-size: 22px; ">error_outline</mat-icon>
+            <mat-icon *ngIf="!setColorIntoIconIfMissMandatory(index)"
+                      style="color: rgb(29, 216, 29); margin-right: 5px; margin-left: 0; width: 22px; font-size: 22px; ">check_circle_outline</mat-icon>
+          </div>
+          <div style="display: flex; flex-direction: column; width: calc(100% - 25px);">
+            <div style="font-weight: bold; display: flex">
+              <span class="tab-file">10G00226P &nbsp;| &nbsp;</span>
+              <span class="tab-file ellipsis">{{st.file}}</span>
+              <span class="tab-file">.{{st.extention}}</span>
+            </div>
+            <div>
+              <span class="tab-sheet" style="display: block;">{{st.sheet}}</span>
+            </div>
+
+          </div>
+        </div>
+      </ng-template>
+      <div>
+        <anms-mapping-home [selectedSheetMapping]="selectedSheetMapping$ | async"></anms-mapping-home>
+      </div>
+    </nz-tab>
+  </nz-tabset>
+</div>

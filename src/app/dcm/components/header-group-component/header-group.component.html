@@ -1,0 +1,7 @@
+<div style="display: flex; align-items: center;">
+    <div (click)="expandOrCollapse()" class="{{'customExpandButton' + (this.expanded ?  ' expanded': ' collapsed')}}">
+        <i *ngIf="!expanded" class="fa fa-plus-circle"></i>
+        <i *ngIf="expanded" class="fa fa-minus-circle"></i>
+    </div>
+    <div class="customHeaderLabel" style="font-weight: bold;">&nbsp;&nbsp;{{this.params.displayName}}</div>
+</div>

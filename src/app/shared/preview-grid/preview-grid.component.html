@@ -1,0 +1,166 @@
+<div style="width: 100%; height: 100%; ">
+  <ag-grid-angular
+    style="width: 100%; height: 100%"
+    class="ag-theme-balham"
+    [sideBar]="sideBar"
+    [modules]="modules"
+    [gridOptions]="gridOptions"
+    
+    [rowData]="rowsData"
+    [columnDefs]="columnDefs"
+    
+    [defaultColDef]="defaultColDef"
+    [pagination]="true"
+    [suppressPaginationPanel]="true"
+    [paginationPageSize]="paginationPageSize"
+    [enterMovesDown]="true"
+    [enterMovesDownAfterEdit]="true"
+
+    (cellValueChanged)="onCellValueChanged($event)"
+    (cellFocused)="onCellFocused($event)"
+    (cellClicked)="onCellClicked($event)"
+
+    (paginationChanged)="onPaginationChanged($event)"
+    (gridReady)="onGridReady($event)"
+  >
+  </ag-grid-angular>
+<!-- 
+    [loadingCellRenderer]="loadingCellRenderer"
+    [loadingCellRendererParams]="loadingCellRendererParams"
+  -->
+  <div class="test-header">
+
+    <ul class="pagination" style="margin-top: 5px; display: inline-block; float: right;">
+      <li *ngIf="currentPage != 1"><a id="idFirst" (click)="onBtFirst()"><i class="fa  fa-step-backward fa-fw"
+                                                                            aria-hidden="true"></i></a></li>
+      <li *ngIf="currentPage == 1"><a id="idFirsta"><i id="idFirstOne" class="fa  fa-step-backward fa-fw"
+                                                       aria-hidden="true"></i></a></li>
+      <li *ngIf="currentPage != 1"><a id="idPreview" (click)="onBtPrevious()"><i class="fa fa-chevron-left fa-fw"
+                                                                                 aria-hidden="true"></i></a></li>
+      <li *ngIf="currentPage == 1"><a id="idPreview"><i id="idPreviewOne" class=" fa fa-chevron-left fa-fw"
+                                                        aria-hidden="true"></i></a></li>
+
+
+      <li *ngIf="currentPage==pageFirst">
+        <a id="idOne" class="active">{{currentPage}}</a>
+      </li>
+      <li *ngIf="currentPage==pageFirst && pageLast - currentPage > 0" (click)="onBtSpecifiquePage(currentPage + 1)">
+        <a id="idOne">{{currentPage + 1}}</a>
+      </li>
+      <li *ngIf="currentPage==pageFirst && pageLast - currentPage - 1 > 0"
+          (click)="onBtSpecifiquePage(currentPage + 2)">
+        <a id="idOne">{{currentPage + 2}}</a>
+      </li>
+      <li *ngIf="currentPage==pageFirst && pageLast - currentPage - 2 > 0"
+          (click)="onBtSpecifiquePage(currentPage + 3)">
+        <a id="idOne">{{currentPage + 3}}</a>
+      </li>
+      <li *ngIf="currentPage==pageFirst && pageLast - currentPage - 3 > 0"
+          (click)="onBtSpecifiquePage(currentPage + 4)">
+        <a id="idOne">{{currentPage + 4}}</a>
+      </li>
+
+
+      <li *ngIf="currentPage == 2">
+        <a id="idOne" (click)="onBtFirst()">{{currentPage - 1}}</a>
+      </li>
+      <li *ngIf="currentPage == 2">
+        <a id="idOne" class="active">{{currentPage}}</a>
+      </li>
+      <li *ngIf="currentPage == 2 && pageLast - currentPage > 0" (click)="onBtSpecifiquePage(currentPage + 1)">
+        <a id="idOne">{{currentPage + 1}}</a>
+      </li>
+      <li *ngIf="currentPage == 2 && pageLast - currentPage - 1 > 0" (click)="onBtSpecifiquePage(currentPage + 2)">
+        <a id="idOne">{{currentPage + 2}}</a>
+      </li>
+      <li *ngIf="currentPage == 2 && pageLast - currentPage - 2 > 0" (click)="onBtSpecifiquePage(currentPage + 3)">
+        <a id="idOne">{{currentPage + 3}}</a>
+      </li>
+
+
+      <li *ngIf="currentPage == 3" (click)="onBtSpecifiquePage(currentPage - 1)">
+        <a id="idOne">{{currentPage - 2}}</a>
+      </li>
+      <li *ngIf="currentPage == 3" (click)="onBtSpecifiquePage(currentPage - 1)">
+        <a id="idOne">{{currentPage - 1}}</a>
+      </li>
+      <li *ngIf="currentPage == 3">
+        <a id="idOne" class="active">{{currentPage}}</a>
+      </li>
+      <li *ngIf="currentPage == 3 && pageLast - currentPage - 1 > 0" (click)="onBtSpecifiquePage(currentPage + 2)">
+        <a id="idOne">{{currentPage + 2}}</a>
+      </li>
+      <li *ngIf="currentPage == 3 && pageLast - currentPage - 2 > 0" (click)="onBtSpecifiquePage(currentPage + 3)">
+        <a id="idOne">{{currentPage + 3}}</a></li>
+
+
+      <li
+        *ngIf="currentPage!=pageFirst && currentPage - 3 > 0  && pageLast - currentPage != 2 && pageLast - currentPage != 1  && pageLast - currentPage != 2 && pageLast - currentPage != 1 && currentPage != pageLast"
+        (click)="onBtSpecifiquePage(currentPage -2)">
+        <a id="idOne">{{currentPage - 2}}</a>
+      </li>
+      <li
+        *ngIf="currentPage!=pageFirst && currentPage - 3 > 0  && pageLast - currentPage != 2 && pageLast - currentPage != 1  && pageLast - currentPage != 2 && pageLast - currentPage != 1 && currentPage != pageLast"
+        (click)="onBtSpecifiquePage(currentPage - 1)">
+        <a id="idOne">{{currentPage - 1}}</a>
+      </li>
+      <li
+        *ngIf="currentPage!=pageFirst && currentPage - 3 > 0  && pageLast - currentPage != 2 && pageLast - currentPage != 1  && pageLast - currentPage != 2 && pageLast - currentPage != 1 && currentPage != pageLast">
+        <a id="idOne" class="active">{{currentPage}}</a>
+      </li>
+
+      <li
+        *ngIf="pageLast - currentPage - 2 > 0 && currentPage != 1 && currentPage != 2 && currentPage != 3 && pageLast - currentPage != 2 && pageLast - currentPage != 1 && currentPage != pageLast"
+        (click)="onBtSpecifiquePage(currentPage + 1)">
+        <a id="idOne">{{currentPage + 1}}</a>
+      </li>
+      <li
+        *ngIf="pageLast - currentPage - 2 > 0  && currentPage != 1 && currentPage != 2 && currentPage != 3 && pageLast - currentPage != 2 && pageLast - currentPage != 1 && currentPage != pageLast"
+        (click)="onBtSpecifiquePage(currentPage + 2)">
+        <a id="idOne">{{currentPage + 2}}</a>
+      </li>
+      <li *ngIf="pageLast - currentPage == 2 && pageLast > 4" (click)="onBtSpecifiquePage(currentPage - 2)"><a
+        id="idOne">{{currentPage - 2}}</a></li>
+      <li *ngIf="pageLast - currentPage == 2 && pageLast > 4" (click)="onBtSpecifiquePage(currentPage - 1)"><a
+        id="idOne">{{currentPage - 1}}</a></li>
+      <li *ngIf="pageLast - currentPage == 2 && pageLast > 4"><a id="idOne" class="active">{{currentPage}}</a></li>
+      <li *ngIf="pageLast - currentPage == 2 && pageLast > 4" (click)="onBtSpecifiquePage(currentPage + 1)"><a
+        id="idOne">{{currentPage + 1}}</a></li>
+      <li *ngIf="pageLast - currentPage == 2 && pageLast > 4" (click)="onBtSpecifiquePage(currentPage + 2)"><a
+        id="idOne">{{currentPage + 2}}</a></li>
+
+      <li *ngIf="pageLast - currentPage == 1 && pageLast > 4"><a id="idOne"
+                                                                 (click)="onBtSpecifiquePage(currentPage - 3)">{{currentPage - 3}}</a>
+      </li>
+      <li *ngIf="pageLast - currentPage == 1 && pageLast > 4"><a id="idOne"
+                                                                 (click)="onBtSpecifiquePage(currentPage - 2)">{{currentPage - 2}}</a>
+      </li>
+      <li *ngIf="pageLast - currentPage == 1 && pageLast > 4"><a id="idOne"
+                                                                 (click)="onBtSpecifiquePage(currentPage - 1)">{{currentPage - 1}}</a>
+      </li>
+      <li *ngIf="pageLast - currentPage == 1 && pageLast > 4"><a id="idOne" class="active">{{currentPage}}</a></li>
+      <li *ngIf="pageLast - currentPage == 1 && pageLast > 4"><a id="idOne"
+                                                                 (click)="onBtSpecifiquePage(currentPage + 1)">{{currentPage + 1}}</a>
+      </li>
+
+      <li *ngIf="currentPage == pageLast && pageLast > 4" (click)="onBtSpecifiquePage(currentPage - 4)"><a
+        id="idOne">{{currentPage - 4}}</a></li>
+      <li *ngIf="currentPage == pageLast && pageLast > 4" (click)="onBtSpecifiquePage(currentPage - 3)"><a
+        id="idOne">{{currentPage - 3}}</a></li>
+      <li *ngIf="currentPage == pageLast && pageLast > 4" (click)="onBtSpecifiquePage(currentPage - 2)"><a
+        id="idOne">{{currentPage - 2}}</a></li>
+      <li *ngIf="currentPage == pageLast && pageLast > 4" (click)="onBtSpecifiquePage(currentPage - 1)"><a
+        id="idOne">{{currentPage - 1}}</a></li>
+      <li *ngIf="currentPage == pageLast"><a id="idOne" class="active">{{currentPage}}</a></li>
+
+
+      <li *ngIf="currentPage != pageLast"><a id="idNext" (click)="onBtNext()"><i class="fa fa-chevron-right fa-fw"
+                                                                                 aria-hidden="true"></i></a></li>
+      <li *ngIf="currentPage == pageLast"><a id="idNexta"><i id="idNextL" class="fa fa-chevron-right fa-fw"
+                                                             aria-hidden="true"></i></a></li>
+      <li *ngIf="currentPage != pageLast"><a id="idLast" (click)="onBtLast()"><i class="fa fa-step-forward fa-fw"
+                                                                                 aria-hidden="true"></i></a></li>
+    </ul>
+  </div>
+
+</div>

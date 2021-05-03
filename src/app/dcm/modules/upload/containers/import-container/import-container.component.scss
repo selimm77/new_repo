@@ -1,0 +1,107 @@
+.browse-button {
+  margin: 0 0 0 0;
+}
+
+.file-name {
+  margin: 0 0 0 0;
+}
+
+.file-upload-title {
+  margin-bottom: 14px;
+}
+
+.file-upload-info {
+  height: 100%;
+}
+
+.file-upload-info-name {
+
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.upload-drag-drop-container {
+  border: 3px solid lightgrey;
+  border-style: dashed;
+  border-radius: 25px;
+  margin: 20px;
+}
+
+.file-upload-progress-container {
+  display: flex;
+  flex-direction: column;
+  place-content: space-between center;
+
+  .perc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 100;
+
+    .number {
+      font-size: 50px;
+      margin-bottom: 30px;
+      margin-top: 10px;
+    }
+
+    .label {
+      text-transform: uppercase;
+      opacity: 0.5;
+    }
+  }
+}
+
+.center-screen {
+  border-style: dotted;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 80vh;
+  max-height: 100%;
+  overflow: hidden;
+  max-width: 100% !important;
+}
+
+.input-group-text {
+  display: inline-block;
+}
+
+::ng-deep .import-button {
+  border-radius: 25px;
+  border-color: #172be0;
+  background: white !important;
+  color: #525ecc;
+}
+
+:host ::ng-deep .mat-form-field-infix {
+  border: 1px solid #172be0 !important;
+  color:#172be0 !important;
+  border-radius: 25px !important;
+}
+
+:host ::ng-deep .mat-form-field-label {
+  color: black !important;
+  font-weight: bold !important;
+}
+
+:host ::ng-deep .mat-select-value-text {
+  color:#172be0 !important;
+}
+
+:host ::ng-deep .mat-select-arrow {
+  color:#172be0 !important;
+}
+
+::ng-deep .drop-zone {
+  margin: auto !important;
+  width: 100% !important;
+  border: none !important;
+}
+
+#btnGroupAddon {
+  height: 35px;
+}

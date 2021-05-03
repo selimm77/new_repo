@@ -1,0 +1,82 @@
+<h1 mat-dialog-title class="opacity-half">
+  <small>Add to Thesaurus</small>
+</h1>
+<div mat-dialog-content>
+
+  <div class="full-h full-w fix-height library-grid" fxLayoutGap="7px" fxLayout="row" fxLayoutAlign="space-between">
+    <div fxFlex="40" class="full-w">
+      <mat-card class="full-h">
+        <mat-card-title>
+          <small>Selected Field</small>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <mat-icon>
+            open_with
+          </mat-icon>
+          Drag and drop at the right header value
+        </mat-card-subtitle>
+
+        <div class="draggable-container">
+          <div class="draggable full-w">
+            <mat-card fxLayout="row" fxLayoutAlign="space-between center" draggable [dragData]="'drag data template'">
+              <div>
+                {{ source.viewValue }}
+              </div>
+              <mat-icon>
+                open_with
+              </mat-icon>
+            </mat-card>
+          </div>
+        </div>
+
+      </mat-card>
+    </div>
+    <div fxFlex="60" class="full-w">
+      <mat-card class="full-h" fxLayout="column" fxLayoutAlign="start">
+        <mat-card-title>
+          <small>Target Field</small>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <input matInput placeholder="Search by field...">
+        </mat-card-subtitle>
+
+        <div class="droppable-container" fxFlex="100">
+          <div *ngIf='(loadingTargets$ | async)'>Loading targets...</div>
+          <mat-accordion *ngIf='!(loadingTargets$ | async)'>
+            <mat-expansion-panel [class.yellow-dev]="t.isSuggestion"
+                                 *ngFor="let t of targets; let ix = index"
+                                 (afterExpand)="loadTaxonomies(t)">
+              <mat-expansion-panel-header droppable (onDrop)="onItemDrop($event.dragData, source.viewValue, ix)">
+                <mat-panel-title>
+                  {{ t.viewValue }}
+                </mat-panel-title>
+                <mat-panel-description class="panel-description">
+                  <fa-icon class="suggestion-icon" *ngIf="t.isSuggestion" icon="magic"></fa-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+
+              <div *ngIf="t.loading">Loading taxonomies...</div>
+              <div *ngIf="t.loaded && t.taxonomies.length == 0" class="text-warn">No values</div>
+              <mat-chip-list *ngIf="t.loaded">
+                <mat-chip *ngFor="let taxonomy of t.taxonomies"
+                          [removable]="true" (removed)="onRemoveClick(taxonomy,t)" color="accent">
+                  {{ taxonomy.viewValue }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
+      </mat-card>
+    </div>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <div fxLayout="row" fxLayoutAlign="space-between" class="full-w">
+    <button mat-button [mat-dialog-close]="false">Close</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Add to dictionary</button>
+  </div>
+</div>

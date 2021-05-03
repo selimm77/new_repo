@@ -1,0 +1,31 @@
+.container-general {
+  min-height: 200px;
+}
+
+.title-div {
+  text-align: center;
+  background: #0292AB;
+  border-radius: 10px;
+  color: white !important;
+}
+
+.title-color {
+  color: white;
+}
+
+.tabs-font {
+  font-weight: bold;
+}
+
+::ng-deep .ant-select-selection.ant-select-selection--single {
+  border-color: #67BECD;
+  border-radius: 5px !important;
+  border-width: 2px;
+}
+
+::ng-deep div#cdk-overlay-15 {
+  max-width: 60vw;
+  pointer-events: auto;
+  width: 59%;
+  position: static;
+}

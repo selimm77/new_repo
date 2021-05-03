@@ -1,0 +1,142 @@
+:host {
+  width: 100%;
+}
+
+.mat-form-field {
+  margin: 0 7px;
+}
+
+.input-select {
+  margin-left: 10px;
+  width: 100%;
+  padding: 5px;
+  border: none;
+  font-weight: bold;
+  color: black;
+}
+
+.input2 {
+  margin-left: 43px;
+}
+
+.mySmall {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: bolder;
+  padding-left: 2px;
+}
+
+::ng-deep ng-tns-c19-7 {
+  width: 100%;
+}
+
+.myDropdown {
+  background-color: #ffffff;
+  color: #172be0 !important;
+  padding: 6px 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: -3.2px;
+  height: 24px;
+  border: none;
+}
+
+::ng-deep body > anms-root > div > div > div > dcm-main > div > div.height-overide > mat-drawer-container > mat-drawer-content > div > div:nth-child(1) > anms-mapping-container > div > div.toolbar.pd > anms-mapping-options > div > div > div > div:nth-child(4) > div > nz-select > div
+, ::ng-deep body > anms-root > div > div > div > dcm-main > div > div.height-overide > mat-drawer-container > mat-drawer-content > div > div:nth-child(1) > anms-mapping-container > div > div.toolbar.pd > anms-mapping-options > div > div > div > div:nth-child(3) > div > nz-select > div
+, ::ng-deep body > anms-root > div > div > div > dcm-main > div > div.height-overide > mat-drawer-container > mat-drawer-content > div > div:nth-child(1) > anms-mapping-container > div > div.toolbar.pd > anms-mapping-options > div > div > div > div:nth-child(1) > div > nz-select > div
+{
+  background-color: #ffffff;
+  color: #172be0 !important;
+  border: none;
+   font-family: Roboto, Open Sans, Assistant, monospace;
+  font-size: 12px;
+  height: 24px;
+}
+
+::ng-deep body > anms-root > div > div > div > dcm-main > div > div.height-overide > mat-drawer-container > mat-drawer-content > div > div:nth-child(1) > anms-mapping-container > div > div.toolbar.pd > anms-mapping-options > div > div > div > div:nth-child(1) > div > nz-select > div > span > i > svg,
+::ng-deep body > anms-root > div > div > div > dcm-main > div > div.height-overide > mat-drawer-container > mat-drawer-content > div > div:nth-child(1) > anms-mapping-container > div > div.toolbar.pd > anms-mapping-options > div > div > div > div:nth-child(3) > div > nz-select > div > span > i > svg,
+::ng-deep body > anms-root > div > div > div > dcm-main > div > div.height-overide > mat-drawer-container > mat-drawer-content > div > div:nth-child(1) > anms-mapping-container > div > div.toolbar.pd > anms-mapping-options > div > div > div > div:nth-child(4) > div > nz-select > div > span > i > svg
+{
+  padding-right: 2px; margin-right: 5px;
+  color: #172be0 !important;
+
+}
+
+.col20 {
+  width: 18.72%;
+  margin: 0 2px;
+  overflow: hidden;
+}
+
+:host ::ng-deep .mat-form-field {
+  margin: 0;
+  width: 100%;
+}
+
+:host ::ng-deep nz-dropdown {
+  width: 100%;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+  width: 95%;
+
+}
+
+.mr3 {
+  margin-top: 6px;
+}
+
+.pl-4 {
+  border: 0.3px solid rgb(218, 218, 218);
+  margin-left: 12px;
+  background-color: white;
+  height: 5.2vh;
+}
+
+.mySmall {
+  color: rgb(184, 184, 184);
+}
+
+.myInputNumber {
+  padding: 0;
+  text-indent: 8px;
+  width: 40%;
+  height: 28px;
+  margin: 2px 5px;
+}
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.mySelect {
+  margin-top: -5px;
+}
+
+.header-option-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .option {
+    width: 90%;
+
+    .ant-select-secondary {
+      width: 95%;
+    }
+  }
+
+}
+
+.dropdown-description {
+  position: absolute;
+  z-index: 100;
+  margin: 5px 11px;
+  font-weight: 700;
+  opacity: 75%;
+}

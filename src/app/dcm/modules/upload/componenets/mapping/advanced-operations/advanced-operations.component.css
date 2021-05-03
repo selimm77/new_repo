@@ -1,0 +1,20 @@
+.list{
+  overflow-y: scroll;
+  height: 80vh;
+  overflow-x: hidden;
+  width: 100%;
+}
+:host ::ng-deep .ant-input-group-addon:last-child{
+  width: 30% !important;
+}
+
+:host ::ng-deep .ant-input-group-addon:first-child{
+  width: 20% !important;
+}
+*{
+  font-size: 14px;
+}
+label{
+  font-size: 15px;
+  font-weight: 600;
+}

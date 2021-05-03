@@ -1,0 +1,33 @@
+.fix-height {
+  min-height: 60vh;
+  margin: 2px 0;
+}
+
+.draggable-container {
+  padding-top: 0px;
+}
+
+.droppable-container {
+  overflow: scroll;
+  padding: 2px;
+}
+
+.draggable:hover {
+  cursor: move;
+}
+
+.draggable {
+  text-align: left;
+}
+
+.panel-description {
+  text-align: right;
+}
+
+.suggestion-icon {
+  margin-left: auto;
+}
+
+.yellow-dev {
+  background: LIGHTGOLDENRODYELLOW;
+}

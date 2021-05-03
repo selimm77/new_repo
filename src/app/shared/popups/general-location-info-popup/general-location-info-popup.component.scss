@@ -1,0 +1,105 @@
+.container-general {
+  height: 310px;
+}
+
+.title-div {
+  text-align: center;
+  background: #0292AB;
+  border-radius: 10px;
+  color: white !important;
+}
+
+.title-color {
+  color: white;
+}
+
+::ng-deep .ant-select-selection.ant-select-selection--single {
+  border-color: #0292ab;
+  border-radius: 3px !important;
+  border-width: 1px;
+  font-size: 12px !important;
+}
+
+::ng-deep div#cdk-overlay-15 {
+  pointer-events: auto;
+  width: 100%;
+  position: static;
+}
+:host >>> .ant-select{
+  font-size: 12px !important;
+}
+:host >>> .danger {
+  color: #cd3531;
+  font-size:12px;
+  font-weight:500
+}
+
+.content-cl {
+  background-color: white;
+  width: 1500px;
+}
+
+::ng-deep .custom-dialog {
+  width: 1450px !important;
+}
+
+::ng-deep .my-tabset  .ant-select-selection.ant-select-selection--single div div {
+  width: 100%;
+  color: rgb(43, 43, 255) !important;
+}
+
+::ng-deep .my-tabset  .ant-select-selection.ant-select-selection--single {
+  background-color: #f4f6fc;
+}
+
+::ng-deep nz-tabset.my-tabset > div.ant-tabs-bar.ant-tabs-top-bar.ant-tabs-default-bar.ng-star-inserted > div > div > div > div > div.ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
+  top: 0;
+  background-color: blue;
+  height: 4px;
+}
+
+::ng-deep nz-tabset.my-tabset  .ant-tabs-nav .ant-tabs-tab-active {
+  font-size: 18px;
+  border-top: 4px solid blue;
+  color: blue;
+}
+
+::ng-deep nz-tabset.my-tabset  .ant-tabs-bar {
+  margin: 0;
+  border: none;
+}
+
+.a-primary-button {
+  color: #FFFFFF !important;
+  background-color: #0700CF;
+  font-weight: 700 !important;
+}
+
+.a-disabled-button {
+  color: red !important;
+  background-color: grey;
+  font-weight: 700 !important;
+}
+
+::ng-deep .my-tabset > div.ant-tabs-content.ant-tabs-top-content.ant-tabs-content-animated.ng-star-inserted > div.ant-tabs-tabpane.ng-star-inserted.ant-tabs-tabpane-active {
+  height: 70vh;
+  overflow-y: scroll;
+}
+::ng-deep .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+ opacity: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+::ng-deep .my-select > div {
+  border: none;
+  border-bottom: 1px solid blue !important;
+}
+

@@ -1,0 +1,22 @@
+.a-tabs-default {
+  .ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
+    background-color: rgb(245, 166, 35);
+    height: 4px;
+    top: 0;
+  }
+
+  .ant-tabs-tab.ant-tabs-tab-active {
+    padding: 17px 6px;
+  }
+
+  .ant-tabs-nav .ant-tabs-tab {
+    margin: 0;
+  }
+}
+
+.a-tabs-default-verified {
+  .ant-tabs-ink-bar.ant-tabs-ink-bar-animated {
+    background-color: rgb(29, 216, 29);
+  }
+}
+

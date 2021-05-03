@@ -1,0 +1,21 @@
+.fields {
+  width: 100%;
+  min-height: 20px;
+  display: block;
+  height: 100%;
+}
+.list{
+  overflow: scroll;
+  height: 80vh;
+}
+.mat-list-base .mat-list-item .mat-line {
+  display: inherit;
+}
+mat-list-item.mat-list-item.ng-star-inserted {
+  border-bottom: 0.5px solid #ccc;
+  height: 70px;
+}
+.iconsetting{
+  color: #0292ab;
+  font-size: 18px;
+}

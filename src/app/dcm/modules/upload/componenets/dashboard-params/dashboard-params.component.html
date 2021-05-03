@@ -1,0 +1,73 @@
+<div class="row">
+  <form nz-form [formGroup]="formChart" [nzLayout]="'vertical'" class="row" style="width: 100%">
+
+    <div class="col-4 offset-1">
+      <nz-form-item  >
+        <nz-form-label  nzRequired nzFor="type"> Argument </nz-form-label>
+        <nz-form-control >
+          <nz-select style="width: 100%" formControlName="argument" id="argument"
+                      nzSize="small">
+            <nz-option *ngFor="let f of fields" [nzValue]="f.code" [nzLabel]="f.name"></nz-option>
+          </nz-select>
+
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div class="col-4 offset-1">
+      <nz-form-item  >
+        <nz-form-label  nzRequired nzFor="type"> Type </nz-form-label>
+        <nz-form-control >
+          <nz-select style="width: 100%" formControlName="type" id="type"
+                      nzSize="small">
+            <nz-option  [nzValue]="'pie'" [nzLabel]="'pie'"></nz-option>
+            <nz-option  [nzValue]="'bar'" [nzLabel]="'bar'"></nz-option>
+          </nz-select>
+
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div class="col-4 offset-1">
+      <nz-form-item  >
+        <nz-form-label  nzFor="level"> Image ( choose none for breakdown ) </nz-form-label>
+        <nz-form-control  >
+          <nz-select style="width: 100%" formControlName="image" id="image"
+                     nzSize="small">
+            <nz-option *ngFor="let f of numericFields" [nzValue]="f.code" [nzLabel]="f.name"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div class="col-4 offset-1">
+      <nz-form-item  >
+        <nz-form-label  > value/percent </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="12">
+
+          <nz-switch  formControlName="value" id="value"
+                     [nzCheckedChildren]="unCheckedTemplate"
+                     [nzUnCheckedChildren]="checkedTemplate"></nz-switch>
+          <ng-template #checkedTemplate><i nz-icon type="number" style="vertical-align: middle;"></i></ng-template>
+          <ng-template #unCheckedTemplate><i nz-icon type="percentage" style="vertical-align: middle;"></i></ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+  </form>
+
+</div>
+<div class="row" mat-dialog-actions>
+  <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="7px" class="full-w">
+    <div class="col-4 offset-1 offset-8">
+
+      <button nz-button nzType="link" style="background:transparent;float: right ; color: #16868C ;border:none" nzSize="small" class="ml-2"
+              (click)="save()" [disabled]="!formChart.valid">
+        Save
+      </button>
+      <button nz-button nzType="link" style="background:transparent; float: right ; color : #D94938 ; border:none"
+              nzSize="small" (click)="close()">
+        cancel
+      </button>
+
+    </div>
+  </div>
+
+</div>

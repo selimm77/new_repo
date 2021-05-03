@@ -1,0 +1,8 @@
+<div [class]="'theme-wrapper ' + (theme$ | async)">
+    <div class="wrapper">
+      <div class="content">
+        <router-outlet #o="outlet"></router-outlet>
+      </div>
+    </div>
+
+</div>

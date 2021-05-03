@@ -1,0 +1,12 @@
+<h1 mat-dialog-title class="opacity-half"><small>Save mapping template</small> </h1>
+<div mat-dialog-content >
+  <mat-form-field>
+    <input matInput cdkFocusInitial placeholder="Template name" [(ngModel)]="name" >
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <div fxLayout="row" fxLayoutAlign="space-between" class="full-w">
+    <button mat-button [mat-dialog-close]="false">Close</button>
+    <button mat-flat-button color="primary" [disabled]="!canSave()" (click)="onSaveClick()" >Save</button>
+  </div>
+</div>

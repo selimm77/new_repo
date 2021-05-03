@@ -1,0 +1,199 @@
+@import 'styles-variables';
+@import '../node_modules/bootstrap/scss/bootstrap-reboot';
+@import '../node_modules/bootstrap/scss/bootstrap-grid';
+@import 'styles-reset';
+@import '../node_modules/@angular/material/theming';
+
+@include mat-core();
+
+// mei2
+// @import "~ag-grid-community/dist/styles/ag-grid.css";
+// @import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+@import "ag-grid-community/dist/styles/ag-grid.css";
+@import "ag-grid-community/dist/styles/ag-theme-balham.css";
+
+@import 'themes/default-theme.scss';
+@import 'themes/light-theme.scss';
+@import 'themes/black-theme.scss';
+@import 'themes/nature-theme.scss';
+
+//icons
+@import "assets/styles/scor_icons";
+
+@import 'styles-reset.scss-theme';
+@import 'app/app.component.scss-theme';
+@import 'app/shared/big-input/big-input.component.scss-theme';
+@import 'app/dcm/containers/main/main.component.scss-theme.scss';
+@import 'assets/styles/main';
+@import 'assets/styles/font';
+@import 'assets/styles/icons';
+@import 'assets/styles/layout';
+@import 'assets/styles/variables';
+@import 'assets/styles/button';
+@import 'assets/styles/dropdown';
+@import 'assets/styles/tabs';
+@import 'assets/styles/tooltip';
+@import 'assets/styles/shared-grid.scss-theme.scss';
+@import "ag-grid-community/dist/styles/ag-grid.css";
+@import "ag-grid-community/dist/styles/ag-theme-balham.css";
+@mixin custom-components-theme($theme) {
+  @include anms-styles-reset-theme($theme);
+  @include anms-app-component-theme($theme);
+  @include shared-grid-component-theme($theme);
+  //@include anms-about-component-theme($theme);
+  //@include anms-big-input-component-theme($theme);
+  //@include anms-notifications-component-theme($theme);
+  //@include anms-todos-container-component-theme($theme);
+  //@include anms-stock-market-container-component-theme($theme);
+  //@include anms-parent-component-theme($theme);
+  //@include anms-child-component-theme($theme);
+  //@include anms-examples-component-theme($theme);
+  @include dcm-component-theme($theme);
+}
+
+.default-theme {
+  @include angular-material-theme($anms-theme);
+  @include custom-components-theme($anms-theme);
+}
+
+.light-theme {
+  @include angular-material-theme($anms-light-theme);
+  @include custom-components-theme($anms-light-theme);
+}
+
+.black-theme {
+  @include angular-material-theme($anms-black-theme);
+  @include custom-components-theme($anms-black-theme);
+}
+
+.nature-theme {
+  @include angular-material-theme($anms-nature-theme);
+  @include custom-components-theme($anms-nature-theme);
+}
+
+/*
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .4);
+  background-color: #CFCFCF
+}
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #F5F5F5
+}
+::-webkit-scrollbar-thumb {
+  background-color: #2C3E50
+}
+*/
+/* ::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  height: 2px;
+  background-image: -webkit-radial-gradient(10% 30%, #EEEEEE, #BDBDBD, #9E9E9E, #212121)
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+} */
+ .ag-pivot-off .ag-header-group-cell  {
+  text-align: left;
+  // font-family: initial;
+  font-size: 13px;
+  background-color: #fff;
+  // border-left: 1px solid #cdcdce;
+}
+.ag-pivot-off .ag-header-cell {
+  text-align: left;
+  // border-left: 1px solid #cdcdce;
+  background-color: #fff;
+}
+/* .ag-pivot-off .ag-cell
+   {border-left: 1px solid #bdc3c7;
+    border-left: 1px solid #bdc3c7;
+      border-right-color: black;
+      border-right-width: 1px ;
+      border-right-style: solid ;
+    } */
+.ag-pivot-off .ag-header-cell-label .ag-header-cell-text {
+  /*Force the width corresponding at how much width
+  we need once the text is laid out vertically*/
+  text-align: left;
+  // font-family: initial;
+  margin-left: 0px !important;
+  font-size: 13px;
+  background-color: #fff;
+
+  // border-right: 1px solid #bdc3c7;
+}
+
+.ag-theme-alpine .ag-header-cell-label {
+  background-color: #fff;
+}
+
+.ag-header-cell-text {
+  background-color: #fff;
+}
+// mei3
+// chrom
+/* width */
+::-webkit-scrollbar {
+  height: 7px;
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f8fffe;
+   height: 5px;
+   width: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: rgb(216, 216, 216);
+   height: 5px;
+   width: 5px;
+  // transition: 1s;
+  // background-image: -webkit-radial-gradient(10% 30%, #EEEEEE, #BDBDBD, #9E9E9E, #212121)
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px ;
+  // background-image: -webkit-radial-gradient(10% 30%,#e6e3e5, rgb(145, 144, 204),  rgb(209, 209, 209), rgb(137, 192, 218));
+    background: rgb(194, 196, 195);
+
+}
+// firefox
+:root {
+  scrollbar-color: rgb(128, 116, 116) rgb(158, 158, 158) !important;
+  scrollbar-width: 3em !important;
+}
+// mei3
+/* .ag-theme-balham .ag-row-selected {
+  background-color: #4abbff;
+}
+
+.ag-theme-balham .ag-ltr .ag-cell-focus {
+  border: 1px solid red;
+} */
+
+/* ------------------ Propositions Design ----------------------- */
+
+/* .mat-step-icon-content,
+.mat-step-header .mat-step-label,
+.mat-step-header .mat-step-optional {
+  display: none;
+}
+
+.mat-horizontal-stepper-header {
+  padding: 0 8px 0 16px !important;
+  &[ng-reflect-active="true"] + .mat-stepper-horizontal-line {
+    border-top-color: rgba(37, 82, 245, 0.54) !important;
+  }
+}
+ .basic-container .mat-step-header .mat-step-icon-selected {
+  background-color: #6cb73a;
+  color: #fff;
+} */

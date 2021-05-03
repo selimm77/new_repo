@@ -1,0 +1,331 @@
+//@import '~primeng/resources/themes/luna-amber/theme.css' ;
+// @import '~primeng/resources/primeng.min.css' ;
+@import '~primeicons/primeicons.css';
+
+.ui-table-container {
+  overflow: hidden;
+}
+
+.ui-table {
+  position: relative;
+  margin: -1px;
+}
+
+.ui-table table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.ui-table .ui-table-thead > tr > th,
+.ui-table .ui-table-tbody > tr > td,
+.ui-table .ui-table-tfoot > tr > td {
+  padding: .25em .5em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ui-table .ui-sortable-column {
+  cursor: pointer;
+}
+
+.ui-table p-sorticon {
+  vertical-align: middle;
+}
+
+.ui-table-auto-layout > .ui-table-wrapper {
+  overflow-x: auto;
+}
+
+.ui-table-auto-layout > .ui-table-wrapper > table {
+  table-layout: auto;
+}
+
+/* Sections */
+.ui-table-caption,
+.ui-table-summary {
+  padding: .25em .5em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.ui-table-caption {
+  border-bottom: 0 none;
+}
+
+.ui-table-summary {
+  border-top: 0 none;
+}
+
+/* Paginator */
+.ui-table .ui-paginator-top {
+  border-bottom: 0 none;
+}
+
+.ui-table .ui-paginator-bottom {
+  border-top: 0 none;
+}
+
+/* Scrollable */
+.ui-table-scrollable-wrapper {
+  position: relative;
+}
+.ui-table-scrollable-header,
+.ui-table-scrollable-footer {
+  overflow: hidden;
+  border: 0 none;
+}
+
+.ui-table-scrollable-body {
+  overflow: scroll;
+  position: relative;
+}
+
+.ui-table-virtual-table {
+  position: absolute;
+}
+
+/* Frozen Columns */
+.ui-table-frozen-view .ui-table-scrollable-body {
+  overflow: hidden;
+}
+
+.ui-table-frozen-view > .ui-table-scrollable-body > table > .ui-table-tbody > tr > td:last-child {
+  border-right: 0 none;
+}
+
+.ui-table-unfrozen-view {
+  position: absolute;
+  top: 0px;
+}
+
+/* Resizable */
+.ui-table-resizable > .ui-table-wrapper {
+  overflow-x: auto;
+}
+
+.ui-table-resizable .ui-table-thead > tr > th,
+.ui-table-resizable .ui-table-tfoot > tr > td,
+.ui-table-resizable .ui-table-tbody > tr > td {
+  overflow: hidden;
+}
+
+.ui-table-resizable .ui-resizable-column {
+  background-clip: padding-box;
+  position: relative;
+}
+
+.ui-table-resizable-fit .ui-resizable-column:last-child .ui-column-resizer {
+  display: none;
+}
+
+.ui-table .ui-column-resizer {
+  display: block;
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  margin: 0;
+  width: .5em;
+  height: 100%;
+  padding: 0px;
+  cursor:col-resize;
+  border: 1px solid transparent;
+}
+
+.ui-table .ui-column-resizer-helper {
+  width: 1px;
+  position: absolute;
+  z-index: 10;
+  display: none;
+}
+
+/* Edit */
+.ui-table .ui-table-tbody > tr > td.ui-editing-cell {
+  padding: 0;
+}
+
+.ui-table .ui-table-tbody > tr > td.ui-editing-cell p-celleditor >  * {
+  width: 100%;
+}
+
+/* Reorder */
+.ui-table-reorder-indicator-up,
+.ui-table-reorder-indicator-down {
+  position: absolute;
+  display: none;
+}
+
+/* Responsive */
+.ui-table-responsive .ui-table-tbody > tr > td .ui-column-title {
+  display: none;
+}
+
+@media screen and (max-width: 40em) {
+  .ui-table-responsive .ui-table-thead > tr > th,
+  .ui-table-responsive .ui-table-tfoot > tr > td {
+      display: none !important;
+  }
+
+  .ui-table-responsive .ui-table-tbody > tr > td {
+      text-align: left;
+      display: block;
+      border: 0 none;
+      width: 100% !important;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  float: left;
+  clear: left;
+  }
+
+  .ui-table-responsive .ui-table-tbody > tr > td .ui-column-title {
+      padding: .4em;
+      min-width: 30%;
+      display: inline-block;
+      margin: -.4em 1em -.4em -.4em;
+      font-weight: bold;
+  }
+}
+
+/* Loader */
+.ui-table-loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.ui-table-loading-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 2;
+  margin-top: -1em;
+  margin-left: -1em;
+}
+
+.ui-table .ui-table-loading-icon {
+  font-size: 2em;
+}
+
+// PAGINATOR
+
+.ui-paginator {
+  margin: 0;
+  text-align: center;
+  padding: .125em;
+}
+
+.ui-paginator .ui-paginator-top {
+  border-bottom: 0 none;
+}
+
+.ui-paginator .ui-paginator-bottom {
+  border-top:0 none;
+}
+
+.ui-paginator .ui-paginator-left-content {
+  float: left;
+}
+
+.ui-paginator .ui-paginator-right-content {
+  float: right;
+}
+
+.ui-paginator .ui-paginator-page,
+.ui-paginator .ui-paginator-pages,
+.ui-paginator .ui-paginator-next,
+.ui-paginator .ui-paginator-last,
+.ui-paginator .ui-paginator-first,
+.ui-paginator .ui-paginator-prev,
+.ui-paginator .ui-paginator-current {
+  display: inline-block;
+  min-width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+zoom: 1;
+margin-left: .063em;
+margin-right: .063em;
+text-decoration: none;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+}
+
+.ui-paginator .ui-paginator-pages {
+  width: auto;
+  line-height: 1;
+  padding: 0 1em;
+}
+
+.ui-paginator .ui-paginator-icon {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1em;
+  height: 1em;
+  margin-top: -.5em;
+  margin-left: -.5em;
+}
+
+.ui-paginator .ui-paginator-page,
+.ui-paginator .ui-paginator-next,
+.ui-paginator .ui-paginator-last,
+.ui-paginator .ui-paginator-first,
+.ui-paginator .ui-paginator-prev{
+  cursor: pointer;
+}
+
+.ui-paginator .ui-paginator-current,
+.ui-paginator .ui-paginator-rpp-options {
+margin-left: 1em;
+margin-right: 1em;
+  background-image: none;
+}
+
+.ui-paginator .ui-paginator-jtp-select option,
+.ui-paginator .ui-paginator-rpp-options option {
+  background-image: none;
+  border: 0 none;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.ui-paginator a.ui-state-disabled {
+  outline: 0 none;
+}
+
+.ui-paginator .ui-dropdown {
+  min-width: 4em;
+  margin-left: .375em;
+}
+
+.ui-fluid .ui-paginator .ui-dropdown {
+  width: auto;
+}
+
+.ui-dataview .ui-paginator-top {
+  border-bottom: 0 none;
+}
+
+.ui-dataview .ui-paginator-bottom {
+  border-top: 0 none;
+}
+
+.ui-table-scrollable-header-box {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.ui-table-scrollable-body-box table {
+  table-layout: auto !important;
+    background: white;
+}
+
+input.ui-table-search {
+  padding: 0 .25em;
+}

@@ -1,0 +1,15 @@
+.display-horizontal {
+  display: flex;
+}
+
+.display-vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.ellipsis {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

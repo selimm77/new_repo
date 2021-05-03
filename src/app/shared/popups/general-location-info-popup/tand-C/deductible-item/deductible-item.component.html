@@ -1,0 +1,59 @@
+<nz-row >
+  <ng-container *ngFor="let it of model">
+    <nz-col [nzSpan]="it.colSpan" style="margin-bottom: 10px;font-weight: bold">
+      <ng-container [ngTemplateOutlet]="it.itemsLabel.checkbox ? checkboxItem : label"></ng-container>
+      <ng-template #checkboxItem>
+        <label class="tand-c-checkbox" nz-checkbox [(ngModel)]="it.itemsLabel.checked">{{it.itemsLabel.label}}</label>
+      </ng-template>
+      <ng-template #label>
+        <span>{{it.itemsLabel.label}}</span>
+      </ng-template>
+    </nz-col>
+  </ng-container>
+</nz-row>
+<nz-row style="padding: 0 0 0 5px">
+  <ng-container *ngFor="let it of model">
+    <nz-col [nzSpan]="it.colSpan" style="padding: 0 0 0 10px">
+      <ng-container [ngTemplateOutlet]="it.itemsLabel.checkbox ? checkboxItem : label"></ng-container>
+      <ng-template #checkboxItem>
+        <ng-container [ngTemplateOutlet]="it.itemsLabel.checked ? defaultItem : withChildren">
+          <ng-template #withChildren>
+            <anms-deductible-item [model]="it.childs" [locationData]="locationData"></anms-deductible-item>
+          </ng-template>
+          <ng-template #defaultItem>
+            <nz-col *ngFor="let valItem of it.items"  [nzSpan]="valItem.colSpan" [nzOffset]="valItem.offset ? valItem.offset : 0" style="margin-bottom: 20px">
+              <ng-container [ngSwitch]="valItem.type">
+                <nz-select  [nzPlaceHolder]="valItem.label" nzShowSearch nzAllowClear nzCustomContent *ngSwitchCase="'list'" class="my-select"
+                            [(ngModel)]="locationData[valItem.field_code]"
+                            [disabled]="valItem.disabled"  style="background-color: #f4f6fc;width: 100%;">
+                  <nz-option nzLabel={{o}} nzValue={{o}}
+                             *ngFor="let o of getReferenceData(valItem.field_code)">
+                    {{o}}
+                  </nz-option>
+                </nz-select>
+                <input *ngSwitchDefault [type]="['Value', 'FI / 100%', 'Min Amount', 'Max Amount'].includes(valItem.label) ? 'number' : 'text'" [(ngModel)]="locationData[valItem.field_code]"
+                       [placeholder]="valItem.label" style="background-color: #f4f6fc;height: 30px;width: 100%;padding-left: 11px" />
+              </ng-container>
+            </nz-col>
+          </ng-template>
+        </ng-container>
+      </ng-template>
+      <ng-template #label>
+        <nz-col *ngFor="let valItem of it.items"  [nzSpan]="valItem.colSpan" [nzOffset]="valItem.offset ? valItem.offset : 0" style="margin-bottom: 20px">
+          <ng-container [ngSwitch]="valItem.type">
+            <nz-select  [nzPlaceHolder]="valItem.label" nzShowSearch nzAllowClear nzCustomContent *ngSwitchCase="'list'" class="my-select"
+                        [(ngModel)]="locationData[valItem.field_code]"
+                        [disabled]="valItem.disabled"  style="background-color: #f4f6fc;width: 100%;">
+              <nz-option nzLabel={{o}} nzValue={{o}}
+                         *ngFor="let o of getReferenceData(valItem.field_code)">
+                {{o}}
+              </nz-option>
+            </nz-select>
+            <input *ngSwitchDefault [type]="['Value', 'FI / 100%', 'Min Amount', 'Max Amount'].includes(valItem.label) ? 'number' : 'text'"  [(ngModel)]="locationData[valItem.field_code]"
+                   [placeholder]="valItem.label" style="background-color: #f4f6fc;height: 30px;width: 100%;padding-left: 11px" />
+          </ng-container>
+        </nz-col>
+      </ng-template>
+    </nz-col>
+  </ng-container>
+</nz-row>

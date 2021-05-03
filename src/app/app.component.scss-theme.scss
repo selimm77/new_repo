@@ -1,0 +1,88 @@
+@import '~@angular/material/theming';
+
+@mixin anms-app-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  mat-sidenav-container {
+    mat-toolbar {
+      button {
+        &.active {
+          color: mat-color($accent);
+          background-color: mat-color($accent, default-contrast);
+        }
+      }
+
+      .link {
+        color: mat-color($primary, default-contrast);
+      }
+    }
+
+    mat-sidenav {
+      .mat-list-item {
+        &.active {
+          color: mat-color($accent, default-contrast);
+          background-color: mat-color($accent) !important;
+
+          &:hover {
+            background-color: mat-color($accent, darker) !important;
+          }
+        }
+      }
+    }
+
+    .footer {
+      color: mat-color($primary, lighter);
+      background-color: mat-color($primary, darker);
+
+      .links,
+      .signature {
+        a {
+          color: mat-color($primary, lighter);
+          &:hover {
+            color: mat-color($accent);
+          }
+        }
+      }
+    }
+  }
+
+  .error-notification-overlay {
+    color: mat-color($warn, darker-contrast);
+    background-color: mat-color($warn, darker);
+    border-color: mat-color($warn);
+  }
+
+  .info-notification-overlay {
+    color: mat-color($accent, darker-contrast);
+    background-color: mat-color($accent, darker);
+    border-color: mat-color($accent);
+  }
+
+  .success-notification-overlay {
+    color: mat-color($success-colors, darker-contrast);
+    background-color: mat-color($success-colors, darker);
+    border-color: mat-color($success-colors);
+  }
+
+  .warning-notification-overlay {
+    color: mat-color($warning-colors, darker-contrast);
+    background-color: mat-color($warning-colors, darker);
+    border-color: mat-color($warning-colors);
+  }
+
+  .error-notification-overlay,
+  .info-notification-overlay,
+  .success-notification-overlay,
+  .warning-notification-overlay{
+    box-shadow: none;
+    border-width: 0;
+    //border-left-width: 10px;
+    border-style: solid;
+    letter-spacing: 0.2px;
+    border-radius: 2px;
+  }
+}

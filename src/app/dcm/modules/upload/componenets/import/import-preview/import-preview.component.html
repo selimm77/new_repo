@@ -1,0 +1,83 @@
+<div class="app-wrapper">
+
+  <!--  <div class="toolbar pd-rl full-w">
+      &lt;!&ndash; <div class="row">
+        <div class="col-md-4">
+          <div style="color: #005373; text-align: center; float: left; margin-top: 15px;">
+            <span><i class="fas fa-file-excel" style="color: green;"></i>  {{fileData.filename}}</span>
+          </div>
+        </div>
+        <div class="col-md-4" *ngIf="fileData && fileData.filename" style="display: inline-block;">
+          <div style="text-align: center; margin-left: 35%;
+          margin-right: auto; display: inline-block;">
+            <mat-form-field *ngIf="fileData && fileData.worksheet; else noFileData" >
+              <mat-select [disabled]='disable' [(value)]="selectedSheet"
+                          (selectionChange)="onSelectionChanged($event)" >
+                <mat-option *ngFor="let worksheet of fileData.worksheet; let i = index" [value]="i">
+                  {{worksheet}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="col-md-4" *ngIf="fileData && fileData.page">
+          <div style="color: #005373; float: right; color: green; display: inline-block; margin-top: 15px;">
+            <i class="fas fa-check-circle"></i> &nbsp;<span style="font-weight: bold; margin-top: 6px;">{{totalRecords}} rows from ' {{fileData.worksheet[selectedSheet]}} ' are loaded</span>
+          </div>
+        </div>
+      </div> &ndash;&gt;
+
+      <ng-template #noFileData>
+        <mat-form-field>
+          <mat-select placeholder="Loading...">
+          </mat-select>
+        </mat-form-field>
+      </ng-template>
+    </div>-->
+
+  <div class="left-wrapper">
+      <span class="main-header-title">
+        Import Selection
+      </span>
+
+    <div class="mat-app-background basic-container">
+      <anms-navbar-import (selectionSheet)="onSelectionSheet($event)">loading</anms-navbar-import>
+    </div>
+  </div>
+
+  <!-- <div fxFlex="100" class="full-w">
+
+
+    <mat-tab-group #tabGroup mat-align-tabs="start" (selectedTabChange)="tabChanged($event)" animationDuration="0ms">
+        <mat-tab *ngFor="let file of files; let i = index" label="{{file}}">
+          <div>
+
+          </div> -->
+
+
+  <div class="right-wrapper" *ngIf="!isFirstImport">
+      <span class="main-header-title">
+        Selection preview
+      </span>
+
+    <anms-preview-grid
+      style="height: calc(100vh - 210px)"
+      [loading]="loading"
+      [headers]="headers"
+      [rowData]="data"
+      [totalRecords]="totalRecords"
+      [nrows]="nrows"
+      [selectedSheet]="selectedSheet"
+      (lazyload)="lazyload.emit($event)"
+      (sizePageChanged)="onPageSizeChanged($event)"
+      (goToLastPage)="onBtLast($event)"
+    ></anms-preview-grid>
+  </div>
+
+  <div class="right-wrapper" *ngIf="isFirstImport">
+      <span class="main-header-title">
+        Selection preview
+      </span>
+  </div>
+
+</div>

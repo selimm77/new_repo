@@ -1,0 +1,18 @@
+.danger {
+  color: #FF0000;
+  font-weight: bold;
+}
+
+.span-errors {
+  color: black;
+  font-weight: bold;
+}
+
+.error-eye {
+  color: #0292AB;
+}
+
+::ng-deep i.ui-table-loading-icon.pi-spin.pi.pi-spinner {
+  font-size: 50px;
+  color: #0292AB;
+}

@@ -1,0 +1,108 @@
+<nz-modal nzWrapClassName="plt-selection" [nzFooter]="modalFooter" [nzVisible]="true" [nzStyle]="{ 'top':'20px', 'bottom': '20px'}" [nzWidth]="'90vw'" (nzOnCancel)="onClose()">
+  <nz-row>
+    <nz-col nzSpan="1">
+      <img src="/assets/images/addLocation.png" style="width: 53px;">
+    </nz-col>
+    <nz-col nzSpan="4" style="margin-left: 20px;">
+      <span style="font-size: 27px;color: black">Add Location</span>
+    </nz-col>
+    <nz-col nzSpan="1">
+      <span style="margin-right: 20px;">
+        <nz-select [ngModel]="selectedCurrency" [nzPlaceHolder]="'USD'" class="my-select">
+          <nz-option nzCustomContent nzLabel={{currency}} nzValue={{currency}}
+                     *ngFor="let currency of currencies">
+            {{currency}}
+          </nz-option>
+        </nz-select>
+      </span>
+    </nz-col>
+  </nz-row>
+  <nz-row style="margin-top: 30px">
+    <nz-tabset class="my-tabset">
+      <nz-tab *ngFor="let tab of popupModel" [nzTitle]="tabsetTitle">
+        <div class="my-tab-content" style="background-color: #f4f6fc">
+              <anms-general-details [locationData]="location" [multiple]="multiple" [isMultipleEdit]="isMultipleEdit" [tabModel]="popupModel[0].value" [mondatories]="mondatoryFields" [percentages]="percentages"  *ngIf="tab.label === 'General'"></anms-general-details>
+              <anms-geographical  [locationData]="location" [multiple]="multiple" [isMultipleEdit]="isMultipleEdit" [tabModel]="popupModel[1].tabs" [mondatories]="mondatoryFields['Geographical']"  *ngIf="tab.label === 'Geographical'"></anms-geographical>
+              <anms-insurred-values [locationData]="location" [multiple]="multiple" [isMultipleEdit]="isMultipleEdit" [tabModel]="popupModel[2].value" [mondatories]="mondatoryFields['Insured Value']" [percentages]="percentages"  *ngIf="tab.label === 'Insured Value'"></anms-insurred-values>
+              <anms-mpl [locationData]="location" [multiple]="multiple" [isMultipleEdit]="isMultipleEdit" [tabModel]="popupModel[3].value" [mondatories]="mondatoryFields['MPL']" *ngIf="tab.label === 'MPL'"></anms-mpl>
+              <anms-tand-C [locationData]="location" [multiple]="multiple" [isMultipleEdit]="isMultipleEdit" [tabModel]="popupModel[4].value" *ngIf="tab.label === 'T&C'"></anms-tand-C>
+              <anms-pricing [locationData]="location" [multiple]="multiple" [isMultipleEdit]="isMultipleEdit" [tabModel]="popupModel[5].value" [mondatories]="mondatoryFields['Pricing']" *ngIf="tab.label === 'Pricing'"></anms-pricing>
+              <anms-cat-Analysis-Info [locationData]="location" [multiple]="multiple" [isMultipleEdit]="isMultipleEdit" [tabModel]="popupModel[6].value" *ngIf="tab.label === 'CAT Analysis & CAT Information'"></anms-cat-Analysis-Info>
+              <anms-more-info  [locationData]="location" [multiple]="multiple" [isMultipleEdit]="isMultipleEdit" [tabModel]="popupModel[7].tabs" [mondatories]="mondatoryFields['More Information']"  *ngIf="tab.label === 'More Information'"></anms-more-info>
+        </div>
+        <ng-template #tabsetTitle>
+              <span>{{tab.label}}</span>
+              <nz-tag style="margin-left: 10px" *ngIf="mondatoryFields | mondatory : tab.label" [nzColor]="'red'">{{mondatoryFields | mondatory : tab.label}}</nz-tag>
+        </ng-template>
+      </nz-tab>
+    </nz-tabset>
+  </nz-row>
+  <ng-template #modalFooter>
+    <div class="footer" style="text-align: center">
+      <button nz-button nzType="default" nzShape="round" style="margin-left: 10px" class="a-default-button" (click)="onClose()">
+         CANCEL
+      </button>
+      <button *ngIf="!isLoading" nz-button nzType="default" nzShape="round" style="margin-left: 10px;width: 200px" [disabled]="!this.checkValidation(true)"
+              [ngClass]="this.checkValidation(true) ? 'a-primary-button': 'a-disabled-button' " (click)="submitMethod()">
+        <i  class="fas fa-save"></i>
+        SAVE
+      </button>
+      <button *ngIf="isLoading"  nz-button nzType="default" nzShape="round" style="margin-left: 10px;width: 200px" [disabled]="true"
+              [ngClass]="this.checkValidation(true) ? 'a-primary-button': 'a-disabled-button' " (click)="submitMethod()">
+        <i  class="fas fa-spinner fa-pulse"></i>
+        LOADING
+      </button>
+    </div>
+  </ng-template>
+</nz-modal>
+<!--<div class="custom-dialog">-->
+<!--  <div fxLayout="row" fxLayoutAlign="start">-->
+<!--    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="gappx" style="margin-top: -15px; margin-left: -10px;">-->
+<!--      <img src="/assets/images/location-g.jpg" style="width: 53px;">-->
+<!--    </div>-->
+<!--    <div fxLayout="row" style="margin-left: 30px; font-size: 30px; margin-top: -15px;" fxLayoutGap="gappx">-->
+<!--      Add Location Osama-->
+<!--    </div>-->
+<!--    <div fxLayout="row" style="margin-left: 30px; margin-top: -10px;" fxLayoutGap="gappx">-->
+<!--      <span style="margin-right: 20px;">-->
+<!--        <nz-select [ngModel]="selectedCurrency" [nzPlaceHolder]="'USD'">-->
+<!--        <nz-option nzCustomContent nzLabel={{currency}} nzValue={{currency}}-->
+<!--          *ngFor="let currency of currencies">-->
+<!--          {{currency}}-->
+<!--        </nz-option>-->
+<!--      </nz-select>-->
+<!--  </span>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--<div mat-dialog-content class="content-cl">-->
+
+<!--  <nav  mat-tab-nav-bar class="nav-container d-none d-sm-flex">-->
+<!--      <a mat-tab-link-->
+<!--        *ngFor="let e of tabs"-->
+<!--        [active]="e.id === activeTab"-->
+<!--        (click)="activeTab = e.id">-->
+<!--        {{e.label | translate}}-->
+<!--      </a>-->
+<!--  </nav>-->
+
+<!--  <div class="container-general tabs-font">-->
+<!--    <anms-general-details *ngIf="activeTab === 'GEN'"></anms-general-details>-->
+<!--    <anms-geographical    *ngIf="activeTab === 'GEO'"></anms-geographical>-->
+<!--    <anms-insurred-values *ngIf="activeTab === 'VAL'"></anms-insurred-values>-->
+<!--    <anms-mpl *ngIf="activeTab === 'MPL'"></anms-mpl>-->
+<!--    <anms-tand-C *ngIf="activeTab === 'TAC'"></anms-tand-C>-->
+<!--    <anms-pricing *ngIf="activeTab === 'PRC'"></anms-pricing>-->
+<!--    <anms-cat-Analysis-Info *ngIf="activeTab === 'CAT'"></anms-cat-Analysis-Info>-->
+<!--    <anms-more-info       *ngIf="activeTab === 'MOR'"></anms-more-info>-->
+<!--  </div>-->
+
+<!--  </div>-->
+
+<!--  <div mat-dialog-actions>-->
+<!--    <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="7px" class="full-w">-->
+<!--      <button mat-button [mat-dialog-close]="false">Cancel</button>-->
+<!--      <button mat-flat-button color="primary" [mat-dialog-close]="true" (click)="modifyData()" >save</button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

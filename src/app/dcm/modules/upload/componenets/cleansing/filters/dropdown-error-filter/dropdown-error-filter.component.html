@@ -1,0 +1,36 @@
+<!-- <div style="float: left;">
+    <select (change)="onSelectElement($event)" id="select-type" [(ngModel)]="selectedTypeErrors" style=" width: 60px;">
+      <option *ngFor="let err of typeErrors" [value]="err.name">{{err.name}}</option>
+    </select>
+</div>  margin-bottom: 4px; -->
+<span style="float: left; margin-left: -15px;">
+  <nz-select class="error-filter" [ngModel]="selectedTypeErrors" [nzPlaceHolder]="All" style="width: 85px;">
+  <nz-option nzCustomContent nzLabel={{err.name}} nzValue={{err.name}}
+    *ngFor="let err of typeErrors" style="width: 100px;">
+    {{err.name}}
+  </nz-option>
+</nz-select>
+</span>
+
+
+<!-- <div style="float: left;">
+    <select (change)="onSelectElement($event)" id="select-type" [(ngModel)]="selectedTypeErrors" style=" width: 60px;">
+      <option *ngFor="let err of typeErrors" [value]="err.name">{{err.name}}</option>
+    </select>
+</div> -->
+<!-- <span style="float: left; margin-left: -15px;">
+  <nz-select (ngModelChange)="onSelectElement($event)" id="select-type" class="error-filter" [ngModel]="selectedTypeErrors" [nzPlaceHolder]="All" style="width: 85px;">
+  <nz-option nzCustomContent nzLabel={{err.name}} nzValue={{err.id}}
+    *ngFor="let err of typeErrors">
+    {{err.name}}
+  </nz-option>
+</nz-select>
+</span> -->
+<!-- <span style="float: left; margin-left: -15px;">
+  <nz-select (change)="onSelectElement($event)" id="select-type" class="error-filter" [ngModel]="selectedTypeErrors" [nzPlaceHolder]="All" style="width: 85px;">
+  <nz-option nzCustomContent nzLabel={{err.name}} nzValue={{err.name}}
+    *ngFor="let err of typeErrors" style="width: 100px;">
+    {{err.name}}
+  </nz-option>
+</nz-select>
+</span> -->

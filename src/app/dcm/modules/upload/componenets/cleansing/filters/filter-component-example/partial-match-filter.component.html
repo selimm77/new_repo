@@ -1,0 +1,13 @@
+<button (click)="onClickBtn($event)">=</button>
+Filter: <input #input (ngModelChange)="onChange($event)" [ngModel]="text">
+&nbsp;
+<button class="btn" (click)="onClickBtn($event)">
+  <i>
+    <img src="assets/icons/filters/filter-b.png" alt="image"/>
+  </i>
+</button>
+&nbsp;
+<button class="btn" (click)="onClickBtn($event)">
+  <i>
+    <img src="assets/icons/filters/filter-f.png" alt="image"/></i>
+</button>

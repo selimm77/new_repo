@@ -1,0 +1,53 @@
+
+<div fxFlex="100" class="grid-p">
+
+  <div fxFlex="100" fxLayout="column" fxLayoutAlign="space-between" class="full-h-s main-container mat-body"
+  style="z-index:1; position:relative;">
+  <div class="header-dr1"
+    *ngIf="(isheaderOpen$ | async) && (currentRoute$|async).state.url !== '/dcm/upload/mapping' && (currentRoute$|async).state.url !== '/dcm/upload/cleansing' " style="z-index:1; position:relative;">
+    <anms-header-first></anms-header-first>
+  </div>
+  <div fxFlex="100" class="height-overide">
+    <mat-drawer-container class="drawer-container" autosize>
+
+      <mat-drawer [opened]="isSidenavOpen$ | async" #drawer class="example-sidenav" mode="side"
+                  *ngIf=" !showSidenav(currentRoute$|async)">
+        <anms-sidenav></anms-sidenav>
+      </mat-drawer>
+            <div class="header-stepper-cl" fxLayout="column"
+            [className]="(currentRoute$|async).state.url === '/dcm/upload/dashboard'?'darwer-map':'darwer-sidenav-content-import'"
+              *ngIf="!isMapping(currentRoute$|async)">
+
+              <div *ngIf="(currentRoute$|async).state.url !== '/dcm/upload'" class="header-stepper">
+                <anms-header-stepper (toggleDrawerClick)="drawer.toggle()"></anms-header-stepper>
+              </div>
+
+              <div class="header-dr" *ngIf="(isheaderOpen$ | async) && (csMetadata$ | async)  " style="z-index:1; position:relative;">
+                <anms-header></anms-header>
+              </div>
+
+              <div fxFlex="100">
+                <router-outlet #o="outlet"></router-outlet>
+              </div>
+              <!-- <div class="stepper-c" *ngIf="((currentRoute$|async).state.url !== '/dcm/upload') && !(((currentRoute$|async).state.url === '/dcm/upload/import') && !(uploaded$ | async))">
+                <anms-stepper (toggleDrawerClick)="drawer.toggle()"></anms-stepper>
+              </div> -->
+              <div class="stepper-c" *ngIf="(currentRoute$|async).state.url !== '/dcm/upload'">
+                <anms-stepper (toggleDrawerClick)="drawer.toggle()"></anms-stepper>
+              </div>
+            </div>
+
+      <div fxFlex="100" class="darwer-sidenav-content" fxLayout="column"
+        *ngIf="isMapping(currentRoute$|async)">
+        <div fxFlex="100">
+          <router-outlet #o="outlet"></router-outlet>
+        </div>
+        <div class="stepper-c">
+          <anms-stepper (toggleDrawerClick)="drawer.toggle()"></anms-stepper>
+        </div>
+      </div>
+    </mat-drawer-container>
+  </div>
+</div>
+        </div>
+

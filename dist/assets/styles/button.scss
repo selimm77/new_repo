@@ -1,0 +1,26 @@
+.a-default-button {
+  color: #0700CF !important;
+  border-color: #0700CF !important;
+  font-weight: 700 !important;
+}
+
+.default-theme .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #0700CF !important;
+}
+
+.default-theme .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: #0700CF !important;
+}
+
+.ant-btn.ant-btn-primary {
+  background-color: #0700CF !important;
+  border-color: #0700CF !important;
+  color: #FFFFFF !important;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: #0700CF;
+    border-color: #0700CF;
+    opacity: 80%;
+  }
+}

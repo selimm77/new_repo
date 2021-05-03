@@ -1,0 +1,137 @@
+.target-list {
+  width: 100%;
+  min-height: 20px;
+  display: block;
+  overflow: hidden;
+}
+
+.my-list {
+  width: 100%;
+  height: calc(100vh - 385px);
+  overflow: auto;
+}
+
+.target-box {
+  padding: 4px;
+  border-bottom: solid 1px #ccc;
+  box-sizing: border-box;
+  background-color: white;
+  // min-height: 20px;
+  height: 5ch;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.target-box:last-child {
+  border: none;
+}
+
+.target-list.cdk-drop-list-dragging .target-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.target-handle {
+  color: rgb(255, 255, 255);
+  cursor: move;
+  margin-left: 5px;
+}
+
+.action-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mapped-item-list {
+  width: 100%;
+  // min-height: 20px;
+  border-width: 2px;
+  border-style: dashed;
+  border-color: transparent;
+  border-radius: 4px;
+  // height: 100%;
+  // height: 3vh;
+  // height: 35px;
+  padding: 10px;
+}
+
+.dropHintClass {
+  border-color: lightgrey;
+  background: rgb(243, 243, 243);
+}
+
+.dropOverClass {
+  background: rgb(243, 243, 243);
+}
+
+.mandatory {
+  font-weight: bold;
+}
+
+.default-theme .mat-icon-button.mat-primary {
+  font-size: 18px;
+}
+
+::ng-deep .default-theme .mat-chip.mat-standard-chip.mat-chip-selected.mat-accent {
+  border: 1px solid #cccccc !important;
+  border-radius: 0px;
+  height: 20px;
+  width: 32vw;
+  // width: 400px;
+}
+
+.list-description {
+  font-weight: 700;
+  color: #000;
+}
+
+::ng-deep {
+  mat-icon.mat-icon-cl.mat-icon.notranslate.material-icons.mat-icon-no-color {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+
+::ng-deep .default-theme .mat-chip.mat-standard-chip.mat-chip-selected.mat-accent,
+::ng-deep .default-theme .mat-chip.mat-standard-chip.mat-chip-selected.mat-accent .mat-chip-remove {
+  background: rgb(245, 245, 245) !important;
+  color: #4d4d4d !important;
+  opacity: 70% !important;
+
+}
+
+::ng-deep .default-theme anms-mapping-target .target-box.mandatory-row:not(.mapped) button,
+::ng-deep .default-theme anms-mapping-target .target-box.mandatory-row:not(.mapped) span,
+::ng-deep .default-theme anms-mapping-target .target-box.mandatory-row:not(.mapped) .mandatory {
+  color: #ff4040 !important;
+  font-weight: bold !important;
+}
+
+
+::ng-deep .default-theme anms-mapping-target .target-box.mandatory-row:not(.mapped) {
+  background: hsl(0, 100%, 98%) !important;
+}
+
+::ng-deep .mandatory {
+  font-weight: 500 !important;
+}
+
+.mat-icon-cl {
+  // margin-left: -15px;
+  padding-right: 20px;
+}

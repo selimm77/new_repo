@@ -1,0 +1,36 @@
+<div>
+  <anms-button-set (AddLocationClick)="onAddLocationClick()"
+                   (CurrentLocationClick)="onCurrentLocationClick()"></anms-button-set>
+</div>
+
+<div  *ngIf="isCleasingFinished() && !(savedUrl$ | async)">
+
+  <div>
+    <anms-shared-location-upload-grid [metadata]="metadata$ | async"
+                                      [headers]="headers$ | async" [exposures]="exposures$ | async"
+                                      (editLocationButtonClick)="onEditRowClick($event)"
+                                      (deleteLocationButtonClick)="onDeleteRowClick($event)" (geocodeLocationButtonClick)="onGeocodeRowClick($event)">
+    </anms-shared-location-upload-grid>
+    <!-- <anms-shared-location-upload-grid [loading]="laoding$ | async" [editable]='true' [metadata]="metadata$ | async"
+                                      [headers]="headers$ | async" [exposures]="exposures$ | async" [datachecks]="datachecks$ | async"
+                                      [prefix]="headerPrefix" [errorsInfo$]='errosInfos$ | async' (editLocationButtonClick)="onEditRowClick($event)"
+                                      (deleteLocationButtonClick)="onDeleteRowClick($event)" (geocodeLocationButtonClick)="onGeocodeRowClick($event)">
+    </anms-shared-location-upload-grid> -->
+  </div>
+</div>
+
+<div>
+  <div *ngIf="isCleasingFinished() && (savedUrl$ | async)">
+    <anms-empty-table></anms-empty-table>
+  </div>
+
+  <div *ngIf="!isCleasingFinished()">
+    <div>
+      <anms-empty-table></anms-empty-table>
+    </div>
+  </div>
+</div>
+
+<!--<div *ngIf="popupVisibility">
+  <anms-general-location-info-popup></anms-general-location-info-popup>
+</div> -->

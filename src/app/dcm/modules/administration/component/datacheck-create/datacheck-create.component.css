@@ -1,0 +1,20 @@
+:host >>> .ant-select-selection.ant-select-selection--single {
+  border-radius: 5px !important;
+  border-width: 1px;
+
+}
+:host >>> .ant-form-item label > .anticon {
+  vertical-align: middle;
+  font-size: 15px;
+}
+.error{
+  border :1px solid red
+}
+:host >>> .mat-dialog-content{
+  height: 55vh;
+  overflow: auto;
+}
+:host >>> .default-theme .mat-dialog-container{
+  height: 75vh;
+  overflow-y: auto;
+}

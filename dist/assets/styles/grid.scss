@@ -1,0 +1,23 @@
+.custom-mat-grid{
+    .mat-header-row,
+    .mat-row
+    {
+        height: unset;
+    }
+}
+
+.table-container
+{
+    max-height:100%;height: 100%;
+    
+    .mat-table{
+        height: 100px;
+        width: 100%;
+    }
+
+    .mat-paginator-sticky {
+        bottom: 0px;
+        position: sticky;
+        z-index: 10;
+    }
+}

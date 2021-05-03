@@ -1,0 +1,14 @@
+<div class="progress-circle-container">
+  <span class="progress-label" *ngIf="label > 101">
+    0
+  </span>
+  <span class="progress-label" *ngIf="label < 101">
+    {{label}}
+  </span>
+  <div nzTitle="100%" nzPlacement="bottomRight">
+    <span nz-tooltip nzTitle="100%">
+    <i class="far fa-circle font-icon-medium"></i>
+      </span>
+  </div>
+
+</div>

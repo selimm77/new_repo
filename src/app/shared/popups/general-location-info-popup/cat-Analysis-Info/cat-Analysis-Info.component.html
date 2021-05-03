@@ -1,0 +1,51 @@
+<div style="padding: 15px 0;margin: 20px 10%">
+  <nz-row>
+    <nz-col nzSpan="16">
+      <div class="header" style="background-color: white;margin-bottom: 20px;padding: 30px">
+        <nz-row>
+          <nz-col nzSpan="5"><span style="font-size: 15px;font-weight: bold">{{tabModel['leftPanel'].header.label}}</span></nz-col>
+          <nz-col nzSpan="5" nzOffset="2"><input type="text" nz-input style="height: 30px;border: 1px solid black" [disabled]="true"></nz-col>
+        </nz-row>
+      </div>
+      <div class="body" style="background-color: white">
+        <nz-row>
+          <nz-col *ngFor="let side of tabModel['leftPanel'].body | keys;let i = index" style="padding: 30px" [nzSpan] ="i==0 ? 12 : 11" [nzOffset] ="i==0 ? 0 : 1">
+            <nz-row *ngFor="let sideItem of tabModel['leftPanel'].body[side]">
+              <nz-col nzSpan="12" style="margin-bottom: 20px">
+                <span style="font-size: 15px;font-weight: bold">{{sideItem.label}}</span>
+              </nz-col>
+              <nz-col nzSpan="12" style="margin-bottom: 20px">
+                  <ng-container [ngTemplateOutlet]="sideItem.type === 'level' ? stepperItem  : inputItem"></ng-container>
+                  <ng-template #inputItem>
+                    <input type="text" nz-input style="height: 30px;border: 1px solid black" [(ngModel)]="sideItem.value" [disabled]="true">
+                  </ng-template>
+                  <ng-template #stepperItem>
+                    <div style="display: flex">
+                      <div *ngFor="let colorItem of sideItem.colors" [ngStyle]="{'background-color': colorItem.color, 'border': colorItem.checked ? '3px solid black' : '1px solid grey'}"
+                           style="width: 30px;height: 30px;border: 1px solid black;cursor: pointer" (click)="chooseColor(sideItem.colors, colorItem.color)">
+                        {{colorItem.value}}
+                      </div>
+                    </div>
+                  </ng-template>
+              </nz-col>
+            </nz-row>
+          </nz-col>
+        </nz-row>
+      </div>
+    </nz-col>
+    <nz-col nzSpan="7" nzOffset="1" style="background-color: white;padding: 20px">
+      <nz-row style="border-bottom: 2px solid lightslategrey;padding-bottom: 20px;">
+        <nz-col nzSpan="24"><span style="font-size: 18px;font-weight: bold">Zones</span></nz-col>
+        <nz-col nzSpan="24"><span>Windstorm Zoning:</span></nz-col>
+      </nz-row>
+      <nz-row style="border-bottom: 2px solid lightslategrey">
+        <nz-col nzSpan="12"><span>PERIL / REGION</span></nz-col>
+        <nz-col nzSpan="12"><span>EXPECTED LOSS(GU):</span></nz-col>
+      </nz-row>
+      <nz-row style="border-bottom: 2px solid lightslategrey">
+        <nz-col nzSpan="12"><span>NAHO=UBM</span></nz-col>
+        <nz-col nzSpan="12"><span>0</span></nz-col>
+      </nz-row>
+    </nz-col>
+  </nz-row>
+</div>

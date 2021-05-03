@@ -1,0 +1,34 @@
+
+input {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  outline: 0;
+  border-width: 0px 0 1px;
+  border-color: #3dabbf;
+  border-radius: 0;
+  font-size: 12px !important;
+
+}
+
+input:focus {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-color: #3dabbf;
+  outline : none;
+  box-shadow: 0 0 0 0 ;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+::ng-deep #cdk-overlay-2 > nz-modal > div > div.ant-modal-wrap.plt-selection > div > div > div.ant-modal-body.ng-star-inserted > nz-row:nth-child(2) > nz-tabset > div.ant-tabs-content.ant-tabs-top-content.ant-tabs-content-animated.ng-star-inserted > div.ant-tabs-tabpane.ng-star-inserted.ant-tabs-tabpane-active > div > anms-more-info > nz-tabset > div.ant-tabs-bar.ant-tabs-top-bar.ant-tabs-default-bar.ng-star-inserted > div > div {
+  text-align: center;
+}

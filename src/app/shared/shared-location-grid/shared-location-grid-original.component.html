@@ -1,0 +1,444 @@
+<!-- AG-GRID -->
+<!-- <ag-grid-angular #agGrid style="width: 100%; height: 100%;" id="myGrid" [rowData]="rowData" class="ag-theme-balham" [columnDefs]="columnDefs" [enableSorting]="true" [multiSortKey]="multiSortKey" [animateRows]="true" [enableFilter]="true" [floatingFilter]="true" [enableColResize]="true" [rowSelection]= rowSelection [defaultColDef]="defaultColDef" [rowDragManaged]="true" suppressRowClickSelection (gridReady)="onGridReady($event)" (cellValueChanged)="onCellValueChanged($event)"></ag-grid-angular> -->
+<!--<div class="row" *ngIf="(errorsInfo$|async).totalErrors">
+  <div class="col-md-3">Total errors</div>
+  <div class="col-md-1">{{(errorsInfo$|async).totalErrors}}</div>
+  <div class="col-md-3">General</div>
+  <div class="col-md-1">{{(errorsInfo$|async).errorCount.general}}</div>
+  <div class="col-md-3">Geographical</div>
+  <div class="col-md-1">{{(errorsInfo$|async).errorCount.geographical}}</div>
+  <div class="col-md-3">Geographical</div>
+  <div class="col-md-1">{{(errorsInfo$|async).errorCount.insuredValues}}</div>
+</div>-->
+
+<!-- <div>
+  <ag-grid-angular
+    style="width: 500px; height: 500px;"
+    class="ag-theme-balham"
+    [rowData]="rowDat"
+    [columnDefs]="columnDef"
+    >
+</ag-grid-angular>
+</div> -->
+<div fxLayout="column" class="full-h" id="div-grid">
+  <div fxFlex=100 class="ui-table-container">
+    <p-table #dt
+             (onFilter)="onFilter()"
+             [alwaysShowPaginator]="true"
+             [autoLayout]="true"
+             [lazyLoadOnInit]="false"
+             [columns]="columns"
+             [paginator]="true"
+             [rows]="paginatorNumber"
+             [resizableColumns]="true"
+             [value]="rowData"
+             [scrollable]="true"
+             (onEditInit)="updateChache($event.data[$event.field])"
+             (onEditComplete)="finishEdit($event.field, $event.data)"
+             (onEditCancel)="exitEdit()"
+             [rowTrackBy]="trackByFunction"
+             [pageLinks]="2"
+             [rowsPerPageOptions]="[30,50,100]"
+    >
+      <!--   [pageLinks]="2"[rowsPerPageOptions]="[30,50,100]" [frozenColumns]="frozenColumns"-->
+      <!--      <ng-template pTemplate="caption">
+              <div class="ui-helper-clearfix">
+                <button nz-button style="color: #0292AB" (click)="dt.exportCSV()"
+                        style="float:left"><i class="fas fa-file-csv" style="color: green; font-size: medium;"></i> Export
+                </button>
+              </div>
+            </ng-template>-->
+      <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+          <col *ngFor="let col of columns" [style.width]="col.width">
+        </colgroup>
+      </ng-template>
+      <ng-template pTemplate="paginatorright">
+        <div style="width: 170px;padding-top: 4px" class="float-left text-left">
+          <!--{{(dt._totalRecords / dt.rows) | number:'1.0-0' }}-->
+          <!--<span style="color: #00334d; font-size: 9px;font-weight: bold;margin-right: 30px" >{{((dt._totalRecords / dt.rows)+0.49) | number:'1.0-0' }} Page(s)</span>-->
+          <ng-container  *ngIf="math.round(dt._totalRecords / dt.rows) < (dt._totalRecords / dt.rows); then diff ; else eq"></ng-container>
+          <ng-template  #diff>
+            <span style="color: #00334d; font-size: 9px;font-weight: bold;margin-right: 30px" >{{math.round(dt._totalRecords / dt.rows ) + 1  }} Page(s)</span>
+          </ng-template>
+          <ng-template #eq>
+            <span style="color: #00334d; font-size: 9px;font-weight: bold;margin-right: 30px" >{{math.round(dt._totalRecords / dt.rows) }} Page(s)</span>
+          </ng-template>
+          <span style="color: #00334d; font-size: 9px;font-weight: bold;"> {{ dt._totalRecords  }} Record(s)  </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft">
+        <div style="width: 115px;padding-top: 4px" class="float-left text-right">
+          <span
+            style="color: #00334d; font-size: 9px;font-weight: bold;"> {{_numberOfSelectedRows}} Line(s) selected</span>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th *ngFor="let group of groups; let i = index;" [attr.colspan]="group.colspan"
+              [attr.rowspan]="1 || group.rowspan">
+            <a style="float: left !important; color: #0292AB;" *ngIf="i!==0 && i!==1 && i!==2"
+               (click)="CollapseUncollapseGroup(i)">
+              <i class="fas fa-plus font-icon-medium font-icon-medium-size" *ngIf="groupState(i)"></i>
+              <i class=" fas fa-minus font-icon-medium-size" *ngIf="!groupState(i)" style="color: firebrick"></i>
+            </a>
+            <div class="header-align">
+              &nbsp; {{ group.headerName }}
+            </div>
+
+          </th>
+        </tr>
+        <tr>
+          <ng-container *ngFor="let column of columns">
+            <th *ngIf="column.ignoreColumn  && !column.expanded"></th>
+            <th [pSortableColumn]="column.field" pResizableColumn *ngIf="!column.ignoreColumn && !column.expanded">
+              {{ column.headerName}}
+              <p-sortIcon [field]="column.field"></p-sortIcon>
+            </th>
+          </ng-container>
+        </tr>
+        <!-- SEARCH FILEDS -->
+        <!--<button class="btn btn-primary" (click)="showPtable(dt)">show table data</button>-->
+        <tr>
+          <ng-container *ngFor="let column of columns" [ngSwitch]="!column.ignoreColumn">
+            <ng-template *ngIf="!column.expanded">
+              <th *ngSwitchCase="false"></th>
+              <th *ngSwitchCase="true">
+                <input class="ui-table-search" type="text">
+              </th>
+            </ng-template>
+          </ng-container>
+        </tr>
+
+        <tr>
+          <th *ngFor="let col of columns; let i = index;" [ngSwitch]="col.field">
+            <!--       <input nz-input [nzSize]="'large'" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                          *ngIf="i !== 0 || i !== 1">-->
+            <label *ngIf="i === 0 " nz-checkbox style="text-align: center" [(ngModel)]="selectAllCheckbox"
+                   (ngModelChange)="selectAllChanged(dt)"></label>
+            <anms-customized-shared-location-grid [rowIndex]="i" [id]="0"
+                                                  [data]="dataAsObservable(data)" *ngIf="i === 1"
+                                                  [allData]="true"></anms-customized-shared-location-grid>
+            <nz-input-group [nzSuffix]="suffixIconSearch" *ngIf="i !== 0 && i !== 1">
+              <input nz-input [nzSize]="'small'"
+                     (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     STYLE="width: 90%; max-with: 90%; max-height: 90%; padding: 2px;"
+              >
+            </nz-input-group>
+            <ng-template #suffixIconSearch>
+              <i class="fas fa-filter" style="color : #BDBDBD; font-size: small;"></i>
+            </ng-template>
+          </th>
+        </tr>
+
+      </ng-template>
+      <ng-template pTemplate="body" let-data let-i="rowIndex">
+        <tr *ngIf="i===0" hidden></tr>
+
+        <tr *ngIf="i!==0">
+
+          <ng-container *ngFor="let column of columns; let i = index" [ngSwitch]="column.field">
+
+            <td *ngSwitchCase="'select_box'" style="text-align: center;padding-left: 7px">
+              <span>
+              <label nz-checkbox [ngModel]="allRowCheck[data.Id]" (ngModelChange)="rowSelectedChange(data.Id)"></label>
+                <!--<div class="form-check">-->
+                <!--<input [(ngModel)]="allRowCheck[data.Id]" (change)="rowSelectedChange(data.Id)" type="checkbox" class="form-check-input">-->
+                <!--</div>-->
+              </span>
+            </td>
+
+            <td *ngSwitchCase="'edit_buttons'">
+              <anms-customized-shared-location-grid [rowIndex]="i" [id]="data.Id" [allData]="false"
+                                                    [data]="dataAsObservable(data)"></anms-customized-shared-location-grid>
+            </td>
+
+            <td *ngSwitchCase="'select_box'" style="text-align: center" hidden><span><input type="checkbox"
+                                                                                            checked=></span></td>
+
+
+            <ng-container *ngSwitchDefault>
+
+              <td
+                [pEditableColumn]="data" [pEditableColumnField]="column.field"
+                [class.empty-cell]="isColumnInError(data, column.field,column.headerName, data[column.field])"
+                [matTooltip]="isColumnInError(data, column.field, column.headerName, data[column.field])"
+                *ngIf="!column.expanded" id={{column.headerName+data.Id}}>
+                <p-cellEditor (click)="updateChache(data[column.field])">
+                  <ng-template pTemplate="input" *ngIf="checkEditable(column.headerName)">
+
+                    <!-- NameOB -->
+                    <input class="ui-table-input"
+                           *ngIf="returnFieldFormat(column.headerName) === 'string' && isInComlumnsRows(column.headerName) === 'Name'"
+                           value="New Location"
+                           [(ngModel)]="data[column.field]"
+                           (keydown)="handleKeyDown($event, data, column.headerName, i)"
+                           [shAttachMenu]="menu" [shMenuData]="{data: data, column: column.field}">
+                    <input class="ui-table-input"
+                           *ngIf="returnFieldFormat(column.headerName) === 'double' && isInComlumnsRows(column.headerName) === 'Latitude'"
+                           [(ngModel)]="data[column.field]"
+                           [shAttachMenu]="menu" [shMenuData]="{data: data, column: column.field}">
+                    <input class="ui-table-input"
+                           *ngIf="returnFieldFormat(column.headerName) === 'double' && isInComlumnsRows(column.headerName) === 'other'"
+                           [(ngModel)]="data[column.field]"
+                           (keydown)="handleKeyDown($event, data, column.headerName)"
+                           (change)="modifyRow(data)"
+                           [shAttachMenu]="menu" [shMenuData]="{data: data, column: column.field}">
+                    <input class="ui-table-input"
+                           *ngIf="returnFieldFormat(column.headerName) === 'string' && isInComlumnsRows(column.headerName) === 'other'"
+                           [(ngModel)]="data[column.field]"
+                           (keydown)="handleKeyDown($event, data, column.headerName)"
+                           (change)="modifyRow(data)"
+                           [shAttachMenu]="menu" [shMenuData]="{data: data, column: column.field}">
+
+                    <input class="ui-table-input"
+                           *ngIf="returnFieldFormat(column.headerName) === 'double' && isInComlumnsRows(column.headerName) === 'Longitude'"
+                           [ngModel]="data[column.field]"
+                           (ngModelChange)="updateNumber($event, column, data)"
+                           (keydown)="handleKeyDown($event, data, column.headerName)"
+                           (change)="modifyRow(data)"
+                           [shAttachMenu]="menu" [shMenuData]="{data: data, column: column.field}">
+                    <input class="ui-table-input"
+                           *ngIf="returnFieldFormat(column.headerName) === 'double' && isInComlumnsRows(column.headerName) === 'Content'"
+                           [ngModel]="data[column.field]"
+                           (ngModelChange)="calculPdValue(data)"
+                           (keydown.enter)="modifyRow(data)"
+                           (keydown)="handleKeyDown($event, data, column.headerName)"
+                           (change)="modifyRow(data)"
+                           [shAttachMenu]="menu" [shMenuData]="{data: data, column: column.field}">
+
+                    <input class="ui-table-input"
+                           (input)="calculContent(data)"
+                           (keyup)="calculContent(data)"
+                           type="number"
+                           *ngIf="returnFieldFormat(column.headerName) === 'double' && isInComlumnsRows(column.headerName) === 'Stock'"
+                           [(ngModel)]="data[column.field]"
+                           (keydown)="handleKeyDown($event, data, column.headerName)"
+                           (change)="modifyRow(data)"
+                           [shAttachMenu]="menu" [shMenuData]="{data: data, column: column.field}">
+
+                    <input class="ui-table-input"
+                           (input)="calculContent(data)"
+                           (keyup)="calculContent(data)"
+                           type="number"
+                           (keydown)="handleKeyDown($event, data, column.headerName)"
+                           *ngIf="returnFieldFormat(column.headerName) === 'double' && isInComlumnsRows(column.headerName) === 'Machinery'"
+                           [(ngModel)]="data[column.field]"
+                           [shAttachMenu]="menu" [shMenuData]="data">
+
+                    <input class="ui-table-input"
+                           (change)="calculTiv(data)"
+                           (keyup)="calculTiv(data)"
+                           (keydown)="handleKeyDown($event, data, column.headerName)"
+                           type="number"
+                           *ngIf="returnFieldFormat(column.headerName) === 'double' && isInComlumnsRows(column.headerName) === 'BiValue'"
+                           [(ngModel)]="data[column.field]"
+                           (change)="modifyRow(data)"
+                           [shAttachMenu]="menu" [shMenuData]="data">
+
+                    <input class="ui-table-input"
+                           (ngModelChange)="calculPdValue(data)"
+                           type="number"
+                           (keydown)="handleKeyDown($event, data, column.headerName)"
+                           *ngIf="returnFieldFormat(column.headerName) === 'double' && isInComlumnsRows(column.headerName) === 'Building'"
+                           [(ngModel)]="data[column.field]"
+                           (change)="modifyRow(data)"
+                           [shAttachMenu]="menu" [shMenuData]="data">
+
+                    <input class="ui-table-input"
+                           (change)="calculTiv(data)"
+                           (keyup)="calculTiv(data)"
+                           type="number"
+                           *ngIf="returnFieldFormat(column.headerName) === 'double' && isInComlumnsRows(column.headerName) === 'PbValue'"
+                           [(ngModel)]="data[column.field]"
+                           (keydown)="handleKeyDown($event, data, column.headerName)"
+                           (change)="modifyRow(data)"
+                           [shAttachMenu]="menu" [shMenuData]="data">
+
+                    <nz-select nzSize="small" style="min-width: 100%" nzShowSearch
+                               nzAllowClear nzPlaceHolder="Division"
+                               *ngIf="returnFieldFormat(column.headerName) === 'ddl' && column.headerName.toLowerCase() == 'division'"
+                               [(ngModel)]="data[column.field]"
+                               (keydown)="handleKeyDown($event, data, column.headerName)"
+                               (ngModelChange)="modifyRow(data)"
+                               [shAttachMenu]="menu" [shMenuData]="data">
+                      <nz-option nzCustomContent nzLabel="Div 1" nzValue="Div1">Div 1</nz-option>
+                      <nz-option nzCustomContent nzLabel="Div 2" nzValue="Div2">Div 2</nz-option>
+                      <nz-option nzCustomContent nzLabel="Div 3" nzValue="Div3">Div 3</nz-option>
+                    </nz-select>
+
+                    <nz-select nzSize="small" style="min-width: 100%" nzShowSearch
+                               nzAllowClear nzPlaceHolder="Occupancy class"
+                               (keydown)="handleKeyDown($event, data, column.headerName)"
+                               *ngIf="returnFieldFormat(column.headerName) === 'ddl' && column.headerName === 'OccupancyClass'"
+                               [(ngModel)]="data[column.field]"
+                               (ngModelChange)="modifyRow(data)"
+                               [autofocus]="i === numberSelected">
+                      <nz-option nzCustomContent nzLabel="Administration, commercial service, public facility"
+                                 nzValue="Administration">Administration, commercial service, public facility
+                      </nz-option>
+                      <nz-option nzCustomContent nzLabel="Agriculture Cultivation"
+                                 nzValue="Agriculture Cultivation">Agriculture Cultivation
+                      </nz-option>
+                    </nz-select>
+
+                    <nz-select nzSize="small" style="min-width: 100%" nzShowSearch
+                               nzAllowClear
+                               (keydown)="handleKeyDown($event, data, column.headerName)"
+                               *ngIf="returnFieldFormat(column.headerName) === 'ddl' && column.headerName === 'OccupancyCode'"
+                               [(ngModel)]="data[column.field]"
+                               (ngModelChange)="modifyRow(data)">
+
+                      <nz-option nzCustomContent nzLabel="INCE999" nzValue="INCE999">INCE999</nz-option>
+                      <nz-option nzCustomContent nzLabel="INFENG001" nzValue="INFENG001">INFENG001</nz-option>
+                      <nz-option nzCustomContent nzLabel="INFENG001" nzValue="INFENG001">INFENG001</nz-option>
+                      <nz-option nzCustomContent nzLabel="INFENG003" nzValue="INFENG003">INFENG003</nz-option>
+                      <nz-option nzCustomContent nzLabel="INCE999" nzValue="INCE999">INFENG004</nz-option>
+                      <nz-option nzCustomContent nzLabel="INCE999" nzValue="INCE999">INFENG005</nz-option>
+                    </nz-select>
+
+                    <nz-select nzSize="small" style="min-width: 100%" nzShowSearch
+                               nzAllowClear
+                               (keydown)="handleKeyDown($event, data, column.headerName)"
+                               *ngIf="returnFieldFormat(column.headerName) === 'ddl' && column.headerName === 'OccupancyScheme'"
+                               [(ngModel)]="data[column.field]"
+                               (ngModelChange)="modifyRow(data)">
+                      <nz-option nzCustomContent nzLabel="ACORD" nzValue="ACORD" selected>ACORD</nz-option>
+                    </nz-select>
+
+                    <nz-select nzSize="small" style="min-width: 100%" nzShowSearch
+                               nzAllowClear
+                               (keydown)="handleKeyDown($event, data, column.headerName)"
+                               *ngIf="returnFieldFormat(column.headerName) === 'ddl' && column.headerName === 'SiteCurrency'"
+                               [(ngModel)]="data[column.field]"
+                               (ngModelChange)="modifyRow(data)">
+                      <nz-option nzCustomContent nzLabel="EUR - Euro - original" nzValue="EUR"> EUR -
+                        Euro - original
+                      </nz-option>
+                      <nz-option nzCustomContent nzLabel="USD - US $" nzValue="USD"> USD - US $</nz-option>
+                      <nz-option nzCustomContent nzLabel="CAD - Canadian $" nzValue="CAD"> CAD - Canadian
+                        $
+                      </nz-option>
+                      <nz-option nzCustomContent nzLabel="CHF - Swiss Franc" nzValue="CHF"> CHF - Swiss
+                        Franc
+                      </nz-option>
+
+                    </nz-select>
+
+                    <nz-select nzSize="small" style="min-width: 100%" nzShowSearch
+                               nzAllowClear
+                               (keydown)="handleKeyDown($event, data, column.headerName)"
+                               *ngIf="returnFieldFormat(column.headerName) === 'ddl' && column.headerName === 'ConstructionClass'"
+                               [(ngModel)]="data[column.field]"
+                               (ngModelChange)="modifyRow(data)">
+                    </nz-select>
+
+                    <nz-select nzSize="small" style="min-width: 100%" nzShowSearch
+                               nzAllowClear
+                               (keydown)="handleKeyDown($event, data)"
+                               *ngIf="returnFieldFormat(column.headerName) === 'ddl' && column.headerName === 'ConstructionSubClass'"
+                               [(ngModel)]="data[column.field]"
+                               (ngModelChange)="modifyRow(data)">
+                    </nz-select>
+
+                    <nz-select nzSize="small" style="min-width: 100%" nzShowSearch
+                               nzAllowClear
+                               (keydown)="handleKeyDown($event, data, column.headerName)"
+                               *ngIf="returnFieldFormat(column.headerName) === 'ddl' && column.headerName === 'ConstructionCode'"
+                               [(ngModel)]="data[column.field]"
+                               (ngModelChange)="modifyRow(data)">
+
+                      <nz-option nzCustomContent nzLabel="INCE999" nzValue="INCE999">CONRCF</nz-option>
+                      <nz-option nzCustomContent nzLabel="INCE999" nzValue="INCE999">CONRCS</nz-option>
+                      <nz-option nzCustomContent nzLabel="INCE999" nzValue="INCE999">CONRPR</nz-option>
+                      <nz-option nzCustomContent nzLabel="INCE999" nzValue="INCE999">CONRTU</nz-option>
+                      <nz-option nzCustomContent nzLabel="INCE999" nzValue="INCE999">CONUNS</nz-option>
+                    </nz-select>
+
+                    <nz-select nzSize="small" style="min-width: 100%" nzShowSearch
+                               nzAllowClear
+                               (keydown)="handleKeyDown($event, data, column.headerName)"
+                               *ngIf="returnFieldFormat(column.headerName) === 'ddl' && column.headerName === 'ConstructionScheme'"
+                               [(ngModel)]="data[column.field]"
+                               (ngModelChange)="modifyRow(data)">
+                      <nz-option nzCustomContent nzLabel="ACORD" nzValue="ACORD" selected>ACORD</nz-option>
+                    </nz-select>
+
+                    <nz-select nzSize="small" style="min-width: 100%" nzShowSearch
+                               nzAllowClear
+                               (keydown)="handleKeyDown($event, data, column.headerName)"
+                               *ngIf="returnFieldFormat(column.headerName) === 'ddl' && column.headerName === 'BiType'"
+                               [(ngModel)]="data[column.field]"
+                               (change)="modifyRow(data)"
+                               (ngModelChange)="modifyRow(data)">
+                    </nz-select>
+
+                    <nz-select nzSize="small" style="min-width: 100%" nzShowSearch
+                               nzAllowClear
+                               (keydown)="handleKeyDown($event, data, column.headerName)"
+                               *ngIf="returnFieldFormat(column.headerName) === 'ddl' && column.headerName === 'ForInterest'"
+                               [(ngModel)]="data[column.field]"
+                               (nzListOfSelectedValueChange)="modifyRow(data)">
+                    </nz-select>
+
+                    <nz-select nzSize="small" style="min-width: 100%" nzShowSearch
+                               nzAllowClear
+                               (keydown)="handleKeyDown($event, data)"
+                               *ngIf="returnFieldFormat(column.headerName) === 'ddl' && column.headerName ==='OccupancySubClass'"
+                               [(ngModel)]="data[column.field]"
+                               (nzListOfSelectedValueChange)="modifyRow(data)">
+                      <nz-option nzCustomContent nzLabel="INCE999" nzValue="INCE999">CONRCS</nz-option>
+                      <nz-option nzCustomContent nzLabel="INCE999" nzValue="INCE999">Bridge</nz-option>
+                    </nz-select>
+
+                  </ng-template>
+                  <ng-template pTemplate="input" *ngIf="!checkEditable(column.headerName)">
+                    <!--inputOB-->
+                    <input class="ui-table-input" readonly
+                           (keydown)="handleKeyDown($event, data, column.headerName)"
+                           style="color: black; font-size: 12px;" [value]="data[column.field]">
+                    style="color: black; font-size: 12px;" value="{{(data[column.field])}}">
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{(data[column.field])}}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+            </ng-container>
+
+          </ng-container>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td class="text-disable" [attr.colspan]="columns.length" *ngIf="!loading">
+            No records found
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <div *ngIf="laoding$|async" style="margin-top: -200px;">
+    <div class="app-loading">
+      <div class="logo">
+        <svg class="spinner" viewBox="25 25 50 50">
+          <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<sh-context-menu #menu>
+  <ng-template shContextMenuItem let-data (click)="applyToAll($event, dt)">
+    <div>
+      Apply to all
+    </div>
+  </ng-template>
+</sh-context-menu>
+
+<nz-modal [(nzVisible)]="isVisibleRestor" nzTitle="Modal Title" (nzOnCancel)="handleCancelRestor()"
+          (nzOnOk)="handleOkRestor()" [nzOkLoading]="isOkLoadingRestor" *ngIf="isVisibleRestor">
+  <p>Modal Content</p>
+</nz-modal>

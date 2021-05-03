@@ -1,0 +1,68 @@
+<!--<div class="stepper" *ngIf="(currentRoute$|async).state.url !== '/dcm/administration' && (currentRoute$|async).state.url !== '/dcm/upload/dashboard'">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="c-stepper">
+
+      <mat-horizontal-stepper class="step-font"
+                              *ngIf="(step$ | async) > -1; else replacementDiv"
+                              [linear]="true"
+                              [selectedIndex]="(step$ | async)"
+                              (selectionChange)="onSelectionChange($event)">
+        <mat-step [completed]="(step$ | async) >= 0">
+          <ng-template matStepLabel>
+            <span>Import</span>
+          </ng-template>
+        </mat-step>
+        <mat-step [completed]="(step$ | async) >= 1" label="Mapping">
+        </mat-step>
+        <mat-step [completed]="(step$ | async) >= 2" label="Cleansing">
+        </mat-step>
+      </mat-horizontal-stepper>
+      <ng-template #replacementDiv>
+        <div id="replacementDiv"></div>
+      </ng-template>
+    </div>
+
+
+</div>-->
+
+<div class="step-header-display" *ngIf="(currentRoute$|async).state.url !== '/dcm/administration' && (currentRoute$|async).state.url !== '/dcm/upload/dashboard'">
+  <div style="display: flex; align-items: center">
+    <img src="assets/image-icon/excel.bmp" />
+    <span style="font-size: 30px; margin-left: 10px; letter-spacing: 0.1em;">Import</span>
+  </div>
+
+  <div class="steps">
+
+    <div class="steps-upper">
+      <div class="stepper" (click)="navigateToStep(0)" [ngClass]="{'selected-stepper': (step$ | async) >= 0}">
+        <span class="empty-ball" *ngIf="(step$ | async) == 0"></span>
+        <span class="material-icons" *ngIf="(step$ | async) >= 1" style="color: #FFFFFF">done</span>
+      </div>
+      <div class="stepper-link" [ngClass]="{'selected-stepper-link': (step$ | async) >= 0}"></div>
+      <div class="stepper" (click)="navigateToStep(1)" [ngClass]="{'selected-stepper': (step$ | async) >= 1}">
+        <span class="empty-ball" *ngIf="(step$ | async) == 1"></span>
+        <span class="material-icons" *ngIf="(step$ | async) >= 2" style="color: #FFFFFF">done</span>
+      </div>
+      <div class="stepper-link" [ngClass]="{'selected-stepper-link': (step$ | async) >= 1}"></div>
+      <div class="stepper" (click)="navigateToStep(2)" [ngClass]="{'selected-stepper': (step$ | async) >= 2}">
+        <span class="empty-ball" *ngIf="(step$ | async) == 2" ></span>
+      </div>
+    </div>
+
+    <div class="steps-bottom">
+      <div class="step-wrap" (click)="navigateToStep(0)" [ngClass]="{'selected-step-wrap': (step$ | async) >= 0}">
+        <span style="margin-left: -10px" class="step-title">step 1</span>
+        <span style="margin-left: -13px" class="step-description">Import</span>
+      </div>
+      <div class="step-wrap" (click)="navigateToStep(1)" style="margin-right: 115px" [ngClass]="{'selected-step-wrap': (step$ | async) >= 1}">
+        <span class="step-title">step 2</span>
+        <span class="step-description">Mapping</span>
+      </div>
+      <div class="step-wrap" (click)="navigateToStep(2)" [ngClass]="{'selected-step-wrap': (step$ | async) >= 2}">
+        <span class="step-title" >step 3</span>
+        <span class="step-description">Cleansing</span>
+      </div>
+    </div>
+  </div>
+
+  <div></div>
+</div>

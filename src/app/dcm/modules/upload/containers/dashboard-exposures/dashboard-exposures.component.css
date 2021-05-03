@@ -1,0 +1,27 @@
+.r-marg {
+  margin-right: 2px;
+}
+.l-marg {
+  margin-left: 2px;
+}
+.displayAll {
+  height: 100%;
+}
+.w-49 {
+  width: 49.7%;
+}
+.w-100 {
+  width: 100%;
+}
+.h-100 {
+  height: 100%;
+}
+.h-400-px {
+  height: 400px;
+}
+.marg-b-5px {
+  margin-bottom: 5px;
+}
+.padd-5-px {
+  padding: 5px;
+}

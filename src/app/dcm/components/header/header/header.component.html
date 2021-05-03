@@ -1,0 +1,49 @@
+<!--<div class="header-container" [ngStyle]="{'margin-left': ((currentRoute$|async).state.url === '/dcm/upload') ? '240px' : '0px'}">
+  <div class="sub-header text-disable" fxLayout="row" fxLayoutAlign="space-between"
+    *ngIf="(currentRoute$|async).state.url !== '/dcm/administration' && (currentRoute$|async).state.url !== '/dcm/upload/import' && (currentRoute$|async).state.url !== '/dcm/upload/mapping'  ">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="accented">
+        <div class="location-font" style="display: inline-block;">
+          <span class="caracteres-font">
+            Total Exposures &nbsp;&nbsp;
+          </span>
+          <span class="number-font" *ngIf="metadataLoaded">{{totalExposureFirstLoad}} &nbsp;</span>
+          <span class="number-font" *ngIf="!metadataLoaded">0 &nbsp;</span>
+        </div>
+        <div class="location-font" style="display: inline-block;">
+            <span class="caracteres-font">
+              |&nbsp;Total TIV&nbsp;&nbsp;
+        </span>
+        <span class="number-font" *ngIf="metadataLoaded">{{metadataLoaded.totalTIV}} &nbsp; &nbsp;</span>
+        <span class="number-font" *ngIf="!metadataLoaded">0 &nbsp; &nbsp;</span>
+        </div>
+      </span>
+  <span><i class="fa fa-exclamation-circle" aria-hidden="true" style="color: gray; font-size: 12px; cursor: pointer;"></i></span>
+
+      <span style="margin-right: 20px; margin-left: 30px;">
+        <nz-select [ngModel]="selectedCurrency" [nzPlaceHolder]="USD">
+        <nz-option nzCustomContent nzLabel={{currency}} nzValue={{currency}}
+          *ngFor="let currency of currencies">
+          {{currency}}
+        </nz-option>
+      </nz-select>
+  </span>
+  <span style="margin-right: 20px;">
+    <nz-select [ngModel]="selectedDivision" [nzPlaceHolder]="'division 1'">
+    <nz-option nzCustomContent nzLabel={{division.viewValue}} nzValue={{division.viewValue}}
+      *ngFor="let division of divisions">
+      {{division.viewValue}}
+    </nz-option>
+  </nz-select>
+</span>
+    </div>
+    &lt;!&ndash; <div fxLayout="row" fxLayoutAlign="space-between center">
+      <span class="excel-button">
+              <div class="small-icon" style="margin-top: 1px; margin-left: 10px;">
+                <img class="small-icon-img" src="assets/images/excel-logo.png" alt="excel extract">
+              </div>
+            </span>
+    </div> &ndash;&gt;
+  </div>
+    </div>-->
+

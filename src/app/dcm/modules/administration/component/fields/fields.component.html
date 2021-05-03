@@ -1,0 +1,228 @@
+<nz-card  >
+
+  <div class="row">
+    <form nz-form [formGroup]="formFields" [nzLayout]="'inline'" class="row">
+      <div class=" col-8 row">
+        <div class="col-6">
+          <nz-form-item nzFlex>
+            <nz-form-label [nzSm]="10" [nzXs]="12" nzRequired nzFor="name"> Name</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="12">
+              <input nz-input formControlName="name" id="name" nzSize="small"/>
+
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-6">
+          <nz-form-item nzFlex>
+            <nz-form-label [nzSm]="10" [nzXs]="12" nzRequired nzFor="shortName"> Short Name</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="12">
+              <input nz-input formControlName="shortName" id="shortName" nzSize="small"/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-6">
+          <nz-form-item nzFlex>
+            <nz-form-label [nzSm]="10" [nzXs]="12" nzRequired nzFor="category">Column Group</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="12">
+              <nz-select style="width: 100%" formControlName="category" id="category"
+                         (ngModelChange)="changeCategory()"
+                         nzSize="small" nzPlaceHolder="Column Group">
+                <nz-option *ngFor="let col of columns" [nzValue]="col" [nzLabel]="col.label"></nz-option>
+              </nz-select>
+
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-6">
+          <nz-form-item nzFlex>
+            <nz-form-label [nzSm]="10" [nzXs]="12" nzRequired nzFor="inCategoryOrder"> Order in Group</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="12">
+              <input nz-input formControlName="inCategoryOrder" id="inCategoryOrder" nzSize="small" disabled [type]="'number'"/>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-6">
+          <nz-form-item nzFlex>
+            <nz-form-label [nzSm]="10" [nzXs]="12" nzRequired nzFor="dataType">Data Type</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="12">
+              <nz-select style="width: 100%" formControlName="dataType" id="dataType"
+                         nzSize="small"
+                         (ngModelChange)="resetDatachecks()"
+                         nzPlaceHolder="Data type">
+                <nz-option *ngFor="let col of types" [nzValue]="col.code" [nzLabel]="col.name"></nz-option>
+              </nz-select>
+
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="col-6">
+          <nz-form-item nzFlex>
+            <nz-form-label [nzSm]="10" [nzXs]="12" nzFor="necessity"> Mapping necessity</nz-form-label>
+            <nz-form-control [nzSm]="14" [nzXs]="12">
+              <nz-select style="width: 100%" formControlName="necessity" id="necessity"
+                         [nzDisabled]="!formFields.value.isMappable"
+                         nzSize="small">
+                <nz-option [nzValue]="'optional'" [nzLabel]="'Optional'"></nz-option>
+                <nz-option [nzValue]="'mandatory'" [nzLabel]="'Mandatory'"></nz-option>
+                <nz-option [nzValue]="'recommended'" [nzLabel]="'Recommended'"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="col-3">
+          <nz-form-item nzFlex>
+            <nz-form-label [nzSm]="18" [nzXs]="12" nzFor="isEditable"> Editable</nz-form-label>
+            <nz-form-control [nzSm]="6" [nzXs]="12">
+              <nz-switch nzSize="small" formControlName="isEditable" id="isEditable"
+                         [nzCheckedChildren]="checkedTemplate"
+                         [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-3">
+          <nz-form-item nzFlex>
+            <nz-form-label [nzSm]="18" [nzXs]="12" nzFor="isMappable">Mappable</nz-form-label>
+            <nz-form-control [nzSm]="6" [nzXs]="12">
+              <nz-switch nzSize="small" formControlName="isMappable" id="isMappable"
+                         [nzCheckedChildren]="checkedTemplate"
+                         [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="col-3">
+          <nz-form-item nzFlex>
+            <nz-form-label [nzSm]="18" [nzXs]="12" nzFor="showInCollapsed">Always displayed</nz-form-label>
+            <nz-form-control [nzSm]="6" [nzXs]="12">
+              <nz-switch nzSize="small" formControlName="showInCollapsed" id="showInCollapsed"
+                         [nzCheckedChildren]="checkedTemplate"
+                         [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-3" *ngIf="showDigit">
+          <nz-form-item nzFlex>
+            <nz-form-label [nzSm]="18" [nzXs]="12" nzFor="skipDigits">Skip Digit</nz-form-label>
+            <nz-form-control [nzSm]="6" [nzXs]="12">
+              <nz-switch nzSize="small" formControlName="skipDigits" id="skipDigits"
+                         [nzCheckedChildren]="checkedTemplate"
+                         [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+
+      </div>
+      <div class="col-4">
+        <mat-list *ngIf="datachecks.length>0">
+          <h3 mat-subheader>Datachecks Rules for the field</h3>
+          <mat-list-item *ngFor="let ds of datachecks" >
+            <div class="row">
+              <p mat-line [className]="ds.level ==='ERROR'?' col-10 errorSpan':'col-10 warnSpan'"  >
+                <span> {{ds?.type?.label}} : {{ds?.type?.description}}</span>
+                <span *ngIf="ds.ref && ds.ref.source"> from {{ds.ref.source}}   </span>
+                <span *ngIf="ds.ref && ds.ref.values.length>0"> from the liste [
+                <span *ngFor="let pr of ds.ref.values;   let i = index">
+             {{pr}}  {{i === ds.ref.values.length - 1 ? '' : ';'}}
+
+            </span>]   </span>
+                <span *ngIf="ds.properties && ds.properties.length>0">
+            [
+            <span *ngFor="let pr of ds.properties;   let i = index">
+             <span *ngIf="pr.value">{{pr.name}} : {{pr.value}} {{i === ds.properties.length - 1 ? '' : ';'}}</span>
+
+            </span>
+            ]
+          </span>
+              </p>
+              <p mat-line class="col-2"> <i class="fas fa-trash" (click)="deletedatachek(ds)" style="color:#D94938"></i></p>
+            </div>
+
+          </mat-list-item>
+
+        </mat-list>
+
+      </div>
+      <div class="col-12 row">
+
+        <div class="col-6 offset-6">
+          <nz-form-item>
+            <nz-form-control>
+              <button nz-button nzType="link" (click)="newDatacheck()" [disabled]="!formFields?.value.dataType"
+                      style="float: right;color: #8C291D ;border: none ;box-shadow: 0 0 0 rgba(0, 0, 0, 0.015)">
+                associate Data Check
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control>
+              <button nz-button nzType="link" (click)="addField()" [nzLoading]="loadingadd"
+                      [disabled]="!formFields.valid"
+                      style="float: right ;color: #16868C ;border: none ;box-shadow: 0 0 0 rgba(0, 0, 0, 0.015)">add field
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <ng-template #checkedTemplate><i nz-icon type="check" style="vertical-align: middle;"></i></ng-template>
+      <ng-template #unCheckedTemplate><i nz-icon type="close" style="vertical-align: middle;"></i></ng-template>
+    </form>
+
+
+  </div>
+
+  <div *ngIf="fields.length>0">
+    <nz-divider nzText="Fields waiting validation" nzOrientation="left" style="margin:5px"></nz-divider>
+
+
+    <nz-table #basicTable [nzData]="fields" style="width: 100%" [nzShowPagination]="false">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Column Group</th>
+        <th>Order in Column Group</th>
+        <th>Data type</th>
+        <th>Necessity</th>
+        <th>Editable</th>
+        <th>Mappable</th>
+        <th></th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.name }}({{data.shortName}})</td>
+        <td>{{data.category?.label}}</td>
+        <td>{{data.inCategoryOrder}}</td>
+        <td>{{data.dataType}}</td>
+        <td>{{data.necessity }}</td>
+        <td>{{data.isEditable ? 'X' : ''}}</td>
+        <td>{{data.isMappable ? 'X' : ''}}</td>
+
+        <td>
+          <a (click)="delete(data)"> <i class="fas fa-trash"></i></a>
+
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+    <div class="row mt-2">
+      <div class="col-4 offset-8">
+
+        <button nz-button nzType="link" style="background:transparent;float: right ; color: #16868C ;border:none" nzSize="small" class="ml-2"
+                (click)="validateAll()">
+          Validate Fields
+        </button>
+        <button nz-button nzType="link" style="background:transparent;float: right ; color : #D94938 ; border:none"
+                nzSize="small" (click)="clearAll()">
+          Clear Fields
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+</nz-card>

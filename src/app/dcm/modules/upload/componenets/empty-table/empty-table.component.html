@@ -1,0 +1,117 @@
+<div id="mySidenav" class="sidenav body template-bg template-border radius-all"
+     style="float: right; z-index:1; position:relative">
+
+
+  <!-- <a id="sideBar" (click)="onShowSideBar()"><i class=" fa fa-bars fa-fw" aria-hidden="true"></i></a>
+  <a href="#/dcm/upload" id="setting"><i class="fa fa-user fa-fw" aria-hidden="true"></i></a>
+  <a (click)="goToAdmin()" id="helps"  nz-popover nzContent="Field Management" >
+    <i class="fa fa-cog fa-spin fa-fw" aria-hidden="true"  ></i>
+  </a> -->
+</div>
+<div style="display: inline-block; width: 96%; height: 100%; z-index:1; position:relative;" class="d-aggrid">
+  <ag-grid-angular
+    #agGrid
+    style="width: 100%; height : calc(100vh - 130px);"
+    id="myGrid"
+    class="ag-theme-balham"
+    [sideBar]="false"
+    [modules]="modules"
+    [gridOptions]="gridOptions"
+    [defaultColDef]="defaultColDef"
+    [pivotPanelShow]="pivotPanelShow"
+     [icons]="icons"
+    [enableRangeSelection]="true"
+    [suppressRowClickSelection]="true"
+     [pagination]="true"
+    [suppressPaginationPanel]="true"
+
+
+    [animateRows]="true"
+    [frameworkComponents]="frameworkComponents"
+    [debug]="true"
+    (gridReady)="onGridReady($event)"
+  >
+  </ag-grid-angular>
+
+</div>
+<div style="display: inline-block; float: right; z-index:1; position:fixed; margin-top: 20px;">
+  <a (click)="onManageColumn()"><mat-icon style=" margin-right: 4px; font-size: 30px;">menu</mat-icon></a>
+</div>
+
+    <nz-modal
+      [(nzVisible)]="isManageColumn"
+      [nzTitle]="modalTitleManageColumn"
+      [nzContent]="modalContentManageColumn"
+      [nzFooter]="modalFooterManageColumn"
+      (nzOnCancel)="handleOutsideClick()"
+      [nzBodyStyle]="{'overflow': 'scroll'}"
+    >
+      <ng-template #modalTitleManageColumn>Manage Columns</ng-template>
+
+      <ng-template #modalContentManageColumn style="overflow: scroll;">
+
+        <div  class="example-list mt-20" >  
+          <section class="example-section">
+            <div class="search-box">
+              <input #myInput class="form-control" [(ngModel)]="name"  style="height: 30px;font-size: 12px;text-align: center;padding: 0.5rem;background: #cccccc52">
+              <div class="search-box-placeholder-wrapper">
+                <mat-icon class="search-box-placeholder">search</mat-icon>
+              </div>
+            </div>
+          </section>
+          <section class="example-section p-3">
+            <mat-checkbox class="example-margin" (change)="setAllTree($event.checked)">Select All</mat-checkbox>
+          </section>
+       
+          <mat-accordion class="example-headers-align" multi> <!-- categoriesFilter(task) -->
+  <mat-expansion-panel *ngFor="let line of categoriesFilter(task) ; let i = index">
+   
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-checkbox class="example-margin"
+              [checked]="allComplete"
+              (click)="$event.stopPropagation()" 
+                (keydown)="$event.stopPropagation()"
+              (change)="setAll($event.checked, i)"
+              >
+            </mat-checkbox>
+      </mat-panel-title>
+      <mat-panel-description>
+        <span >
+          {{line.name}}
+        </span>
+       
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    
+      <ul cdkDropList class="example-list pl-4 pr-2" (cdkDropListDropped)="drop($event,i)"> <!--  line.subtask -->
+        <li class="example-box pr-2 pl-2 " [class.highlight]="subtask.checked" *ngFor="let subtask of dataFiltered(line)" cdkDrag>
+          <mat-checkbox [(ngModel)]="subtask.checked" class="mt-2"
+                        (ngModelChange)="updateAllComplete()"
+                        >
+                        <span (click)="onClickSheet($event, line.name, subtask.name)" class="w-100 drag-content">
+                          {{subtask.name}}
+                        </span>
+            
+          </mat-checkbox>
+        </li>
+      </ul>
+    
+  </mat-expansion-panel>
+
+          </mat-accordion>
+          
+        
+        
+
+              
+      </div>
+      </ng-template>
+
+      <ng-template #modalFooterManageColumn>
+        <button nz-button class="cancel-btn" nzType="default" (click)="handleCancelManageColumn()">Cancel</button>
+        <button nz-button class="reset-btn" (click)="handleResetManageColumn()">Reset</button>
+        <button nz-button class="save-btn" (click)="handleOkManageColumn()" [nzLoading]="isConfirmLoading">Save</button>
+      </ng-template>
+    </nz-modal>

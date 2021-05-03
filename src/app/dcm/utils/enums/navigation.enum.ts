@@ -1,0 +1,6 @@
+export enum IMPORT_NAVIGATION{
+  IMPORT,
+  MAPPING,
+  CLEANSING,
+  MATCHING
+}

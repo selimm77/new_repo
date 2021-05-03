@@ -1,0 +1,50 @@
+
+<div class="danger" id="id-errors" *ngIf="responseModel && metadataModel">
+  <div class="row">
+    <div class="col-md-12" style="width: 500px;">
+      <span class="span-errors" style="color: rgb(221, 0, 0); font-size: 16px; font-weight: bold;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp;&nbsp;Total Errors: &nbsp;</span><a class="number-errors" style="color: rgb(221, 0, 0); font-size: 13px; font-weight: bold;cursor: default">{{metadataModel.totalErrors}}&nbsp;&nbsp;</a>
+      &nbsp;&nbsp;<a class="number-errors" style="color: #555555;; font-size: 13px;">{{metadataModel.uniqueErrorLines}}&nbsp;</a><span class="span-errors" style="font-size: 16px; color: #555555;">lines identified &nbsp;&nbsp;</span>
+      <div style="display: inline-block; margin-left: 10px;">
+        <button mat-button [matMenuTriggerFor]="menu" #trigger="matMenuTrigger" style="background-color: rgb(248, 248, 248); height: 35px; border-radius: 70px;">
+          <i class="fa fa-eye" style="margin-right: 7px;"></i>
+          <i class="fa fa-chevron-down" aria-hidden="true"></i>
+        </button>
+        <!-- [hasBackdrop]="false" -->
+        <mat-menu #menu="matMenu" class="menu-form-wrapper" >
+
+          <div class="notification-container" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()" style="overflow: scroll;">
+
+            <form class="menu-form" style="margin-left: -40px;">
+
+              <span style="text-transform: uppercase; margin-left: 50px; padding-bottom: 50px;">
+                <i class="fa fa-eye" id="head-fa" style="color: #919191; margin-left: 20px; margin-top: 10px;"></i>
+                display errors
+              </span>
+
+              <ul style="list-style-type:none; margin-left: 15px;">
+                <li  *ngFor="let codefield of responseModel">
+                  <a *ngIf="activateBtn == false || (activateBtn == true && colId != codefield.fieldCode)" class="notification" (click)="onSelectionErrors($event)">
+                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                    <span class="fieldCode-cl"
+                      [id]="codefield.fieldCode">{{codefield.fieldName}}:</span>
+                    <span class="badge">{{codefield.errorsNumber}}</span>
+                  </a>&nbsp;&nbsp;&nbsp;
+                  <a *ngIf="activateBtn == true && colId == codefield.fieldCode" class="notification-activate" (click)="onSelectionErrors($event)">
+                    <i class="fa fa-eye" style="color: #f50000;"></i>
+                    <span class="fieldCode-cl-activate"
+                      [id]="codefield.fieldCode">{{codefield.fieldName}}</span>:
+                    <span class="badge">{{codefield.errorsNumber}}</span>
+                  </a>
+                </li>
+            </ul>
+
+            </form>
+
+          </div>
+
+        </mat-menu>
+      </div>
+
+</div>
+  </div>
+</div>

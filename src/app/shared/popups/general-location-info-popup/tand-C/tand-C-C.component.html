@@ -1,0 +1,75 @@
+<nz-tabset>
+    <nz-tab  *ngFor="let tab of tabModel" [nzTitle]="tabTitle" >
+      <ng-container *ngFor="let tabContent of tab.content">
+        <div class="tand-C-tab-supheader" style="background-color: white;padding: 25px;margin: 20px 20px;">
+          <nz-row>
+            <nz-col>
+              <label class="tand-c-checkbox" nz-checkbox style="font-size: 20px" [(ngModel)]="tabContent.header.checked">{{tabContent.header.label}}</label>
+            </nz-col>
+          </nz-row>
+          <nz-row *ngIf="tabContent.header.checked">
+            <nz-col *ngFor="let child of tabContent.header.childs" nzSpan="4" nzOffset="1">
+              <label class="tand-c-checkbox" nz-checkbox [(ngModel)]="child.checked">{{child.label}}</label>
+            </nz-col>
+          </nz-row>
+        </div>
+        <div class="insured-tab-content" style="margin: 0 20px;" *ngIf="tabContent.header.checked">
+          <nz-row>
+<!--            limit-->
+            <nz-col [nzSpan]="8" style="background-color: white;padding: 30px;height: 100%">
+              <div style="margin-bottom: 10px">
+                <span style="font-size: 18px;font-weight: bold;">{{tabContent.body[0].label}}</span>
+              </div>
+              <div>
+                <nz-row>
+                  <nz-col *ngFor="let valItem of tabContent.body[0].items"  [nzSpan]="valItem.colSpan" [nzOffset]="valItem.offset ? valItem.offset : 0" style="margin-bottom: 20px">
+                    <ng-container [ngSwitch]="valItem.type">
+                      <nz-select  [nzPlaceHolder]="getPlaceHolder(valItem)" nzShowSearch nzAllowClear nzCustomContent *ngSwitchCase="'list'" class="my-select"
+                                  [(ngModel)]="locationData[valItem.field_code]"
+                                  [disabled]="valItem.disabled"  style="background-color: #f4f6fc;width: 100%;">
+                        <nz-option nzLabel={{o}} nzValue={{o}}
+                                   *ngFor="let o of getReferenceData(valItem.field_code)">
+                          {{o}}
+                        </nz-option>
+                      </nz-select>
+                      <input *ngSwitchDefault [type]="['Value', 'FI / 100%'].includes(valItem.label) ? 'number' : 'text'" [(ngModel)]="locationData[valItem.field_code]"
+                             [placeholder]="getPlaceHolder(valItem)" style="background-color: #f4f6fc;height: 30px;width: 100%;padding-left: 11px" />
+                    </ng-container>
+                  </nz-col>
+                </nz-row>
+              </div>
+            </nz-col>
+<!--            Deductible-->
+            <nz-col  [nzSpan]="15" [nzOffset]="1" style="background-color: white;padding: 30px">
+              <div style="margin-bottom: 10px">
+                <span style="font-size: 18px;font-weight: bold;">{{tabContent.body[1].label}}</span>
+              </div>
+              <div>
+<!--                First row-->
+                <nz-row style="margin-bottom: 10px">
+                  <nz-col *ngFor="let valItem of tabContent.body[1].subContent.header.items"  [nzSpan]="valItem.colSpan" [nzOffset]="valItem.offset ? valItem.offset : 0">
+                    <input [type]="valItem.label === 'FI / 100%' ? 'number' : 'text'" [placeholder]="getPlaceHolder(valItem)" nzSize="large" style="background-color: #f4f6fc;height: 30px;width: 100%;padding-left: 11px" />
+                  </nz-col>
+                </nz-row>
+<!--                Deductible body-->
+                <nz-row>
+                  <anms-deductible-item [model]="[tabContent.body[1].subContent.body]" [locationData]="locationData"></anms-deductible-item>
+                </nz-row>
+              </div>
+            </nz-col>
+          </nz-row>
+        </div>
+      </ng-container>
+      <ng-template #tabTitle>
+        <nz-row>
+          <nz-col nzSpan="5" style="height: 55px">
+            <img [src]="tab.supHeader.icon" style="width: 100%;height: 100%">
+          </nz-col>
+          <nz-col nzSpan="18" nzOffset="1" style="height: 55px">
+            <span>{{tab.supHeader.label}}</span>
+          </nz-col>
+        </nz-row>
+      </ng-template>
+    </nz-tab>
+  </nz-tabset>
+<!--</div>-->

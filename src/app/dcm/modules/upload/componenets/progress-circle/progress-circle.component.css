@@ -1,0 +1,23 @@
+.progress-circle-container {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  cursor: pointer;
+}
+
+.progress-label {
+  padding: 0 5px;
+  letter-spacing: 0.2px;
+  text-transform: uppercase; 
+  opacity: 1;
+}
+
+.progress-perc {
+  opacity: 1;
+  padding: 0 5px;
+}
+
+.font-icon-medium {
+  color: #67BECD;
+  font-size: xx-large;
+}

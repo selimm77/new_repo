@@ -1,0 +1,13 @@
+<!-- Durpricated -->
+<div style="height: 100%;" class="scrollable-table mat-elevation-z1">
+       
+         <div *ngIf="!isLoading()">
+        <anms-empty-table></anms-empty-table>
+    </div>
+    <div *ngIf="isLoading()">
+        <anms-shared-location-grid  [loading]="laoding" [editable]='true' [metadata]="metadata"
+          [headers]="headers" [exposures]="exposures" [datachecks]="datachecks"
+          [prefix]="headerPrefix" [errorsInfo$]='errosInfos$ | async' (editLocationButtonClick)="onEditRowClick($event)"
+          (deleteLocationButtonClick)="onDeleteRowClick($event)" (geocodeLocationButtonClick)="onGeocodeRowClick($event)"></anms-shared-location-grid>
+    </div> 
+</div>

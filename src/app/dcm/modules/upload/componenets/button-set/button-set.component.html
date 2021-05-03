@@ -1,0 +1,216 @@
+<div class="button-header-wrapper">
+  <div *ngIf="!(csMetadata$ | async)" style="display: flex; align-items: center">
+    <!-- 1758 Location out of 1758 | Total TIV: 578 478 475 064 -->
+    {{selectedLocation}} Location out of {{totalLocation}} | Total TIV: {{totalTiv}}
+    <div class="icon-hover">
+      <span [nz-tooltip]="description" class="material-icons">
+        error_outline
+      </span>
+
+      <ng-template #description>
+        <!-- PD: 234 234 354 021 <br>
+        BI: 344 344 124 043 -->
+        PD : {{pdValue}} <br>
+        <span style="margin-right: 0.65rem;">BI</span>: {{biValue}}
+      </ng-template>
+    </div>
+   
+   
+  </div>
+
+  <div *ngIf="(csMetadata$ | async)" style="display: flex; align-items: center">
+    <!-- 1758 Location out of 1758 | Total TIV: 578 478 475 064 -->
+    {{(csMetadata$ | async).selectedLocations}} Location out of {{(csMetadata$ | async).totalLocations}} | Total TIV: {{numberWithCommas((csMetadata$ | async).totalTIV)}}
+    <div class="icon-hover mr-3">
+      <span [nz-tooltip]="description" class="material-icons">
+        error_outline
+      </span>
+      <ng-template #description>
+        <!-- PD: 234 234 354 021 <br>
+        BI: 344 344 124 043 -->
+        PD : {{numberWithCommas((csMetadata$ | async).totalPD)}} <br>
+        <span style="margin-right: 0.65rem;">BI</span>: {{numberWithCommas((csMetadata$ | async).totalBI)}}
+      </ng-template>
+    </div>
+    <ng-container *ngIf="cleansing">
+      <nz-select   class="a-dropdown-default" [(ngModel)]="currency">
+        <nz-option *ngFor="let cur of currencies" [nzValue]="cur.value" [nzLabel]="cur.viewValue"></nz-option>
+      </nz-select>
+  
+      <nz-select class="a-dropdown-default" style="margin-left: 10px" [(ngModel)]="division">
+        <nz-option *ngFor="let cur of divisionOptions" [nzValue]="cur.value" [nzLabel]="cur.viewValue"></nz-option>
+      </nz-select>
+    </ng-container>
+   
+
+  </div>
+
+  <div style="display: flex; align-items: center">
+    <button nz-button *ngIf="!cleansing" nzType="default" style="margin-left: 10px" nzShape="round" (click)="onCurrentLocationClick()"
+            class="a-default-button">
+      <div style="display: flex; align-items: center; margin-top: 4px;">
+        <span style="font-size: 19px" class="material-icons">sync</span> RETRIEVE DATA
+      </div>
+    </button>
+
+    <button nz-button *ngIf="(!cleansing) && (savedUrl === '')" nzType="default" nzShape="round" class="a-default-button" style="width: 200px; margin-left: 10px" (click)="fileInput.click()" >
+      <div style="display: flex; align-items: center; margin-top: 4px; justify-content: space-around; width: 100%">
+        <span style="font-size: 19px" class="material-icons">save_alt</span> <span>IMPORT</span>
+      </div>
+    </button>
+    <button nz-button *ngIf="(!cleansing) && (savedUrl !== '')"  nzType="default" nzShape="round" class="a-default-button" style="width: 200px; margin-left: 10px" (click)="onRestoreSession()" ><i
+      class="fas fa fa-download"></i>
+      Import
+    </button>
+    <input style="display: none" #attachments type="file" (change)="onFileSelected($event)" #fileInput multiple="true">
+
+    <!-- (click)="onImportClick()"  *ngIf="(laodingCleansing$ | async) || (laodedCleansing$ | async)"-->
+    <button nz-button nzType="default" nzShape="round" style="margin-left: 10px" (click)="onAddLocationClick()" class="a-default-button">
+      <i class="fas fa-map-marker-alt"></i> ADD LOCATION
+    </button>
+    <!-- <span  class="ms-1"><i class="fa fa-lock" aria-hidden="true" style="font-size: 25px; margin-left: 25px; opacity: 60%; margin-top: 4px; cursor: pointer;"></i></span> -->
+
+    <div *ngIf="!cleansing" style="margin-left: 15px">
+      <button mat-button [matMenuTriggerFor]="menu" style="padding: 3px !important; min-width: 20px; width: fit-content; border-radius: 20px !important;">
+        <i class="fa " aria-hidden="true"><mat-icon  style="font-size: 25px; opacity: 60%;">lock_open</mat-icon></i>
+      </button>
+
+      <mat-menu #menu="matMenu" class="menu-form-wrapper" style="width: 400px;">
+
+        <div class="notification-container" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()" style="overflow: scroll;">
+
+          <form class="menu-form">
+
+            <ul style="list-style-type:none; margin-left: -15px;">
+              <li style="padding-bottom: 20px;">
+                <a *ngIf="activateBtn === false" class="notification">
+                  <div style=" display: inline-block; margin-top: -25px;">
+                    <i class="fa fa-users" aria-hidden="true" style="font-size: 20px;"></i>
+                  </div>
+                  <div style=" display: inline-block;">
+                  <span class="badge"  style=" display: block;">File unlocked for everyone</span>
+                  <span class="badge"  style=" display: block;">Users currentely using the file:</span>
+                  </div>
+                  <div class="lock-ic" (click)="onChangeAcces($event)" style="background-color: rgb(231, 231, 255); margin-left: 360px;">
+                    <span class="ms-1" ><i class="fa fa-lock" aria-hidden="true" style="margin-top: -7px; font-size: 9px; color: blue; cursor: pointer; background-color: white; border-radius: 45%; padding: 3px; margin-left: 0;"></i></span>
+                  </div>
+                </a>
+                <a *ngIf="activateBtn !== false" class="notification">
+                  <div style=" display: inline-block; margin-top: -25px;">
+                    <i class="fa fa-users" aria-hidden="true" style="font-size: 20px;"></i>
+                  </div>
+                  <div style=" display: inline-block;">
+                  <span class="badge"  style=" display: block;">File loked for everyone</span>
+                  <span class="badge"  style=" display: block;">Users currentely using the file:</span>
+                  </div>
+                  <div class="lock-ic" (click)="onChangeAcces($event)" style="background-color: rgb(231, 231, 255);  margin-left: 360px;">
+                    <span  class="ms-1" ><i class="fa fa-lock" aria-hidden="true" style="margin-top: -7px; font-size: 9px; color: white; cursor: pointer; background-color: blue; border-radius: 45%; padding: 3px;  margin-left: 25px;"></i></span>
+                  </div>
+                </a>
+                    <!-- <div class="circle">PW</div> -->
+              </li>
+
+
+              <li>
+                <a class="notification">
+                  <div style=" display: inline-block;">
+                    <div class="circle">PW</div>
+                  </div>
+                  <div style=" display: inline-block; margin-left: 25px;">
+                    <span class="fieldCode-cl" style=" display: block;">Mary Brown (You)</span>
+                  </div>
+                  <div style=" display: inline-block; margin-left: 135px;">
+                    <nz-select class="a-dropdown-default" [nzPlaceHolder]="'Can edit'" style="width: 100px;" >
+                      <nz-option nzCustomContent nzLabel={{element.viewValue}} nzValue={{element.viewValue}}
+                        *ngFor="let element of elements">
+                        {{element.viewValue}}
+                      </nz-option>
+                    </nz-select>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a class="notification">
+                  <div style=" display: inline-block;">
+                    <div class="circle" style="background-color: rgb(235, 104, 57);">MB</div>
+                  </div>
+                  <div style=" display: inline-block; margin-left: 25px;">
+                    <span class="fieldCode-cl" style=" display: block;">Paul Wright</span>
+                  </div>
+                  <div style=" display: inline-block; margin-left: 174px;">
+                    <nz-select class="a-dropdown-default" [ngModel]="activateBtn ? 'Read only' : 'Can edit'" [ngModelOptions]="{standalone: true}" [nzPlaceHolder]="activateBtn ? 'Read only' : 'Can edit'" style="width: 100px;" >
+                      <nz-option nzCustomContent nzLabel={{element.viewValue}} nzValue={{element.viewValue}}
+                                 *ngFor="let element of elements">
+                        {{element.viewValue}}
+                      </nz-option>
+                    </nz-select>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a class="notification">
+                  <div style=" display: inline-block;">
+                    <div class="circle" style="background-color: rgb(152, 42, 255);">MB</div>
+                  </div>
+                  <div style=" display: inline-block; margin-left: 25px;">
+                    <span class="fieldCode-cl" style=" display: block;">Nathalie Dulac</span>
+                  </div>
+                  <div style=" display: inline-block; margin-left: 154px;">
+                    <nz-select class="a-dropdown-default" [ngModel]="activateBtn ? 'Read only' : 'Can edit'" [ngModelOptions]="{standalone: true}"
+                               [nzPlaceHolder]="activateBtn ? 'Read only': 'Can edit' " style="width: 100px;" >
+                      <nz-option nzCustomContent nzLabel={{element.viewValue}} nzValue={{element.viewValue}}
+                                 *ngFor="let element of elements">
+                        {{element.viewValue}}
+                      </nz-option>
+                    </nz-select>
+                  </div>
+                </a>
+              </li>
+          </ul>
+          </form>
+        </div>
+      </mat-menu>
+    </div>
+
+    <span *ngIf="!cleansing"><i class="fas fa-globe-americas" style="margin-left: 15px ;font-size: 25px; cursor: pointer;"></i></span>
+    <span (click)="onExportDisplayedData()" [nz-tooltip]="emp" ><i class="img-export"><img src="assets/icons/excel-emp.png" alt="image" /></i>
+      <ng-template #emp >
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Extract <br> displayed columns
+       </ng-template>
+    </span>
+    <span (click)="onExportAllData()" [nz-tooltip]="grey"><i class="img-export"><img src="assets/icons/excel-grey.png" alt="image"  /></i>
+      <ng-template #grey>
+        &nbsp; &nbsp; Extract <br> all columns
+       </ng-template>
+    </span>
+  </div>
+
+  <!--*ngIf="!cleansing" <button nz-button nzType="primary" disabled><i class="far fa-map"></i> Geocode</button>(click)="onImportNewClick()"
+  <button nz-button nzType="primary" disabled><i class="fas fa-globe"></i> Map Occupancy</button>
+ -->
+
+</div>
+
+<nz-modal
+    [(nzVisible)]="isVisibleRestoreSession"
+    [nzTitle]="modalTitleRestoreSession"
+    [nzContent]="modalContentRestoreSession"
+    [nzFooter]="modalFooterRestoreSession"
+    (nzOnCancel)="handleCancelRestoreSession()"
+    >
+    <ng-template #modalTitleRestoreSession>Data Capture Manager</ng-template>
+
+    <ng-template #modalContentRestoreSession>
+      <p style="color: red;">
+        <mat-icon>error_outline</mat-icon>
+        Some modifications have been made on exposures.
+      </p>
+      <p>Do you want to retrive the last session's work?</p>
+    </ng-template>
+
+    <ng-template #modalFooterRestoreSession>
+      <button nz-button nzType="default" class="cancel-btn" (click)="fileInput.click()" (click)="handleCancelRestoreSession()">No</button>
+      <button nz-button class="confirm-btn" nzType="primary" (click)="handleOkRestoreSession()" [nzLoading]="isConfirmLoading">Yes</button>
+      <!-- <input style="display: none" #attachments type="file" (change)="onFileSelected($event)" #fileInput multiple="true"> -->
+    </ng-template>
+    </nz-modal>

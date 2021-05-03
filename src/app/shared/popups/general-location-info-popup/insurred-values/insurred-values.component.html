@@ -1,0 +1,83 @@
+<div style="padding: 1px 0">
+  <div class="insured-tab-header" style="background-color: white;padding: 10px;margin: 20px 10%;">
+    <nz-row style="padding: 0 15%">
+      <nz-col nzSpan="1" style="height: 55px">
+        <img [src]="tabModel.header.icon" style="width: 100%;height: 35px">
+      </nz-col>
+      <nz-col *ngFor="let item of tabModel.header.items; let i= index" [nzSpan]="i === 0 ? 14 :  3" nzOffset="1" style="height: 35px">
+        <ng-container [ngSwitch]="item.type">
+          <nz-select  [nzPlaceHolder]="getPlaceHolder(item)" nzShowSearch nzAllowClear nzCustomContent *ngSwitchCase="'list'" class="my-select"
+                      (ngModelChange)="checkMondatory($event, item.field_code)" [(ngModel)]="locationData[item.field_code]"
+                      [disabled]="item.disabled" [ngStyle]="{'border': mondatories[item.field_code] ? '1px solid red' : ''}" style="background-color: #f4f6fc;width: 100%;">
+            <nz-option nzLabel={{o}} nzValue={{o}} [nzHide]="true"
+                       *ngFor="let o of getReferenceData(item.field_code)">
+              {{o}}
+            </nz-option>
+          </nz-select>
+          <input *ngSwitchDefault type="text" only-number  [ngModel]="locationData[item.field_code]" (ngModelChange)="checkMondatory($event, item.field_code)"
+                 [ngStyle]="{'border': mondatories[item.field_code] ? '1px solid red' : ''}" [placeholder]="getPlaceHolder(item)" style="background-color: #f4f6fc;height: 100%;width: 100%" />
+        </ng-container>
+      </nz-col>
+    </nz-row>
+  </div>
+  <div class="insured-tab-content" style="margin: 0 10%;margin-bottom: 20px;">
+    <nz-row>
+      <nz-col *ngFor="let val of tabModel.body;let j = index"
+              [nzSpan]="j == 0 ? 12 : 11" [nzOffset]="j"
+              style="padding: 15px 30px;background-color: white">
+        <div style="margin-bottom: 10px">
+          <span style="font-size: 18px;font-weight: bold;">{{val.label}}</span>
+        </div>
+        <div style="width: 100%; height: 40px; margin-bottom: 10px" *ngFor="let valItem of val.items; let k=index" [ngStyle]="{'margin-top' : (k==3 && j==1) ? '160px' : ''}">
+          <nz-row>
+            <nz-col *ngFor="let it of valItem;let k = index" [nzSpan]="k === 0 ? 12 :  5" [nzOffset]="k === 0 ? 0 :  1">
+              <ng-container [ngSwitch]="it.type">
+                <nz-select  [nzPlaceHolder]="getPlaceHolder(it)" nzShowSearch nzAllowClear nzCustomContent *ngSwitchCase="'list'" class="my-select"
+                            (ngModelChange)="checkMondatory($event, it.field_code, it.parent_field)" [(ngModel)]="locationData[it.field_code]"
+                            [disabled]="it.disabled" [ngStyle]="{'border': mondatories[it.field_code] ? '1px solid red' : ''}" style="background-color: #f4f6fc;width: 100%;">
+                  <nz-option nzLabel={{o}} nzValue={{o}} nzHide
+                             *ngFor="let o of getReferenceData(it.field_code)">
+                    {{o}}
+                  </nz-option>
+                </nz-select>
+<!--                | unitPipe : locationData[it.child_field];locationData[it.field_code]=$event-->
+                <input *ngSwitchCase="'inputNumber'" type="text" only-number [(ngModel)]="locationData[it.field_code]" (ngModelChange)="checkMondatory($event, it.field_code)"
+                       [ngStyle]="{'border': mondatories[it.field_code] ? '1px solid red' : ''}" [placeholder]="getPlaceHolder(it)"  style="background-color: #f4f6fc;height: 33px;width: 100%;padding-left: 11px" />
+                <div *ngSwitchCase="'split'" style="background-color: #f4f6fc;height: 33px;padding-left: 11px;border-bottom: 1px solid blue">
+                  <span style="font-weight: bold;vertical-align: sub">{{it.label}} : </span> <span *ngIf="pdSplitVisibility" style="font-weight: bold;color: blue;vertical-align: sub"> {{pdSplitValue ? 'Yes' : 'NO'}}</span>
+                </div>
+                <input *ngSwitchDefault nz-input [(ngModel)]="locationData[it.field_code]" (ngModelChange)="checkMondatory($event, it.field_code)"
+                       [ngStyle]="{'border': mondatories[it.field_code] ? '1px solid red' : ''}" [placeholder]="getPlaceHolder(it)" nzSize="large" style="background-color: #f4f6fc;height: 100%" />
+              </ng-container>
+            </nz-col>
+          </nz-row>
+        </div>
+      </nz-col>
+    </nz-row>
+  </div>
+  <div class="insured-footer" style="background-color: white;padding: 25px;margin: 20px 10%;margin-bottom: 20px">
+    <nz-row>
+      <nz-col nzSpan="24" style="font-size: 20px;font-weight: bold;margin-bottom: 20px;">
+        <span style="font-size: 20px;font-weight: bold;">{{tabModel.footer.title}}</span>
+      </nz-col>
+      <nz-col *ngFor="let headerItem of tabModel.footer.content, let i= index"
+              [nzSpan]="headerItem.colSpan" [nzOffset]="headerItem.offset">
+        <ng-container [ngSwitch]="headerItem.type">
+          <nz-select  [nzPlaceHolder]="getPlaceHolder(headerItem)" nzShowSearch nzAllowClear nzCustomContent *ngSwitchCase="'list'" class="my-select"
+                      [(ngModel)]="locationData[headerItem.field_code]"  (ngModelChange)="checkMondatory($event, headerItem.field_code)"
+                      [disabled]="headerItem.disabled" [ngStyle]="{'border': mondatories[headerItem.field_code] ? '1px solid red' : ''}" style="background-color: #f4f6fc;width: 100%;">
+            <nz-option nzLabel={{o}} nzValue={{o}} nzHide
+                       *ngFor="let o of getReferenceData(headerItem.field_code)">
+              {{o}}
+            </nz-option>
+
+          </nz-select>
+          <input *ngSwitchCase="'inputNumber'" type="text" only-number [(ngModel)]="locationData[headerItem.field_code]" (ngModelChange)="checkMondatory($event, headerItem.field_code)"
+                 [ngStyle]="{'border': mondatories[headerItem.field_code] ? '1px solid red' : ''}" [placeholder]="getPlaceHolder(headerItem)"  style="background-color: #f4f6fc;height: 33px;width: 100%;padding-left: 11px" />
+          <input *ngSwitchDefault nz-input [(ngModel)]="locationData[headerItem.field_code]" (ngModelChange)="checkMondatory($event, headerItem.field_code)"
+                 [ngStyle]="{'border': mondatories[headerItem.field_code] ? '1px solid red' : ''}" [placeholder]="getPlaceHolder(headerItem)" nzSize="large" style="background-color: #f4f6fc;height: 100%" />
+        </ng-container>
+      </nz-col>
+    </nz-row>
+  </div>
+</div>

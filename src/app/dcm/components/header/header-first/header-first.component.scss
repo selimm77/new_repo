@@ -1,0 +1,175 @@
+@import '../../../../../styles-variables';
+
+.btn-currency {
+  z-index:1;
+  position:relative;
+  display:inline-block;
+  height:21.4px;
+  width: 50px;
+  border-radius: 5px 0px 0px 5px;
+  font-family: 'Arial Narrow',
+  sans-serif;
+}
+#select-currency, .btn-currency {
+  background-color: white;
+  transition-duration: 0.4s;
+}
+#select-currency {
+  margin-left: -1px;
+  width: 68px;
+  height:21.5px;
+  border-radius: 5px 5px 5px 5px;
+  border: 1px solid rgb(106, 198, 201);
+  position:relative;
+  display:inline-block;
+  margin-left: -50px;
+}
+option {
+  font-size: 13px;
+  border-radius: 0px 5px 5px 0px;
+  border: 1px solid rgb(106, 198, 201);
+}
+
+#select-currency:hover, .btn-currency:hover{
+   background-color:rgb(235, 247, 255);
+   color: rgb(12, 171, 177);
+   border: 1px solid rgb(106, 198, 201);
+}
+
+option:hover {
+  background-color: white;
+}
+
+
+.sub-header {
+  padding: 7px 14px;
+
+  .accented {
+    margin-left: 14px;
+  }
+}
+::ng-deep .mat-select-arrow {
+  color: #0292AB;
+}
+
+.excel-button {
+
+  margin: 5px 5px;
+  .small-icon {
+    height: 31px;
+    width: 31px;
+
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .small-icon-img {
+      height: 100%;
+
+      &:hover {
+        height: 90%;
+      }
+    }
+
+    :hover {
+      cursor: pointer;
+      opacity: 0.8;
+      transition: all 0.2s ease-in-out;
+    }
+
+  }
+}
+
+::ng-deep .font-header {
+  font-weight: bold;
+  font-size: 12px;
+  font-family: Calibri;
+  height: 25px;
+  padding: 2px;
+}
+
+.number-font {
+  color: rgb(24, 160, 184);
+  letter-spacing: -0.5px;
+  font-size: 15px;
+  font-family: 'Arial Black';
+}
+
+.caracteres-font {
+  color: #9b9b9b;
+  font-size: 18px;
+  font-family: 'Tw Cen MT', sans-serif;
+  letter-spacing: -0.3px;
+  text-transform: full-width;
+  transform: scale(1.0, 0.6);
+}
+
+.font-pipe {
+  color: #000;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+::ng-deep .ant-select-selection.ant-select-selection--single {
+  border-radius: 0px !important;
+}
+
+::ng-deep .svg.ng-tns-c21-3 {
+  color: #67BECD;
+}
+
+::ng-deep .ant-select-arrow-icon {
+  color: #0292AB;
+}
+
+::ng-deep .ant-select-selection-selected-value.ng-tns-c22-4.ng-star-inserted {
+  color: #0292AB !important;
+}
+
+.excel-icon {
+  color: green;
+  font-size: xx-large;
+  margin-left: 5px;
+}
+
+.font-icon-medium {
+  color: #67BECD;
+  font-size: large;
+}
+
+.font-icon-medium:hover {
+  color: #0292AB;
+  font-size: x-large;
+}
+
+.active-icon {
+  color: #0292AB;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 15px;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.05);
+
+  .header {
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+  }
+
+  .header-style-active {
+  }
+}
+
+.ng-tns-c20-3.ng-tns-c22-4.ant-select-selection__rendered {
+  padding: 0px !important;
+}
+
+::ng-deep ul.nav.nav-tabs {
+  padding: 0px !important;
+}

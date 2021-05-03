@@ -1,0 +1,15 @@
+<div style="float: left;">
+    <select (change)="onSelectElement($event)" id="select-division" [(ngModel)]="selectedDivision">
+      <option *ngFor="let div of divisions" [value]="div.name">{{div.name}}</option>
+    </select>
+    
+    <button class="btn" (click)="onClickFilter()" name="checkbox" *ngIf="!isFilter">
+      <i>
+        <img src="assets/icons/filters/filter-b.png" alt="image" />
+      </i>
+    </button>
+    <button class="btn" (click)="onClickFilter($event)" *ngIf="isFilter">
+      <i>
+        <img src="assets/icons/filters/filter-f.png" alt="image" /></i>
+    </button>
+  </div>

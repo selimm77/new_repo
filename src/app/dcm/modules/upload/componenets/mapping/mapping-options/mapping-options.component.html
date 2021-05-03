@@ -1,0 +1,81 @@
+<div class="header-option-wrapper">
+  <div class="option">
+    <small class="dropdown-description">Division</small>
+    <nz-select nzShowSearch [(ngModel)]="mappingParamaters.division" class="ant-select-secondary" 
+               (ngModelChange)="onParamaterChanged()"  nzAllowClear nzCustomContent> 
+      <nz-option id="division-op" *ngFor="let option of divisonsOptions" nzLabel="{{option.value}}" [nzValue]="option.key"></nz-option>
+    </nz-select>
+  </div>
+
+  <div class="option">
+    <small class="dropdown-description">TIV</small>
+    <nz-select [(ngModel)]="mappingParamaters.for_interest "
+               class="ant-select-secondary"  nzAllowClear nzCustomContent
+               (ngModelChange)="onParamaterChanged()">
+      <nz-option nzCustomContent nzValue="int" nzLabel="for interest">
+        <div>
+          <span> For interest</span>
+          <input style="text-align: center; font-size: 11px; height: 100%"
+                 type="number"   min="0" max="100" #interest
+                 [(ngModel)]="tivChoice"
+                 (click)="onEvent($event);"
+                 class="form-control col-6"
+                 (keyup)="updateValue(interest)">
+        </div>
+      </nz-option>
+      <nz-option nzCustomContent nzValue="100" nzLabel="100%" >
+        <div>
+          <span>100%</span>
+          <input type="number" min="0" max="100" #cent
+                 class="form-control col-6"
+                 [(ngModel)]="centvalue"
+                 (click)="onEvent($event);"
+                 (keyup)="updateValue(cent)">
+        </div>
+      </nz-option>
+      <nz-option  [nzValue]="null"  [nzLabel]="'As Per Schedule'">
+      </nz-option>
+    </nz-select>
+  </div>
+
+  <div class="option">
+    <small class="dropdown-description">Country</small>
+    <nz-select nzShowSearch nzAllowClear nzCustomContent class="ant-select-secondary"
+               [(ngModel)]="mappingParamaters.country "
+               (ngModelChange)="onRefParamaterChanged()">
+      <nz-option *ngFor="let option of countriesOptions" nzLabel="{{option.name}}"
+                 [nzValue]="option.name"></nz-option>
+    </nz-select>
+  </div>
+
+  <div class="option">
+    <small class="dropdown-description">Currency</small>
+    <nz-select  nzShowSearch nzAllowClear nzCustomContent [(ngModel)]="mappingParamaters.site_currency "
+               (ngModelChange)="onRefParamaterChanged()" class="ant-select-secondary" style="height: 52px;">
+      <nz-option *ngFor="let option of currencyOptions" nzLabel="{{option}}" [nzValue]="option"
+      ></nz-option>
+    </nz-select>
+  </div>
+
+  <div class="option">
+    <small class="dropdown-description">BI declaration period</small>
+    <nz-select  [(ngModel)]="mappingParamaters.declaration " class="ant-select-secondary"
+                (ngModelChange)="onParamaterChanged()"  nzAllowClear nzCustomContent>
+      <nz-option nzCustomContent nzValue="mon" [nzLabel]="declarationPeriodChoice +' Months'" >
+        <div class="row col-12">
+          <span class="col-6 px-0"    (click)="onParamaterChanged()" >months</span>
+          <input style=" text-align: center;font-size: 11px; height: 100%"
+                 type="number" value="0" min="0" max="100" #monthNumber
+                 class="form-control col-6"
+                 [(ngModel)]="declarationPeriodChoice"
+                 (click)="onEvent($event);"
+                 (keyup)="onChange(monthNumber)">
+        </div>
+      </nz-option>
+      <nz-option  [nzValue]="null"  [nzLabel]="'As Per Schedule'">
+      </nz-option>
+    </nz-select>
+  </div>
+
+
+</div>

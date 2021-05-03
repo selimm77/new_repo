@@ -1,0 +1,6 @@
+:host ::ng-deep  .ant-select-selection.ant-select-selection--single {
+  border-color: #172be0;
+  border-radius: 3px !important;
+  border-width: 1px;
+  font-size: 12px !important;
+}

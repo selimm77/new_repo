@@ -1,0 +1,23 @@
+  .newGroup{
+  color: #1d5687 !important;
+}
+
+:host >>> .mat-list-base .mat-list-item.mat-list-item-with-avatar , :host >>> .mat-list-base .mat-list-item{
+  height:40px
+}
+:host >>> .mat-list-base .mat-list-item .mat-list-icon{
+  font-size: 15px;
+}
+:host >>> .mat-list-base .mat-list-item{
+  font-size: 14px;
+}
+:host >>> .ant-card-body{
+  padding: 10px;
+}
+:host >>> .ant-form label{
+  font-size: 12px;
+}
+:host >>> .ant-form-vertical .ant-form-item-label  {
+  padding: 0;
+  line-height: 1;
+}

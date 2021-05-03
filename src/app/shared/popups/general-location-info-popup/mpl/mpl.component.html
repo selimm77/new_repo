@@ -1,0 +1,31 @@
+<div style="padding: 15px 0">
+  <div class="global-tab-header" style="background-color: white;padding: 15px;margin: 12px 10%">
+    <nz-row>
+      <nz-col nzSpan="3" style="height: 33px;margin-left: 20px">
+        <nz-select  [nzPlaceHolder]="getPlaceHolder(tabModel.header)" nzShowSearch nzAllowClear nzCustomContent class="my-select"
+                    [(ngModel)]="locationData[tabModel.header.field_code]"  (ngModelChange)="checkMondatory($event, tabModel.header.field_code)"
+                    [disabled]="tabModel.header.disabled" [ngStyle]="{'border': mondatories[tabModel.header.field_code] ? '1px solid red' : ''}" style="background-color: #f4f6fc;width: 100%;">
+          <nz-option nzLabel={{o}} nzValue={{o}}
+                     *ngFor="let o of getReferenceData(tabModel.header.field_code)">
+            {{o}}
+          </nz-option>
+        </nz-select>
+      </nz-col>
+    </nz-row>
+  </div>
+  <div class="my-tab-content" style="margin: 0 10%;margin-bottom: 20px;height: 55vh;">
+    <nz-row>
+      <nz-col *ngFor="let val of tabModel.body;let i = index" [nzSpan]="i == 0 ? 12 : 11"  [nzOffset]="i"
+              style="background-color: white;padding: 30px;"
+              [ngStyle]="{'padding-right' : i==1 ? '20px' : ''}">
+        <div style="margin-bottom: 10px">
+          <span style="font-size: 18px;font-weight: bold;">{{val.label}}</span>
+        </div>
+        <div style="width: 100%; height: 40px; margin-bottom: 10px" *ngFor="let valItem of val.items">
+          <input type="text" only-number [(ngModel)]="locationData[valItem.field_code]" (ngModelChange)="checkMondatory($event, valItem.field_code)"
+                 [ngStyle]="{'border': mondatories[valItem.field_code] ? '1px solid red' : ''}" [placeholder]="getPlaceHolder(valItem)" style="background-color: #f4f6fc;height: 100%;width: 100%;padding-left: 11px" />
+        </div>
+      </nz-col>
+    </nz-row>
+  </div>
+</div>

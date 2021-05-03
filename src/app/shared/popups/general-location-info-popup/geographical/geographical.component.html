@@ -1,0 +1,65 @@
+<div style="height: 70vh">
+  <nz-tabset class="my-geographical" [nzSelectedIndex]="currentTabIndex">
+    <nz-tab *ngFor="let tab of tabModel;let tabIndex=index" [nzTitle]="tab.title">
+      <div class="global-tab-header" style="background-color: white;padding: 15px 25px;margin: 20px 10%;">
+        <nz-row style="padding: 0 20%">
+          <nz-col *ngFor="let item of tab.content.header" nzSpan="24">
+            <nz-row>
+              <nz-col nzSpan="1" style="height: 55px">
+                <img [src]="item.icon" style="width: 100%;height: 100%">
+              </nz-col>
+              <nz-col nzSpan="22" nzOffset="1" style="height: 55px">
+                <input nz-input [(ngModel)]="locationData[item.field_code]" [placeholder]="getPlaceHolder(item)" nzSize="large" style="background-color: #f4f6fc;height: 100%"
+                       (ngModelChange)="checkMondatory($event, item.field_code)"
+                       [ngStyle]="{'border': mondatories[item.field_code] ? '1px solid red' : ''}" [disabled]="item.disabled" />
+              </nz-col>
+            </nz-row>
+          </nz-col>
+        </nz-row>
+      </div>
+      <div class="my-tab-content" style="margin: 0 10%;margin-bottom: 20px;">
+        <nz-row>
+          <nz-col *ngFor="let val of tab.content.body;let i = index"
+                  [nzSpan]="val.colSpan" [nzOffset]="val.offset"
+                  [ngStyle]="{'height' : tabIndex == 0 ? '42vh' : '50vh'}"
+                  style="background-color: white;padding: 20px">
+            <ng-container [ngTemplateOutlet]="val.label == 'Geocoding' ? geocodingDiv : default"></ng-container>
+            <ng-template #default>
+              <div style="margin-bottom: 10px">
+                <span style="font-size: 18px;font-weight: bold;">{{val.label}}</span>
+              </div>
+              <div style="width: 100%; height: 40px; margin-bottom: 10px" *ngFor="let valItem of val.items">
+                <ng-container [ngSwitch]="valItem.type">
+                  <nz-select  [nzPlaceHolder]="getPlaceHolder(valItem)" nzShowSearch nzAllowClear nzCustomContent *ngSwitchCase="'list'" class="my-select"
+                              [(ngModel)]="locationData[valItem.field_code]"  (ngModelChange)="checkMondatory($event, valItem.field_code)"
+                              [disabled]="valItem.disabled || tab.title === 'Final Address'" [ngStyle]="{'border': mondatories[valItem.field_code] ? '1px solid red' : ''}" style="width: 100%;">
+                    <nz-option nzLabel={{o}} nzValue={{o}}
+                               *ngFor="let o of getReferenceData(valItem.field_code)">
+                      {{o}}
+                    </nz-option>
+                  </nz-select>
+                  <input *ngSwitchCase="'inputNumber'" type="text" only-number [(ngModel)]="locationData[valItem.field_code]" [placeholder]="getPlaceHolder(valItem)" (ngModelChange)="checkMondatory($event, valItem.field_code)"
+                         [disabled]="valItem.disabled || tab.title === 'Final Address'" [ngStyle]="{'border': mondatories[valItem.field_code] ? '1px solid red' : ''}" style="background-color: #f4f6fc;height: 100%;width: 100%;padding-left: 11px" />
+                  <input *ngSwitchDefault nz-input [(ngModel)]="locationData[valItem.field_code]" [placeholder]="getPlaceHolder(valItem)" (ngModelChange)="checkMondatory($event, valItem.field_code)"
+                         [disabled]="valItem.disabled || tab.title === 'Final Address'" [ngStyle]="{'border': mondatories[valItem.field_code] ? '1px solid red' : ''}" nzSize="large" style="background-color: #f4f6fc;height: 100%" />
+                </ng-container>
+              </div>
+            </ng-template>
+            <ng-template #geocodingDiv style="cursor: pointer">
+              <div class="in-between-dev" style="background-color: white;position: relative;top: 20%;cursor: pointer">
+                <nz-row *ngFor="let valItem of val.items" style="margin-bottom: 20px">
+                  <nz-col nzSpan="24" style="height: 55px;background-color: #f4f6fc;text-align: center">
+                    <div>{{valItem.label}}</div>
+                  </nz-col>
+                  <nz-col nzSpan="24" style="height: 55px">
+                    <img [src]="valItem.icon" style="width: 100%;height: 100%">
+                  </nz-col>
+                </nz-row>
+              </div>
+            </ng-template>
+          </nz-col>
+        </nz-row>
+      </div>
+    </nz-tab>
+  </nz-tabset>
+</div>

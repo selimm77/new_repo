@@ -1,0 +1,11 @@
+<form [formGroup]="form">
+  <input #input formControlName="txt" (click)="onFocusInput($event)" [value]="txt" />
+  <button class="btn" (click)="onClickFilter($event)" name="checkbox" *ngIf="!isFilter">
+    <i>
+      <img src="assets/icons/filters/filter-b.png" alt="image" />
+    </i>
+  </button>
+  <button class="btn" (click)="onClickFilter($event)" *ngIf="isFilter">
+    <i><img src="assets/icons/filters/filter-f.png" alt="image" /></i>
+  </button>
+</form>

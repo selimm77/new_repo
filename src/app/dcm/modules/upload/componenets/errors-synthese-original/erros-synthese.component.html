@@ -1,0 +1,21 @@
+<div class="danger" *ngIf="res">
+  <div class="row">
+    <div class="col-md-12">
+      <span> <i class="fas fa-exclamation-circle"></i> Please correct Errors detected : </span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <span class="span-errors">Total errors  </span>{{res.totalErrors}}
+      <span class="span-errors"> | Site  </span>
+      {{res.errorCount.site}} <a><i class="far fa-eye error-eye"></i></a> <span class="span-errors"> | Geographical  </span>
+      {{res.errorCount.geographical}} <a><i class="far fa-eye error-eye"></i></a> <span class="span-errors">
+      | Insured Values  </span> {{res.errorCount.insuredValues}} <a><i class="far fa-eye error-eye"></i></a>
+      <span class="span-errors"> | Primary Characteristics  </span> {{res.errorCount.primaryCharacteristics}} <a><i
+      class="far fa-eye error-eye"></i></a>
+      <span class="span-errors"> | Secondary Characteristics  </span> {{res.errorCount.secondaryCharacteristics}} <a><i
+      class="far fa-eye error-eye"></i></a>
+    </div>
+  </div>
+
+</div>

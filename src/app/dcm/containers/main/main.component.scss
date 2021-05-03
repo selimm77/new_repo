@@ -1,0 +1,65 @@
+@import '../../../../styles-variables';
+
+nav {
+  margin-bottom: 20px;
+
+  .mat-tab-link {
+    min-width: 120px;
+    padding: 0 0px;
+  }
+
+  @media (max-width: map-get($grid-breakpoints, md)) {
+    .mat-tab-link {
+      min-width: 0;
+    }
+  }
+}
+
+.header-dr1 {
+  background-color: #ffffff;
+}
+
+.drawer-container {
+  height: 100%;
+  // margin-bottom: 15px;
+  // height: 100%;
+}
+::ng-deep .mat-input-underline {
+  display: none;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .mat-tooltip {
+
+  background: rgb(255, 255, 255) !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  margin-bottom: 10px;
+}
+
+.darwer-sidenav-content {
+  height: 100%;
+  // height: calc(100% - 49px);
+  background-color: white;
+}
+.darwer-sidenav-content-import {
+  background-color: white;
+  height: 100%;
+
+}
+.darwer-map {
+  height: 100% !important;
+  // height: 85% !important;
+  background-color: #F8F8FB;
+
+}
+
+.stepper-c {
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+}

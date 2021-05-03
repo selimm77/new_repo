@@ -1,0 +1,102 @@
+@import '~@angular/material/theming';
+
+@import url('https://fonts.googleapis.com/css?family=Assistant:200,400,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+//@import url('https://fonts.googleapis.com/css?family=Passion+One');
+
+$default-size:12px;
+$default-line-height:14px;
+$default-font-size: 16px;
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$custom-typography: mat-typography-config(
+  $font-family:   'Roboto, Open Sans, Assistant, monospace',
+  $display-4:     mat-typography-level(112px, 112px, 300),
+  $display-3:     mat-typography-level(56px, 56px, 400),
+  $display-2:     mat-typography-level(45px, 48px, 400),
+  $display-1:     mat-typography-level(34px, 40px, 400),
+  $headline:      mat-typography-level(24px, 32px, 400),
+  $title:         mat-typography-level(20px, 32px, 500),
+  $subheading-2:  mat-typography-level(16px, 28px, 400),
+  $subheading-1:  mat-typography-level(15px, 24px, 400),
+  $body-2:        mat-typography-level($default-size, 24px, 500),
+  $body-1:        mat-typography-level($default-size, 20px, 400),
+  $caption:       mat-typography-level(10px, 20px, 400),
+  $button:        mat-typography-level($default-size, $default-line-height, 500),
+  $input:         mat-typography-level(inherit, 1.125, 400)
+);
+
+@include mat-base-typography($custom-typography);
+
+// Override typography for a specific Angular Material components.
+@include mat-checkbox-typography($custom-typography);
+
+// Override typography for all Angular Material, including mat-base-typography and all components.
+@include angular-material-typography($custom-typography);
+
+@include mat-core($custom-typography);
+
+//icons
+.material-icons
+{
+    font-size: $default-font-size;
+}
+
+.ui-table{
+  font-size: $default-font-size;
+}
+
+.mat-step-icon .mat-icon
+{
+    font-size: $default-font-size !important;
+}
+
+.mat-icon-button{
+    height:30px !important;
+    width: 30px !important;
+    line-height: 30px !important;
+
+    .mat-icon{
+        line-height: unset !important;
+        height: unset !important;
+    }
+}
+
+.container-general{
+  font-size: $default-size;
+}
+
+.mat-chip .mat-chip-trailing-icon.mat-icon, .mat-chip .mat-chip-remove.mat-icon {
+    font-size: $default-size !important;
+    height: $default-size !important;
+    width: $default-size !important;
+}
+
+.mat-fab {
+    height: $default-size * 2.5 !important;
+    width: $default-size * 2.5 !important;
+
+    line-height: inherit !important;
+
+    .mat-button-wrapper{
+        padding: 0 !important;
+        line-height: inherit !important;
+    }
+}
+
+.ui-table {
+  font-size: $default-size;
+}
+
+* {
+  letter-spacing: 0.2px;
+}
+
+.bolder {
+  font-weight: bolder;
+}
+
+.bold {
+  font-weight: bold
+}

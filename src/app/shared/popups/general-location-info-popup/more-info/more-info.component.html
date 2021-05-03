@@ -1,0 +1,229 @@
+<nz-tabset class="info-tabset" [nzSelectedIndex]="currentTabIndex">
+  <nz-tab *ngFor="let tab of tabModel" [nzTitle]="tab.title" style="height: 70vh;overflow: scroll;">
+    <ng-container [ngTemplateOutlet]="tab.title === 'Binders' ? binders : tab.title === 'Miscellaneous' ? miscellaneous : others"></ng-container>
+    <ng-template #binders>
+      <div class="binders">
+        <div class="binders-header" style="background-color: white; margin: 20px 20%;padding: 50px 50px 20px 50px;">
+          <nz-row >
+            <nz-col *ngFor="let bindersItem of tab.content.header" [nzSpan]="bindersItem.colSpan" [nzOffset]="bindersItem.offset" style="margin-bottom: 20px">
+              <ng-container [ngTemplateOutlet]="bindersItem.type == 'date' ? dateItem : bindersItem.type == 'inputNumber' ? inputItem : bindersItem.type == 'list' ? listItem : defaultItem"></ng-container>
+              <ng-template #dateItem>
+                <span>{{bindersItem.headerLabel}}</span><br>
+                <nz-date-picker class="my-info-date" style="width: 100%"
+                                [nzPlaceHolder]="getPlaceHolder(bindersItem)" [(ngModel)]="locationData[bindersItem.field_code]" (ngModelChange)="checkMondatory($event, bindersItem.field_code)"
+                                [ngStyle]="{'border': mondatories[bindersItem.field_code] ? '1px solid red' : ''}" [disabled]="bindersItem.disabled">
+                </nz-date-picker>
+              </ng-template>
+              <ng-template #inputItem>
+                <input  type="text" only-number [placeholder]="getPlaceHolder(bindersItem)" [(ngModel)]="locationData[bindersItem.field_code]" (ngModelChange)="checkMondatory($event, bindersItem.field_code)" [disabled]="bindersItem.disabled"
+                        [ngStyle]="{'border': mondatories[bindersItem.field_code] ? '1px solid red' : ''}" style="background-color: #f4f6fc;width: 100%;height: 33px">
+              </ng-template>
+              <ng-template #listItem>
+                <nz-select  [nzPlaceHolder]="getPlaceHolder(bindersItem)" nzShowSearch nzAllowClear nzCustomContent class="my-select"
+                            [(ngModel)]="locationData[bindersItem.field_code]"
+                            (ngModelChange)="checkMondatory($event, bindersItem.field_code)"
+                            [ngStyle]="{'border': mondatories[bindersItem.field_code] ? '1px solid red' : ''}"
+                            [disabled]="bindersItem.disabled"  style="background-color: #f4f6fc;width: 100%;">
+                  <nz-option nzLabel={{o}} nzValue={{o}}
+                             *ngFor="let o of getReferenceData(bindersItem.field_code)">
+                    {{o}}
+                  </nz-option>
+                </nz-select>
+              </ng-template>
+              <ng-template #defaultItem>
+                <nz-row>
+                  <nz-col nzSpan="1" style="height: 55px">
+                    <img [src]="bindersItem.icon" style="width: 100%;height: 100%">
+                  </nz-col>
+                  <nz-col nzSpan="22" nzOffset="1" style="height: 55px">
+                    <input nz-input [(ngModel)]="locationData[bindersItem.field_code]" (ngModelChange)="checkMondatory($event, bindersItem.field_code)" [disabled]="bindersItem.disabled"
+                           [ngStyle]="{'border': mondatories[bindersItem.field_code] ? '1px solid red' : ''}" [placeholder]="getPlaceHolder(bindersItem)"  nzSize="large" style="background-color: #f4f6fc;height: 100%" />
+                  </nz-col>
+                </nz-row>
+              </ng-template>
+            </nz-col>
+          </nz-row>
+        </div>
+        <div class="binders-body" style="background-color: white; margin: 0 20%;padding: 50px 50px 0 50px;margin-bottom: 20px;">
+          <nz-row>
+            <nz-col nzSpan="24" style="margin-bottom: 20px">
+              <span style="font-size: 18px;font-weight: bold">{{tab.content.body[0].label}}</span>
+            </nz-col>
+            <nz-col *ngFor="let bindersItem of tab.content.body[0].items" [nzSpan]="bindersItem.colSpan" [nzOffset]="bindersItem.offset" style="height: 40px; margin-bottom: 50px">
+              <ng-container [ngTemplateOutlet]="bindersItem.type == 'date' ? dateItem : bindersItem.type == 'input' ? inputItem : listItem"></ng-container>
+              <ng-template #dateItem>
+                <span>{{bindersItem.headerLabel}}</span><br>
+                <nz-date-picker class="my-info-date" style="width: 100%"
+                                [nzPlaceHolder]="getPlaceHolder(bindersItem)" [(ngModel)]="locationData[bindersItem.field_code]" (ngModelChange)="checkMondatory($event, bindersItem.field_code)"
+                                [ngStyle]="{'border': mondatories[bindersItem.field_code] ? '1px solid red' : ''}" [disabled]="bindersItem.disabled">
+                </nz-date-picker>
+              </ng-template>
+              <ng-template #inputItem>
+                <input  nz-input [placeholder]="getPlaceHolder(bindersItem)" [(ngModel)]="locationData[bindersItem.field_code]" (ngModelChange)="checkMondatory($event, bindersItem.field_code)"
+                        [ngStyle]="{'border': mondatories[bindersItem.field_code] ? '1px solid red' : ''}" style="background-color: #f4f6fc;width: 100%;" [disabled]="bindersItem.disabled">
+              </ng-template>
+              <ng-template #listItem>
+                <nz-select  [nzPlaceHolder]="getPlaceHolder(bindersItem)" nzShowSearch nzAllowClear nzCustomContent class="my-select"
+                            [(ngModel)]="locationData[bindersItem.field_code]"
+                            (ngModelChange)="checkMondatory($event, bindersItem.field_code)"
+                            [ngStyle]="{'border': mondatories[bindersItem.field_code] ? '1px solid red' : ''}"
+                            [disabled]="bindersItem.disabled"  style="background-color: #f4f6fc;width: 100%;">
+                  <nz-option nzLabel={{o}} nzValue={{o}}
+                             *ngFor="let o of getReferenceData(bindersItem.field_code)">
+                    {{o}}
+                  </nz-option>
+                </nz-select>
+              </ng-template>
+            </nz-col>
+          </nz-row>
+        </div>
+        <div class="binders-sub-body" style="background-color: white; margin: 0 20%;padding: 50px 50px 0 50px;margin-bottom: 20px;">
+          <nz-row *ngFor="let it of tab.content.body[1].items">
+            <nz-col [nzSpan]="24" style="background-color: white;padding: 20px;height: 100%">
+              <div style="margin-bottom: 10px">
+                <label class="tand-c-checkbox" nz-checkbox style="font-size: 20px" [(ngModel)]="it.checked">{{it.label}}</label>
+              </div>
+              <div *ngIf="it.checked">
+                <nz-row>
+                  <nz-col *ngFor="let valItem of it.body" [nzSpan]="valItem.colSpan" [nzOffset]="valItem.offset ? valItem.offset : 0">
+                    <div style="margin-bottom: 10px">
+                      <span style="font-size: 14px;font-weight: bold;">{{valItem.label}}</span>
+                    </div>
+                    <nz-row>
+                      <nz-col *ngFor="let item of valItem.items" [nzSpan]="item.colSpan" [nzOffset]="item.offset ? item.offset : 0">
+                        <ng-container [ngSwitch]="item.type">
+                          <nz-select  [nzPlaceHolder]="getPlaceHolder(item)" nzShowSearch nzAllowClear nzCustomContent *ngSwitchCase="'list'" class="my-select"
+                                      [(ngModel)]="locationData[item.field_code]"
+                                      [disabled]="item.disabled"  style="background-color: #f4f6fc;width: 100%;">
+                            <nz-option nzLabel={{o}} nzValue={{o}}
+                                       *ngFor="let o of getReferenceData(item.field_code)">
+                              {{o}}
+                            </nz-option>
+                          </nz-select>
+                          <input *ngSwitchDefault type="text" only-number [(ngModel)]="locationData[item.field_code]"
+                                 [placeholder]="getPlaceHolder(item)" style="background-color: #f4f6fc;height: 33px;width: 100%;padding-left: 11px" />
+                        </ng-container>
+                      </nz-col>
+                    </nz-row>
+                  </nz-col>
+                </nz-row>
+              </div>
+            </nz-col>
+          </nz-row>
+
+
+<!--          <nz-row>-->
+<!--            <nz-col nzSpan="24" style="margin-bottom: 20px">-->
+<!--              <span style="font-size: 18px;font-weight: bold">{{tab.content.body[1].label}}</span>-->
+<!--            </nz-col>-->
+<!--            <nz-col *ngFor="let bindersItem of tab.content.body[1].items" [nzSpan]="bindersItem.colSpan" [nzOffset]="bindersItem.offset" style="height: 40px; margin-bottom: 50px">-->
+<!--              <input nz-input [placeholder]="bindersItem.label" nzSize="large" style="background-color: #f4f6fc;height: 100%" />-->
+<!--            </nz-col>-->
+<!--          </nz-row>-->
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #miscellaneous>
+      <div style="background-color: white; margin: 50px 20%;padding: 50px;height: 50vh">
+        <nz-row>
+          <nz-col nzSpan="24" *ngFor="let millItem of tab.content" [ngStyle]="{'height': millItem.height}" style="margin-bottom: 30px">
+            <input nz-input [placeholder]="millItem.label" nzSize="large" style="background-color: #f4f6fc;height: 100%" />
+          </nz-col>
+        </nz-row>
+      </div>
+    </ng-template>
+    <ng-template #others>
+      <div style="margin: 10px 20px">
+        <div class="global-tab-header" style="background-color: white;padding: 10px 20px;">
+          <nz-row style="padding: 0 20%">
+            <nz-col *ngFor="let item of tab.content.header" [nzSpan]="item.colSpan" [nzOffset]="item.offset" style="margin-bottom: 15px">
+              <ng-container [ngSwitch]="item.type">
+                <nz-select  [nzPlaceHolder]="getPlaceHolder(item)" nzShowSearch nzAllowClear nzCustomContent *ngSwitchCase="'list'"
+                            [(ngModel)]="locationData[item.field_code]"  (ngModelChange)="checkMondatory($event, item.field_code)"
+                            [disabled]="item.disabled || tab.title === 'Final Address'" [ngStyle]="{'border': mondatories[item.field_code] ? '1px solid red' : ''}" style="width: 100%;">
+                  <nz-option nzLabel={{o}} nzValue={{o}}
+                             *ngFor="let o of getReferenceData(item.field_code)">
+                    {{o}}
+                  </nz-option>
+                </nz-select>
+                <input type="text" only-number [placeholder]="getPlaceHolder(item)" [(ngModel)]="locationData[item.field_code]"  (ngModelChange)="checkMondatory($event, item.field_code)"
+                       style="background-color: #f4f6fc;height: 33px;width: 100%;padding-left: 11px" *ngSwitchDefault />
+              </ng-container>
+            </nz-col>
+          </nz-row>
+        </div>
+        <div class="my-tab-content" style="padding: 25px 0;height: 50vh;">
+          <nz-row style="height: 100%">
+            <nz-col nzSpan="4" style="background-color: white;height: 100%;padding: 15px">
+              <div *ngFor="let item of tab.content.body" style="display: flex;height: 50px;margin-bottom: 20px; cursor: pointer"
+                   [ngClass]="item.active ? 'body-active-item' : ''" (click)="activeBodyItem(item.label)">
+                <div style="width: 10px" [ngStyle]="{'background-color': item.color}"></div>
+                <div style="margin-left: 10px;font-size: 18px;width: 100%">
+                  <span style="vertical-align: middle;">{{item.label}}</span>
+                  <i nz-icon nzType="right" style="float: right;position: relative;top: 10px"></i>
+                </div>
+              </div>
+            </nz-col>
+            <nz-col nzSpan="13" style="background-color: white;height: 100%;margin: 0 20px;border-top: 3px solid #7bbe31;padding: 30px;overflow: scroll;">
+              <ng-container *ngFor="let item of tab.content.body">
+                <ng-container *ngIf="item.active">
+                  <nz-row style="margin-bottom: 15px">
+                    <nz-col nzSpan="24"><span style="font-size: 18px;font-weight: bold">{{item.label}}</span></nz-col>
+                  </nz-row>
+                  <nz-row style="margin-bottom: 15px;padding-bottom: 15px;border-bottom: 1px solid grey">
+                    <nz-col nzSpan="4">
+                      <input nz-input [placeholder]="'Tags'" nzSize="large" style="background-color: #f4f6fc;height: 40px" />
+                    </nz-col>
+                    <nz-col nzSpan="19" nzOffset="1">
+                      <input nz-input [placeholder]="'Search'" nzSize="large" style="background-color: #f4f6fc;height: 40px" />
+                    </nz-col>
+                  </nz-row>
+                  <ng-container *ngFor="let subItem of item.value">
+                    <nz-row style="margin-bottom: 15px;border-bottom: 1px solid grey">
+                        <nz-col nzSpan="24" style="margin-bottom: 20px">
+                          <label class="info-checkbox" nz-checkbox [(ngModel)]="subItem.checked">{{subItem.label}}</label>
+                        </nz-col>
+                        <ng-container *ngIf="subItem.checked">
+                          <nz-col nzSpan="24" style="margin-bottom: 20px; padding-left: 20px" *ngFor="let it of subItem.items">
+                            <label class="info-checkbox" nz-checkbox [(ngModel)]="it.checked">{{it.label}}</label>
+                          </nz-col>
+                        </ng-container>
+                    </nz-row>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </nz-col>
+            <nz-col nzSpan="6" style="background-color: white;height: 100%;border-top: 3px solid #7bbe31;padding: 15px;overflow: scroll">
+              <nz-row style="margin-bottom: 10px;">
+                <nz-col nzSpan="24"><span style="font-size: 18px;font-weight: bold">Selection Basket</span></nz-col>
+              </nz-row>
+              <nz-row style="margin-bottom: 15px; border-bottom: 1px solid grey;padding-bottom: 10px">
+                <nz-col nzSpan="24"><nz-alert nzType="warning" nzMessage="Default RMS values are not in the summary" nzShowIcon></nz-alert></nz-col>
+              </nz-row>
+                <ng-container *ngFor="let rightItem of tab.content.body">
+                  <ng-container *ngIf="rightItem.active">
+                    <ng-container *ngFor="let rightSubItem of rightItem.value">
+                      <ng-container *ngIf="rightSubItem.checked">
+                        <div style="border-bottom: 1px solid grey">
+                          <nz-row>
+                            <nz-col nzSpan="24"><div style="font-size: 15px;font-weight: bolder" class="text-overflow" [title]="rightSubItem.label">{{rightSubItem.label}}</div></nz-col>
+                          </nz-row>
+                          <ng-container *ngFor="let rightSubItem1 of rightSubItem.items">
+                            <ng-container *ngIf="rightSubItem1.checked">
+                              <nz-row style="padding-left: 15px">
+                                <nz-col  nzSpan="24"><div class="text-overflow" [title]="rightSubItem1.label">{{rightSubItem1.label}}</div></nz-col>
+                              </nz-row>
+                            </ng-container>
+                          </ng-container>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+            </nz-col>
+          </nz-row>
+        </div>
+      </div>
+    </ng-template>
+  </nz-tab>
+</nz-tabset>

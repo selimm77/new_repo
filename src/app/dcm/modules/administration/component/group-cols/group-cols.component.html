@@ -1,0 +1,85 @@
+<nz-card class="listData">
+  <div class="container mt-3  ">
+    <div class="row">
+      <div class="col-7">
+
+        <form nz-form [formGroup]="groupForm" class="row" [nzLayout]="'vertical'">
+          <div class="col-5 pr-0">
+            <nz-form-item class="mb-1">
+              <nz-form-label  nzRequired nzFor="label">Group Label</nz-form-label>
+              <nz-form-control  >
+                <input nz-input formControlName="label" id="label" [nzSize]="'small'"/>
+                <nz-form-explain *ngIf="groupForm.get('label')?.dirty && groupForm.get('label')?.errors">
+                  the Label is Required to add a group Column !
+                </nz-form-explain>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div class="col-5 pr-0">
+
+          </div>
+          <div class="col-2">
+            <nz-form-item nz-row style="margin-bottom:8px;">
+              <nz-form-label nzFor="btn"></nz-form-label>
+              <nz-form-control>
+                <button nz-button nzType="link" (click)="addGroup()" [disabled]="!groupForm.valid"
+                        class="mt-2"
+                        [nzSize]="'small'">add to List
+                </button>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+
+        </form>
+        <mat-list style="width:100%">
+          <div class="row">
+            <h3 mat-subheader  >Column Group waiting Validation</h3>
+
+          </div>
+          <mat-list-item *ngFor="let group of newGroups" class="row">
+            <p mat-line class="col-9">{{group.label}}</p>
+            <button mat-button   style="float:right" (click)="delete(group)"
+            [ngStyle]="{color:'#D9930D'}">cancel</button>
+
+
+          </mat-list-item>
+        </mat-list>
+
+
+
+      </div>
+      <nz-divider nzType="vertical" style="height: 450px"  ></nz-divider>
+
+      <div class="col-3 pl-0 container"  >
+        <mat-list>
+          <h3 mat-subheader>Existing Column Group List</h3>
+          <mat-list-item *ngFor="let group of groups">
+            <mat-icon mat-list-icon>view_column</mat-icon>
+            <p mat-line > {{group.label}} </p>
+          </mat-list-item>
+
+        </mat-list>
+
+
+      </div>
+
+
+  </div>
+    <div class="row" *ngIf="newGroups.length>0">
+   <div class="col-4 offset-8">
+     <button nz-button nzType="link"
+             style="float: right ; color: #16868C ;border: none ;box-shadow: 0 0 0 rgba(0, 0, 0, 0.015)"
+             (click)="ValidateAll()"
+             nzSize="small">
+       Validate Column Group
+     </button>
+       <button nz-button nzType="link" style="float: right ; color : #D94938 ; border: none ;box-shadow: 0 0 0 rgba(0, 0, 0, 0.015) " class="ml-2" nzSize="small"
+       (click)="clearAll()">
+          Clear Column Group
+       </button>
+
+   </div>
+  </div>
+  </div>
+</nz-card>

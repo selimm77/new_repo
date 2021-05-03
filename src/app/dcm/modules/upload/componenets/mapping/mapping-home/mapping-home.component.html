@@ -1,0 +1,79 @@
+
+<div>
+
+  <div class="toolbar pd" *ngIf="!(loading$ | async)" fxLayout="row" fxLayoutAlign="space-between center">
+    <anms-mapping-options [mappingParamaters]="parameters"
+                          (mappingParamatersChanged)="onUpdateParameters($event)"></anms-mapping-options>
+    <div>
+      <anms-toggle-header-button></anms-toggle-header-button>
+    </div>
+  </div>
+
+  <div *ngIf="(loading$ | async)" style="    height: calc(100vh - 300px); display: flex; align-items: center; justify-content: center;">
+    <div style="display: flex; align-items: center">
+      <nz-spin style="width: 60px"></nz-spin>
+      <span style="font-size: 17px;">Mapping...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!(loading$ | async)" class="drag-drop-wrapper">
+    <div class="drag-drop-left">
+      <div class="search-field">
+        <span class="search-label">Source Fields</span>
+        <div>
+          <nz-input-group nzSize="small" [nzPrefix]="suffixIconSearch">
+            <input #myInput type="text" nz-input [(ngModel)]="sourceFilter" (input)="sendSourceFilter(myInput.value)" />
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <i nz-icon nzType="search"></i>
+          </ng-template>
+        </div>
+      </div>
+
+      <div>
+        <anms-mapping-source (dragItemChanged)="draggedItem = $event; onDragItemUpdated($event)"
+                             [mapped]="mappedSources" [items]="sourceFilterItems"></anms-mapping-source>
+        <!-- <anms-mapping-source (dragItemChanged)="draggedItem = $event; onDragItemUpdated($event)"
+                               [mapped]="mappedSources" [items]="source$ | async"></anms-mapping-source> -->
+      </div>
+
+    </div>
+
+
+    <div class="drag-drop-right">
+      <div class="right-header">
+        <div class="header-status">
+          <div [ngSwitch]="mandatoryMissingInSheet" style="margin-top: 15px;">
+            <span *ngSwitchCase='0' class="text-success" style="float: left;"><fa-icon icon="check"></fa-icon><b> All Mandatory Targets mapped</b></span>
+            <span *ngSwitchDefault class="text-warn">
+              <mat-icon>report_gmailerrorred</mat-icon>
+              {{ mandatoryMissingInSheet }} mandatory fields missing</span>
+          </div>
+        </div>
+        <div style="margin-right: 20%; margin-top: 10px;">
+          <button class="reset-button" nz-button (click)="resetAllMapping()">Reset mapping</button>
+        </div>
+        <div class="header-filter">
+          <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="gappx"><span style="font-weight: bold;">Target Fields</span></div>
+          <div class="search-box">
+
+            <nz-input-group nzSize="small" [nzPrefix]="suffixIconSearch">
+              <input #myInput type="text" nz-input [(ngModel)]="targetFilter" (input)="sendTargetFilter(myInput.value)" />
+            </nz-input-group>
+            <ng-template #suffixIconSearch>
+              <i nz-icon nzType="search"></i>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <anms-mapping-target  *ngIf="targetFilter === ''" [draggedItem]="draggedItem" [items]="target$ | async"
+                             (updateTarget)='onUpdateTarget($event)'></anms-mapping-target>
+        <anms-mapping-target  *ngIf="!(targetFilter === '')" [draggedItem]="draggedItem" [items]="targetFilterItems"
+                             (updateTarget)='onUpdateTarget($event)'></anms-mapping-target>
+      </div>
+
+    </div>
+  </div>
+</div>

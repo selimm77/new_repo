@@ -1,0 +1,20 @@
+<!-- original -->
+<div class="danger" id="id-errors" *ngIf="responseModel && metadataModel">
+  <div class="row">
+    <div class="col-md-12" style="margin-top: -5px; margin-bottom: -5px;">
+      <span class="span-errors">Total Errors&nbsp;&nbsp;</span><a class="number-errors">{{metadataModel.totalErrors}}&nbsp;&nbsp;</a>
+      <div *ngFor="let codefield of responseModel" style="display: inline-block;">
+        <a *ngIf="activateBtn == false || (activateBtn == true && colId != codefield.fieldCode)" class="notification">
+          <span class="fieldCode-cl" (click)="onSelectionErrors($event)"
+            [id]="codefield.fieldCode">{{codefield.fieldName}}</span>
+          <span class="badge">{{codefield.errorsNumber}}</span>
+        </a>&nbsp;&nbsp;&nbsp;
+        <a *ngIf="activateBtn == true && colId == codefield.fieldCode" class="notification-activate">
+          <span class="fieldCode-cl-activate" (click)="onSelectionErrors($event)"
+            [id]="codefield.fieldCode">{{codefield.fieldName}}</span>
+          <span class="badge">{{codefield.errorsNumber}}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

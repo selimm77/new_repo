@@ -1,0 +1,138 @@
+::ng-deep .ant-btn, .ant-btn:active, .ant-btn:focus {
+  outline: 0;
+  color: #525ecc;
+  opacity: 1 !important;
+  font-size: 15px !important;
+  border-color: #172be0 !important;
+  border-radius: 25px;
+  font-family: 'Tw Cen MT', monospace !important;
+}
+
+::ng-deep .import-button {
+  border-radius: 25px;
+  background: #ffffff !important;
+  color: #525ecc;
+  margin-left: 0px;
+}
+
+::ng-deep .import-button:hover {
+  border-radius: 25px;
+  background: #ffffff !important;
+  color: #172be0;
+}
+
+.location-button:hover {
+  border-radius: 25px;
+  background: #ffffff !important;
+  color: #172be0;
+}
+.retrieve-button:hover {
+  border-radius: 25px;
+  background: #ffffff !important;
+  color: #172be0;
+}
+.btns-header {
+  padding: 0px 0px 0px 85px;
+  // padding: 0px 0px 0px 113%;
+}
+
+::ng-deep.mat-menu-panel {
+  max-width: none !important;
+}
+.notification-container{
+ width: 500px;
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  background: rgb(17, 224, 224);
+}
+
+.lock-ic {
+  width: 40px;
+  height: 22px;
+  line-height: 20px;
+  border-radius: 20px;
+  margin-top: -25px;
+  // font-size: 12px;
+  // color: #fff;
+  // text-align: center;
+  // background: rgb(22, 255, 255);
+}
+
+ul li {
+  color: #252525;
+  // color: #bdb8d7;
+  display: block;
+  padding: 15px;
+  border-bottom: 1px solid #d6d3e6;
+  transition: 0.5s;
+}
+
+::placeholder {
+  color: #172be0;
+}
+
+.img-export {
+  width: 25px;
+  margin-left: 20px;
+  opacity: 75%;
+  cursor: pointer;
+}
+
+.icon-hover {
+  cursor: pointer;
+  display: flex;
+  padding: 2px;
+  opacity: 80%;
+  margin-left: 5px;
+
+  &:hover {
+    background-color: rgb(229, 233, 250);
+    border-radius: 20px;
+  }
+}
+
+.button-header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid rgba(0,0,0,0.15);
+  align-items: center;
+  padding: 13px;
+}
+
+.confirm-btn {
+  background: #172be0 !important;
+  text-transform: uppercase;
+  border-radius: 25px;
+  border: none;
+  outline:none;
+  color: white;
+  font-family: "Lucida Console", "Courier New", monospace;
+  width: 150px;
+}
+
+.confirm-btn:hover {
+  transition: 0.7s;
+  background: #253bff !important;
+  border-radius: 25px;
+  border: none;
+  outline:none;
+  color: white;
+}
+
+.cancel-btn {
+  border-radius: 25px;
+  text-transform: uppercase;
+  color: #525ecc;
+  width: 150px;
+  font-weight: bold;
+  font-family: "Lucida Console", "Courier New", monospace;
+}

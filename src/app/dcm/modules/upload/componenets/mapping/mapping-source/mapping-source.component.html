@@ -1,0 +1,47 @@
+
+<div class="source-list" class="my-list">
+  <div 
+  (mouseover)="showBook(i)"
+       (mouseleave)="hideBook(i)"
+       *ngFor="let item of sortBy(items); let i = index;"
+       [class.source-box]="!mapped[item.value]"
+       [dndDraggable]="item"
+       (dndStart)="dragItemChanged.emit(item)"
+       (dndEnd)="dragItemChanged.emit(null)"
+       [class.color-source]="mapped[item.value]"
+       >
+    <div>
+      {{item.viewValue}}
+    </div>
+    <div class="action-box">
+      <!-- (cdkDropDropped)="drop($event)" <button mat-icon-button color="primary" (click)='onLibraryClick(item)'
+              *ngIf="item.taxonomies.length > 0 && showBooksArray[i]"
+              matBadgeColor="accent" [matBadge]="item.taxonomies.length"
+              style="color: rgb(189, 189, 189);"
+      >
+        <fa-icon icon="book" style="color: rgb(189, 189, 189);"></fa-icon>
+      </button> -->
+
+      <!-- <button mat-icon-button color="primary" (click)='onLibraryClick(item)'
+              *ngIf="item.taxonomies.length === 0 && showBooksArray[i]"
+              matBadgeColor="'rgb(189, 189, 189);'" [matBadge]="item.taxonomies.length"
+      >
+        <fa-icon icon="book" style="color: rgb(189, 189, 189);"></fa-icon>
+      </button> -->
+
+      <button mat-icon-button color="primary" 
+              matTooltipClass="my-tooltip" aria-label="Button that displays a tooltip when focused or hovered over">
+                <span nz-tooltip nzTitle="{{getData(item.viewValue)}}">
+        
+        <mat-icon style="color: rgb(189, 189, 189);">
+          remove_red_eye
+        </mat-icon>
+                  </span>
+      </button>
+
+      <mat-icon class="source-handle" style="color: rgb(189, 189, 189);">
+        drag_indicator
+      </mat-icon>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,200 @@
+@import '~@angular/material/theming';
+
+@mixin dcm-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .text-primary {
+    color: mat-color($primary);
+  }
+  .text-accent {
+    color: mat-color($accent);
+  }
+  .text-warn {
+    color: mat-color($warn);
+  }
+  .text-success {
+    color: $success;
+  }
+  .text-disable {
+    color: mat-color($foreground, disabled)
+  }
+
+  .scrollable-table {
+    //border-left: 1px solid mat-color($primary);
+  }
+
+  .stepper {
+    .mat-card {
+      border-top: 1px solid mat-color($foreground, divider);
+    }
+    margin-bottom: 2px !important;
+  }
+
+  .mapping-grid, .library-grid {
+    & > .mat-card, > div > .mat-card {
+      border-top: 10px solid mat-color($accent, lighter);
+    }
+    & > .mat-card:hover, > div:hover > .mat-card {
+      border-top: 10px solid mat-color($accent, 200);
+    }
+    .mat-card {
+      transition: border-color 0.2s ease;
+    }
+  }
+
+  .bordered-card-primary {
+    & > .mat-card:first-child {
+      //border: 1px solid mat-color($primary,lighter);
+      border-top: 10px solid mat-color($primary, lighter);
+    }
+  }
+
+  .bordered-card-accent {
+    & > .mat-card:last-child {
+      //border: 1px solid mat-color($accent,lighter);
+      border-top: 10px solid mat-color($accent, lighter);
+    }
+  }
+
+  .nav-container {
+    .mat-tab-links {
+      background-color: mat-color($background, card);
+    }
+  }
+
+  anms-header {
+
+    .header-container {
+      background-color: mat-color($background, card);
+    }
+
+    .header {
+      //background-color: mat-color($primary, default-contrast);
+      color: mat-color($foreground, text);
+      background-color: mat-color($background, app-bar);
+
+      ::before {
+        content: '';
+        background-color: mat-color($primary);
+        height: 12px;
+        width: 12px;
+      }
+    }
+
+    .sub-header {
+      .currency .mat-select-value-text {
+        color: mat-color($success-colors);
+        //font-weight: bold;
+      }
+      .accented {
+        //color: mat-color($primary);
+      }
+    }
+  }
+
+  .draggable-container {
+    .draggable {
+      .mat-card {
+        background-color: mat-color($primary, lighter);
+        color: mat-color($primary, default-contrast);
+      }
+    }
+  }
+
+  .droppable-container {
+    .mat-expansion-panel-header {
+      border-top: 2px solid mat-color($accent, lighter);
+    }
+  }
+
+  .toolbar {
+    background: mat-color($background, card);
+    border-bottom: 1px solid mat-color($foreground, divider);
+    // border-left: 5px solid $success;
+  }
+
+  anms-sidenav {
+    .mat-icon-button.active {
+      background: mat-color($accent, 50) !important;
+    }
+    .mat-icon-button:not(.active):hover {
+      background: mat-color($background, background) !important;
+    }
+  }
+
+  .mat-form-field-infix {
+    border: 1px solid mat-color($foreground, divider);
+  }
+
+  anms-mapping-container {
+    .source-title,
+    .target-title {
+      background: mat-color($background, card) !important;;
+      border-bottom: 1px solid mat-color($foreground, divider) !important;
+      font-size: 10px;
+      //color: #4d9bb1;
+    }
+
+    .mat-card {
+      background: mat-color($background, background) !important;
+    }
+  }
+
+  anms-mapping-source {
+    .source-box {
+
+      &.mapped {
+        background: white !important;
+        font-weight: bold;
+        //color:  mat-color($accent, darker);
+        border-left: 5px solid mat-color($accent, lighter) !important;
+
+        // .mat-button, .source-handle{
+        //   color: mat-color($accent, default-contrast) !important;
+        // }
+      }
+    }
+  }
+  anms-mapping-target {
+
+    .target-box.disabled {
+      background: repeating-linear-gradient(
+          -45deg,
+          mat-color($accent, 100),
+          mat-color($accent, 100) 10px,
+          mat-color($accent, 50) 10px,
+          mat-color($accent, 50) 20px
+      );
+      color: grey;
+    }
+    .target-box.mandatory-row:not(.mapped) {
+      background: mat-color($warn, 50) !important;
+      .mandatory {
+        color: mat-color($warn);
+      }
+    }
+    .target-box.mandatory-row.mapped {
+      &.mandatory-row {
+        // background: lighten( $success, 40% ) !important;
+      }
+      .mandatory {
+        color: darken($success, 0%);
+      }
+    }
+  }
+
+  anms-mapping-library-popup {
+    .suggested {
+      .mat-expansion-panel-header {
+        border-top-color: rgb(231, 175, 22);
+      }
+      .suggestion-icon {
+        color: rgb(231, 175, 22);
+      }
+    }
+  }
+}

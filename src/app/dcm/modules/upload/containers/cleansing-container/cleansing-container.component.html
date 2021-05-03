@@ -1,0 +1,72 @@
+<div class="full-h" fxLayout="column" fxLayoutAlign="start">
+
+
+  <div class="button-set-cl">
+    <anms-button-set [cleansing]="true" (AddLocationClick)="onAddLocationClick()"
+          ></anms-button-set>
+  </div>
+
+  <div class="toolbar pd" *ngIf="(stage$ | async).toLowerCase() === 'Transform'.toLowerCase()
+  || (stage$ | async).toLowerCase() === 'CLEANSING'.toLowerCase()
+  ||(stage$ | async).toLowerCase() === 'SNAPSHOT'.toLowerCase()
+  ">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div class="step-cleansing">
+        <span class="text-green">
+          <div *ngIf="(stage$ | async).toLowerCase() === 'Transform'.toLowerCase()" style="display: inline-block;">
+            <div class="row">
+              <div class="col-md-1">
+                <nz-spin [nzSize]="'small'"></nz-spin>
+              </div>
+              <div class="col-md-6">
+                Transforming...
+              </div>
+            </div>
+          </div>
+          <div *ngIf="(stage$ | async).toLowerCase() === 'CLEANSING'.toLowerCase()
+                  ||(stage$ | async).toLowerCase() === 'SNAPSHOT'.toLowerCase() " style="display: inline-block;">
+            <div class="row">
+              <div class="col-md-1">
+                <nz-spin [nzSize]="'small'"></nz-spin>
+              </div>
+              <div class="col-md-6">
+                Cleansing...
+              </div>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="toolbar" *ngIf="(stage$ | async).toLowerCase() === 'Finish'.toLowerCase() && showFinish">
+
+  </div>
+
+  <div class="toolbar" *ngIf="(stage$ | async).toLowerCase() === 'Finish'.toLowerCase() && showFinish">
+
+  </div>
+
+  <div class="toolbar pd">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div>
+
+        <div *ngIf="totalErrors > 0" class="row mt-1 mb-1">
+          <div class="col-md-12" id="id-errors-synthese">
+            <anms-erros-synthese [res]="res" [responseModel]="responseModel" [metadataModel]="metadataModel"
+              [datacheckModel]="datacheckModel" (filterErrors)="onSelectionErrors($event)"></anms-erros-synthese>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div fxFlex="100" class="mat-elevation-z1 scrollable-table">
+    <anms-shared-location-grid [loading]="laoding$ | async" [editable]='true' [metadata]="metadata$ | async"
+      [headers]="headers$ | async" [exposures]="exposures$ | async" [datachecks]="datachecks$ | async"
+      [prefix]="headerPrefix" [errorsInfo$]='errosInfos$ | async' (editLocationButtonClick)="onEditRowClick($event)"
+      (deleteLocationButtonClick)="onDeleteRowClick($event)" (geocodeLocationButtonClick)="onGeocodeRowClick($event)">
+    </anms-shared-location-grid>
+  </div>
+
+</div>
+<!-- <location-map-component></location-map-component> -->

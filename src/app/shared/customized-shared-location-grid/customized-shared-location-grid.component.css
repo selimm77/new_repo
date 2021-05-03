@@ -1,0 +1,21 @@
+.center-buttons{
+  text-align: center;
+  width: 100%;
+}
+
+.center-buttons i{
+  cursor: pointer;
+}
+
+.ms-2{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.material-icons {
+    font-size: inherit !important
+}
+.confirm-btn {
+  background-color: #172be0;
+  color: white;
+}

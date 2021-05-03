@@ -1,0 +1,36 @@
+input {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  outline: 0;
+  border-width: 0px 0 1px;
+  border-color: rgb(43, 43, 255);
+  border-radius: 0;
+  font-size: 12px !important;
+  color: rgb(43, 43, 255) !important;
+
+}
+
+input:focus {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-color: rgb(43, 43, 255);
+  outline : none;
+  box-shadow: 0 0 0 0 ;
+  color: rgb(43, 43, 255) !important;
+
+}
+
+input::placeholder {
+  color: blue;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

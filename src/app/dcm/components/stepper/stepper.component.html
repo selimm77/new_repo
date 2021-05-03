@@ -1,0 +1,110 @@
+<div class="stepper" *ngIf="(currentRoute$|async).state.url !== '/dcm/administration' && (currentRoute$|async).state.url !== '/dcm/upload/dashboard'">
+  <mat-card style="border: none; box-shadow: none;">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="c-stepper">
+      
+        <div fxLayout="row" fxLayoutGap="7px" fxLayoutAlign="center" class="btn-footer">
+          <!-- <button nz-button class="import-button-cancel"
+          [disabled]="((currentRoute$|async).state.url === '/dcm/upload/import') && !(uploaded$ | async)"
+          (click)="resetUpload()">
+            Cancel
+          </button> -->
+          <button nz-button class="import-button-cancel" (click)="resetUpload()">
+            Cancel
+          </button>
+          <button nz-button  class="import-button-save"
+                  ng-class="{import-class:(step$ | async) === 3,default:(step$ | async) !== 3}"
+                  (click)="onSaveClick()">Close And Save
+          </button>
+          <button nz-button class="import-button previous" *ngIf="((step$ | async) >= 0) && ((currentRoute$|async).state.url !== '/dcm/upload/import') "
+                  (click)="onPreviousClick()">Previous
+          </button>
+
+          <button nz-button class="import-button upload"
+                  [disabled]="((step$ | async) === 3 || ((canNavigate$ | async)!== 0 &&
+                  (step$ | async) === 1)) || ((step$|async) === 0 && (imported$|async) === false)"
+                  *ngIf="(currentRoute$|async).state.url === '/dcm/upload'"> Upload
+          </button>
+          
+          <!--   || ((currentRoute$|async).state.url === '/dcm/upload/cleansing' && (metadata$ | async).totalErrors !== 0) -->
+          
+          <button nz-button class="import-button next"
+                  [disabled]="((step$ | async) === 3 || ((canNavigate$ | async)!== 0 && (step$ | async) === 1)) || (((step$|async) === 0 && (imported$|async) === false) || (checkedFileImported|async) === 0) || ((currentRoute$|async).state.url === '/dcm/upload/cleansing' && totalErrors !== 0)"
+                  (click)="onNextClick()"
+                  *ngIf="(currentRoute$|async).state.url !== '/dcm/upload'
+                   &&(currentRoute$|async).state.url !== '/dcm/upload/locations'
+                   &&(currentRoute$|async).state.url !== '/dcm/upload/dashboard' "
+                  >Next
+          </button>
+          <!-- <button nz-button class="import-button next"
+                  [disabled]="((step$ | async) === 3 || ((canNavigate$ | async)!== 0 && (step$ | async) === 1)) || (((step$|async) === 0 && (imported$|async) === false) || (checkedFileImported|async) === 0) || ((currentRoute$|async).state.url === '/dcm/upload/cleansing' && (metadata$ | async).totalErrors !== 0)"
+                  (click)="onNextClick()"
+                  *ngIf="(currentRoute$|async).state.url !== '/dcm/upload'
+                   &&(currentRoute$|async).state.url !== '/dcm/upload/locations'
+                   &&(currentRoute$|async).state.url !== '/dcm/upload/dashboard' "
+                  >Next
+          </button> -->
+          <button nz-button class="import-button previous"
+                  (click)="gotoCleansing()"
+                  *ngIf=" (currentRoute$|async).state.url === '/dcm/upload/locations' ||
+                  (currentRoute$|async).state.url === '/dcm/upload/dashboard' "
+                  >previous
+          </button>
+          
+        </div>
+    </div>
+
+  </mat-card>
+</div>
+
+<nz-modal
+    [(nzVisible)]="isVisibleSaveClose"
+    [nzTitle]="modalTitleSaveClose"
+    [nzContent]="modalContentSaveClose"
+    [nzFooter]="modalFooterSaveClose"
+    (nzOnCancel)="handleCancelSaveClose()"
+    >
+    <ng-template #modalTitleSaveClose>Confirmation</ng-template>
+    
+    <ng-template #modalContentSaveClose>
+      <p>Do you want to save the changes?</p>
+    </ng-template>
+    
+    <ng-template #modalFooterSaveClose>
+      <button nz-button class="cancel-btn" nzType="default" (click)="handleCancelSaveCloseNo()">No</button>
+      <button nz-button class="confirm-btn" nzType="primary" (click)="handleOkSaveClose()" [nzLoading]="isConfirmLoading">Yes</button>
+    </ng-template>
+    </nz-modal>
+
+    <nz-modal
+    [(nzVisible)]="isAddReplaceVisible"
+    [nzTitle]="modalTitleAddReplace"
+    [nzContent]="modalContentAddReplace"
+    [nzFooter]="modalFooterAddReplace"
+    (nzOnCancel)="handleCancelAddReplace()"
+    nzWidth="750px"
+    [nzBodyStyle]="{'height': '390px'}"
+    >
+    <ng-template #modalTitleAddReplace><h4 style="color: rgb(88, 88, 88);">Add or Replace</h4></ng-template>
+
+    <ng-template #modalContentAddReplace>
+      <p style="font-weight: bold;">The number of imported locations does not equal that of the original file</p>
+      <nz-row>
+        <nz-col nzSpan="10" nzOffset="1"  style="height: 240px; border: 1px rgb(228, 228, 228) solid;">
+          <div class="center icon-add-replace"><mat-icon style="font-size: 40px; color: blue;">swap_horiz</mat-icon></div>
+          <div class="center text-add-replace">Do you want to replace {{oldLocations}} locations with {{newLocations}} locations</div>
+          <!-- <div class="center text-add-replace">Do you want to replace 200 locations with 300 locations</div> -->
+          <div class="center button-add-replace"><Button nz-button class="replace-btn" nzType="primary" (click)="handleOkReplace()">REPLACE</Button></div>
+        </nz-col>
+        <nz-col nzSpan="11" nzOffset="1" style="height: 240px; border: 1px rgb(228, 228, 228) solid;">
+          <div class="center icon-add-replace"><mat-icon style="font-size: 40px; color: green">add</mat-icon></div>
+          <div class="center text-add-replace">FA0000271 will have {{allLocations}} locations instead of {{oldLocations}} locations. Do you want to add {{newLocations}} locations?</div>
+          <!-- <div class="center text-add-replace">FA0000271 will have 500 locations instead of 200 locations. Do you want to add 300 locations?</div> -->
+          <div class="center button-add-replace"><Button nz-button class="add-btn" nzType="primary" (click)="handleOkAdd()">ADD</Button></div>
+        </nz-col>
+      </nz-row>
+    </ng-template>
+
+    <ng-template #modalFooterAddReplace>
+      <button nz-button nzType="default" class="cancel-btn-2" style="float: center;" (click)="handleCancelAddReplace()">Cancel</button>
+    </ng-template>
+    </nz-modal>

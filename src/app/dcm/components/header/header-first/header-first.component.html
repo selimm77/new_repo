@@ -1,0 +1,30 @@
+<div class="header-container" *ngIf="(currentRoute$|async).state.url !== '/dcm/upload/import'">
+  <div class="header">
+    <div style="font-size: 14px">
+      <span class="bolder">UW FILE | FA0000271 | </span>
+      <span> Property | GROUPEMENT DES MOUSQ... | AON FRANCE</span>
+    </div>
+    <div>
+      <span style="display: flex; align-items: center">
+        <img style="margin-top: -2px; cursor: pointer" src="./assets/image-icon/star.bmp" />
+        <img style="margin-top: -5px; cursor: pointer" src="./assets/image-icon/comment.bmp" />
+      </span>
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: center">
+    <nz-select class="a-dropdown-default" [(ngModel)]="currency">
+      <nz-option *ngFor="let cur of currencies" [nzValue]="cur.value" [nzLabel]="cur.viewValue"></nz-option>
+    </nz-select>
+
+    <nz-select class="a-dropdown-default" style="margin-left: 10px" [(ngModel)]="division">
+      <nz-option *ngFor="let cur of divisionOptions" [nzValue]="cur.value" [nzLabel]="cur.viewValue"></nz-option>
+    </nz-select>
+
+    <span style="margin-left: 10px; letter-spacing: 0.1em; font-weight: 600; font-size: 12px;" class="header-style-active">Active [U/S]</span>
+
+    <span style="cursor: pointer" class="material-icons">
+      more_vert
+    </span>
+  </div>
+</div>

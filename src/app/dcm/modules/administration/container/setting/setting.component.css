@@ -1,0 +1,35 @@
+::ng-deep .listData{
+  height: 520px !important;
+  overflow-x: auto !important;
+}
+:host >>> .ant-select-selection.ant-select-selection--single {
+  border-radius: 5px !important;
+  border-color: #7ccdcf;
+  border-width: 1px;
+}
+:host >>> .mat-tab-body-content{
+  overflow-x: hidden;
+}
+:host >>> .ant-card{
+  background: #ffffff73;
+  min-height: 90vh !important;
+}
+:host >>> .ant-select-dropdown-menu-item {
+  color: #1fa6b8 !important;
+  text-align: center !important;
+}
+:host >>> .ant-select-selection__rendered{
+  width: 93%;
+  text-align: center;
+  border-right :1px solid #2da5b9 !important;
+}
+:host >>> .ant-btn .anticon {
+  vertical-align: middle;
+  line-height: 0;
+}
+:host >>> .ant-btn > .anticon + span {
+  margin-left: 1px;
+}
+:host >>> .ant-btn[disabled], :host >>> .ant-btn[disabled]:hover{
+  background: transparent;
+}

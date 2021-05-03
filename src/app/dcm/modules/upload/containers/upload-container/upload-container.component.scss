@@ -1,0 +1,91 @@
+.scrollable-table {
+  max-height: 100%;
+  min-height: unset !important;
+}
+
+::ng-deep .mat-form-field-label {
+  color: black !important;
+  font-weight: bold !important;
+}
+
+::ng-deep .mat-select-value-text {
+  color: white;
+}
+
+::ng-deep .mat-select-arrow {
+  color: white !important;
+}
+
+#header-third-id {
+  background-color: #ffffff;
+}
+
+#mySidenav a {
+  right: 0px;
+  transition: 0.3s;
+  padding: 15px;
+  position: fixed;
+  width: 47px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  border-radius: 5px 0px 0px 5px;
+  border: 7px solid #DCDCDC;
+
+}
+
+#sideBar:hover {
+  background-color: #20B2AA;
+}
+
+#sideBar:hover .fa-bars {
+  color: white;
+}
+
+#helps {
+  top: calc(100% - 140px);
+  background-color: white;
+}
+
+.fa-cog {
+  position: absolute;
+  left: 15%;
+  top: 15%;
+  font-size: 20px !important;
+  color: #FFA500;
+}
+
+#helps:hover {
+  background-color: #FFA500;
+}
+
+#helps:hover .fa-cog {
+  color: white;
+}
+
+#setting {
+  top: calc(100% - 180px);
+  background-color: white;
+
+}
+
+.fa-user {
+  position: absolute;
+  left: 15%;
+  top: 15%;
+  font-size: 20px !important;
+  color: #2196F3;
+}
+
+#setting:hover {
+  background-color: #2196F3;
+}
+
+#setting:hover .fa-user {
+  color: white;
+}
+
+.button-set-cl {
+  float: right;
+  margin-right: 0px;
+}

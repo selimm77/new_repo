@@ -1,0 +1,258 @@
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- best style sidenav -->
+<div class="wrapper page-wrapper chiller-theme toggled">
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div style="border: 2px solid #1E90FF; background-color: #1E90FF; padding-left: 20px; height: 57px; padding-bottom: 30px;">
+      <div style="margin-left: -2px; display: inline-block;">
+        <i style="color: rgb(255, 255, 255); opacity: 90%; background-color: #1E90FF" class="fa fa-file-text" aria-hidden="true"></i>
+      </div>
+      <div style="background-color: white; padding: 20px 0px 10px 28px;  display: inline-block; margin-left: 10px; margin-right: -2px;  height: 53px;">
+        <!-- <i class="fa fa-file-text" style="color: black;"></i> -->
+        <span style="font-size: 18px;">Data Capture</span>
+      <span style=" margin-left: 7px; margin-right: 15px;">|</span>
+      <span><i class="fa fa-chevron-right" aria-hidden="true"></i></span>
+      </div>
+    </div>
+  <div class="sidebar" style="overflow: scroll;">
+    
+    <!-- <img src="assets/icons/SGPC_INTRANET.png" alt="image" style="width: 140px; margin-left: 20%;" /> -->
+    <ul>
+      <li role="presentation" [class.active]="activated=='upload'"
+       href="#"
+       [routerLink]="'upload'"
+       routerLinkActive='active'
+       (click)="changeActivated('upload')"
+       aria-controls="home"
+       role="tab"
+       data-toggle="tab">
+        <i class="fa fa-cloud-upload-alt" aria-hidden="true"
+        style="display: inline-block;"></i>
+          <a style="display: inline-block; margin-left: 35px;">
+            Exposure Data
+          </a>
+      </li>
+      <li role="presentation" 
+       href="#"
+       
+       routerLinkActive='active'
+       (click)="changeActivated('matching')"
+       aria-controls="home"
+       role="tab"
+       data-toggle="tab">
+        <i class="fas fa-grip-horizontal"></i>
+          <a style="display: inline-block; margin-left: 35px;" style="display: inline-block; margin-left: 35px;">
+            Perils
+          </a>
+      </li>
+      <li role="presentation" 
+       href="#"
+       
+       routerLinkActive='active'
+       (click)="changeActivated('matching')"
+       aria-controls="home"
+       role="tab"
+       data-toggle="tab">
+       <i class="fas fa-map-marker-alt"></i>
+          <a style="display: inline-block; margin-left: 35px;">
+            Geocoding
+          </a>
+      </li>
+      <li role="presentation" 
+       href="#"
+       
+       routerLinkActive='active'
+       (click)="changeActivated('matching')"
+       aria-controls="home"
+       role="tab"
+       data-toggle="tab">
+       <i class="fa fa-cubes"></i>
+          <a style="display: inline-block; margin-left: 35px;">
+            Spatial analysis
+          </a>
+      </li>
+      <li role="presentation" 
+       href="#"
+       
+       routerLinkActive='active'
+       (click)="changeActivated('matching')"
+       aria-controls="home"
+       role="tab"
+       data-toggle="tab">
+        <i class="fa fa-random" aria-hidden="matching"
+        ></i>
+          <a style="display: inline-block; margin-left: 35px;">
+            Cat extraction
+          </a>
+      </li>
+      <li role="presentation" 
+      href="#" [routerLink]="'locations'"
+      routerLinkActive='active'
+      (click)="changeActivated('current')"
+      aria-controls="profile" role="tab"
+      data-toggle="tab">
+        <i class="fas fa-map-marked" aria-hidden="true"
+        ></i>
+        <a style="display: inline-block; margin-left: 35px;">
+          Current Locations
+        </a>
+      </li>
+      <li role="presentation" [class.active]="activated=='matching'"
+      href="#" [routerLink]="'matching'"
+      routerLinkActive='active'
+      (click)="changeActivated('matching')"
+      aria-controls="messages" role="tab" data-toggle="tab">
+        <i class="fa fa-puzzle-piece"></i>
+         <a style="display: inline-block; margin-left: 35px;">
+          Matching
+        </a></li>
+        <li role="presentation"
+        href="#"
+        
+        routerLinkActive='active'
+        (click)="changeActivated('matching')"
+        aria-controls="home"
+        role="tab"
+        data-toggle="tab">
+         <i class="fas fa-tachometer-alt" aria-hidden="true"
+         ></i>
+           <a style="display: inline-block; margin-left: 35px;">
+             Dashboard
+           </a>
+       </li>
+    </ul>
+    <ul style="margin-bottom: 5px;" id="id-map-view">
+      <li>
+        <i class="fas fa-globe-americas"></i>
+           <a style="display: inline-block; margin-left: 35px;">
+             Map view
+           </a>
+      </li>
+    </ul>
+  </div>
+  </nav>
+</div>
+
+
+
+<!-- <div class="wrapper page-wrapper chiller-theme toggled">
+  <nav id="sidebar" class="sidebar-wrapper">
+  <div class="sidebar" style="overflow: scroll;">
+    <img src="assets/icons/SGPC_INTRANET.png" alt="image" style="width: 140px; margin-left: 20%;" />
+    <ul>
+      <li role="presentation" [class.active]="activated=='upload'"
+       href="#"
+       [routerLink]="'upload'"
+       routerLinkActive='active'
+       (click)="changeActivated('upload')"
+       aria-controls="home"
+       role="tab"
+       data-toggle="tab">
+        <i class="fa fa-cloud-upload-alt" aria-hidden="true"
+        style="display: inline-block;"></i>
+          <a style="display: inline-block; margin-left: 35px;">
+            Exposure Data
+          </a>
+      </li>
+      <li role="presentation" [class.active]="activated=='matching'"
+       href="#"
+       [routerLink]="'matching'"
+       routerLinkActive='active'
+       (click)="changeActivated('matching')"
+       aria-controls="home"
+       role="tab"
+       data-toggle="tab">
+        <i class="fas fa-grip-horizontal"></i>
+          <a style="display: inline-block; margin-left: 35px;" style="display: inline-block; margin-left: 35px;">
+            Perils
+          </a>
+      </li>
+      <li role="presentation" [class.active]="activated=='matching'"
+       href="#"
+       [routerLink]="'matching'"
+       routerLinkActive='active'
+       (click)="changeActivated('matching')"
+       aria-controls="home"
+       role="tab"
+       data-toggle="tab">
+       <i class="fas fa-map-marker-alt"></i>
+          <a style="display: inline-block; margin-left: 35px;">
+            Geocoding
+          </a>
+      </li>
+      <li role="presentation" [class.active]="activated=='matching'"
+       href="#"
+       [routerLink]="'matching'"
+       routerLinkActive='active'
+       (click)="changeActivated('matching')"
+       aria-controls="home"
+       role="tab"
+       data-toggle="tab">
+       <i class="fa fa-cubes"></i>
+          <a style="display: inline-block; margin-left: 35px;">
+            Spatial analysis
+          </a>
+      </li>
+      <li role="presentation" [class.active]="activated=='matching'"
+       href="#"
+       [routerLink]="'matching'"
+       routerLinkActive='active'
+       (click)="changeActivated('matching')"
+       aria-controls="home"
+       role="tab"
+       data-toggle="tab">
+        <i class="fa fa-random" aria-hidden="matching"
+        ></i>
+          <a style="display: inline-block; margin-left: 35px;">
+            Cat extraction
+          </a>
+      </li>
+      <li role="presentation" [class.active]="activated=='matching'"
+      href="#" [routerLink]="'locations'"
+      routerLinkActive='active'
+      (click)="changeActivated('current')"
+      aria-controls="profile" role="tab"
+      data-toggle="tab">
+        <i class="fa fa-map-marked" aria-hidden="true"
+        ></i>
+        <a style="display: inline-block; margin-left: 35px;">
+          Current Locations
+        </a>
+      </li>
+      <li role="presentation" [class.active]="activated=='matching'"
+      href="#" [routerLink]="'matching'"
+      routerLinkActive='active'
+      (click)="changeActivated('matching')"
+      aria-controls="messages" role="tab" data-toggle="tab">
+        <i class="fa fa-puzzle-piece"></i>
+         <a style="display: inline-block; margin-left: 35px;">
+          Matching
+        </a></li>
+        <li role="presentation" [class.active]="activated=='matching'"
+        href="#"
+        [routerLink]="'matching'"
+        routerLinkActive='active'
+        (click)="changeActivated('matching')"
+        aria-controls="home"
+        role="tab"
+        data-toggle="tab">
+         <i class="fas fa-tachometer-alt" aria-hidden="true"
+         ></i>
+           <a style="display: inline-block; margin-left: 35px;">
+             Dashboard
+           </a>
+       </li>
+    </ul>
+    <ul style="margin-bottom: 5px;" id="id-map-view">
+      <li>
+        <i class="fas fa-globe-americas"></i>
+           <a style="display: inline-block; margin-left: 35px;">
+             Map view
+           </a>
+      </li>
+    </ul>
+  </div>
+  </nav>
+</div>
+
+ -->

@@ -1,0 +1,275 @@
+
+/*
+    sideBar Design
+*/
+
+#mySidenav a {
+  right: 0px;
+  transition: 0.3s;
+  padding: 15px;
+  position: fixed;
+  width: 47px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  border-radius: 5px 0px 0px 5px;
+  border: 7px solid #DCDCDC;
+
+}
+
+   #id_notify_success_div {
+     position: fixed;
+     right: 0px;
+     top: 130px;
+     margin-right: 10px;
+     transition: opacity 0.6s;
+     padding: 20px;
+     width: 200px;
+     font-size: 17px;
+     background-color: #4CAF50;
+     color: white;
+     opacity: 1;
+   }
+
+#sideBar {
+  top: calc(100% - 220px);
+  background-color: white;
+}
+.fa-bars {
+  position: absolute;
+  left: 15%;
+  top: 15%;
+  font-size: 20px !important;
+  color: #20B2AA;
+}
+#sideBar:hover {
+  background-color: #20B2AA;
+}
+#sideBar:hover .fa-bars {
+  color: white;
+}
+
+#setting {
+  top: calc(100% - 280px);
+  /* top: calc(100% - 180px); */
+  background-color: white;
+
+}
+
+.fa-user {
+  position: absolute;
+  left: 15%;
+  top: 15%;
+  font-size: 20px !important;
+  color: #2196F3;
+}
+#setting:hover {
+  background-color: #2196F3;
+}
+#setting:hover .fa-user {
+  color: white;
+}
+
+#helps {
+  top: calc(100% - 140px);
+  background-color: white;
+}
+.fa-cog {
+  position: absolute;
+  left: 15%;
+  top: 15%;
+  font-size: 20px !important;
+  color: #FFA500;
+}
+#helps:hover {
+  background-color: #FFA500;
+}
+
+#helps:hover .fa-cog {
+  color: white;
+}
+
+
+.fa-step-backward, .fa-chevron-left, .fa-chevron-right, .fa-step-forward {
+  color: black;
+}
+
+#idFirstOne, #idPreviewOne, #idNextL, #idLastL {
+  color: rgb(180, 179, 179);
+}
+
+
+
+
+.font-icon-medium {
+  color: #67BECD;
+}
+
+.font-icon-medium-size {
+  font-size: medium;
+}
+
+.d-aggrid {
+  margin-right: 5px;
+}
+
+ul {
+  list-style-type: none;
+}
+.cancel-btn, .reset-btn {
+  border: none;
+  text-transform: uppercase;
+  color: #525ecc;
+  font-weight: bold;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+.save-btn {
+  background: #172be0 !important;
+  border-radius: 25px;
+  border: none;
+  outline:none;
+  color: white;
+  width: 170px;
+}
+
+.save-btn:hover {
+  transition: 0.7s;
+  background: #253bff !important;
+  border-radius: 25px;
+  border: none;
+  outline:none;
+  color: white;
+}
+.search-box {   
+  position: relative;
+
+ &-placeholder-wrapper {
+   pointer-events: none;
+   position: absolute;
+   left: 17px;
+   transform: translateX(-50%);
+   top: 7px;
+   font-size: 2px;
+  }
+
+ &-input:focus + .search-box-placeholder-wrapper {
+   display: none;  
+ } 
+
+ .form-control:focus {
+  background-color: #fff;
+  border-color: transparent;
+  outline: 0;
+  box-shadow: #ccc0 0px 3px 1px -2px, #ccc0 0px 2px 2px 0px, #ccc 0px 1px 5px 0px;
+  
+}
+
+}
+/* 
+// old design
+#mySidenav a {
+  right: 0px;
+  transition: 0.3s;
+  padding: 15px;
+  position: fixed;
+  width: 47px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  border-radius: 5px 0px 0px 5px;
+  border: 7px solid #DCDCDC;
+
+}
+
+   #id_notify_success_div {
+     position: fixed;
+     right: 0px;
+     top: 130px;
+     margin-right: 10px;
+     transition: opacity 0.6s;
+     padding: 20px;
+     width: 200px;
+     font-size: 17px;
+     background-color: #4CAF50;
+     color: white;
+     opacity: 1;
+   }
+
+#sideBar {
+  top: calc(100% - 220px);
+  background-color: white;
+}
+.fa-bars {
+  position: absolute;
+  left: 15%;
+  top: 15%;
+  font-size: 20px !important;
+  color: #20B2AA;
+}
+#sideBar:hover {
+  background-color: #20B2AA;
+}
+#sideBar:hover .fa-bars {
+  color: white;
+}
+
+#setting {
+  top: calc(100% - 180px);
+  background-color: white;
+
+}
+
+.fa-user {
+  position: absolute;
+  left: 15%;
+  top: 15%;
+  font-size: 20px !important;
+  color: #2196F3;
+}
+#setting:hover {
+  background-color: #2196F3;
+}
+#setting:hover .fa-user {
+  color: white;
+}
+
+#helps {
+  top: calc(100% - 140px);
+  background-color: white;
+}
+.fa-cog {
+  position: absolute;
+  left: 15%;
+  top: 15%;
+  font-size: 20px !important;
+  color: #FFA500;
+}
+#helps:hover {
+  background-color: #FFA500;
+}
+
+#helps:hover .fa-cog {
+  color: white;
+}
+
+
+.fa-step-backward, .fa-chevron-left, .fa-chevron-right, .fa-step-forward {
+  color: black;
+}
+
+#idFirstOne, #idPreviewOne, #idNextL, #idLastL {
+  color: rgb(180, 179, 179);
+}
+
+
+
+
+.font-icon-medium {
+  color: #67BECD;
+}
+
+.font-icon-medium-size {
+  font-size: medium;
+}
+ */
+

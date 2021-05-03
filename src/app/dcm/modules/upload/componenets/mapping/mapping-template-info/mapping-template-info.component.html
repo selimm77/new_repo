@@ -1,0 +1,13 @@
+<div *ngIf="template ; let t" fxLayout="row"  fxLayoutAlign="space-between center">
+   <span *ngIf="!t.id; else saved">
+    <div class='text-warn'>Template not saved</div>
+   </span>
+   <ng-template #saved>
+     <span>
+        <div class='text-primary'>Template saved</div>
+     </span>
+   </ng-template>
+    <span>
+      {{ t.lastUsedDate }}
+    </span>
+</div>

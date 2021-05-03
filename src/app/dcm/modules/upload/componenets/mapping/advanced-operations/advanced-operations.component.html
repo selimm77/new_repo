@@ -1,0 +1,73 @@
+<div *ngIf="field" class="list">
+  <h6 style="font-size: 16px;  font-weight: 600;color: #0292ab;" class="mb-3">function to apply for the target {{field.viewValue}}</h6>
+<div style="height: 40vh">
+  <div class="row mt-4">
+    <div class="col-2"><label>Mapped Sources : </label></div>
+    <div class="row col-10">
+      <nz-tag [nzColor]="'#0292ab'" *ngFor="let source of field.mappedItems"
+              style="font-size: 15px"
+      >{{source.viewValue}}</nz-tag>
+    </div></div>
+  <nz-divider nzDashed [nzText]="text">
+    <ng-template #text><i nz-icon type="edit" style="vertical-align: middle;"></i>Edit Operations</ng-template>
+  </nz-divider>
+  <form nz-form [formGroup]="formOperation"  class="row" nzLayout="vertical" >
+    <div class="col-6 mt-3">
+      <nz-form-item>
+        <nz-form-label   nzFor="operand" nzRequired>Operand</nz-form-label>
+        <nz-form-control  [nzSpan]="18">
+          <nz-input-group [nzAddOnAfter]="addOnAfterTemplate" [nzAddOnBefore]="addOnBeforeTemplate">
+            <input nz-input formControlName="operand" type="number" id="operand">
+          </nz-input-group>
+
+          <ng-template #addOnBeforeTemplate>
+            <nz-select style="width: 100%" nzAllowClear formControlName="beforeOperand">
+              <nz-option [nzLabel]="'-'" [nzValue]="'-'"></nz-option>
+            </nz-select>
+          </ng-template>
+          <ng-template #addOnAfterTemplate>
+            <nz-select style="width: 100%" nzAllowClear formControlName="after">
+              <nz-option [nzLabel]="'percent(%)'" [nzValue]="'%'"></nz-option>
+            </nz-select>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item >
+    </div>
+    <div class="col-6 mt-3">
+      <nz-form-item>
+        <nz-form-label   nzFor="operation" nzRequired>operation</nz-form-label>
+        <nz-form-control   [nzSpan]="18" >
+          <nz-select style="" formControlName="operation" nzAllowClear nzPlaceHolder="Choose operation">
+            <nz-option nzValue="+" nzLabel="addition(+)"></nz-option>
+            <nz-option nzValue="/" nzLabel="division(/)"></nz-option>
+            <nz-option nzValue="-" nzLabel="subtraction(-)" ></nz-option>
+            <nz-option nzValue="*" nzLabel="multiplication(*)" ></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item >
+    </div>
+
+  </form>
+</div>
+  <div   style="height: 20vh">
+    <div *ngIf="formOperation.valid">
+      <nz-divider nzDashed [nzText]="text">
+        <ng-template #text><i nz-icon type="eye"></i> preview Result </ng-template>
+      </nz-divider>
+      <div class="col-12">
+        For Each {{field.viewValue}} , we will Apply the formula :<b>
+        {{field.viewValue}} {{ formOperation.value.operation}} {{formOperation.value.beforeOperand}}{{formOperation.value.operand}}{{formOperation.value.after}}</b>
+      </div>
+    </div>
+  </div>
+  <button nz-button nzType="link" style="background:transparent;float: right ; color: #D94938 ;border:none" nzSize="small" class="ml-2" (click)="reset()">
+    Cancel
+  </button>
+  <button nz-button nzType="link" style="background:transparent;float: right ; color: #16868C ;border:none" nzSize="small" class="ml-2" (click)="update()">
+    save
+  </button>
+</div>
+<div *ngIf="!field" class="list">
+  <nz-alert nzType="warning" nzMessage="please select a field to Continue !" nzShowIcon  ></nz-alert>
+
+</div>
